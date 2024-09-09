@@ -1,0 +1,60 @@
+version 1.1.0 (9/6/2024)
+
+Features:
+    * JPG, BMG, & PNG support
+    * Drawing capabilities:
+        * Draw a line
+        * Change width of a line
+        * Save Modified image
+    * Color changer
+    * Help Tab in Menu Bar
+    * Image resizing tool
+
+Know Bugs:
+    * Difficulty finding saved images in local file explorer
+
+Features coming soon:
+    * New shapes
+        * Square, Circle, Rectangle, Elipse, Triangle
+    * Keyboard shortcuts
+    * text label for colors
+    * dashed outline of shape
+    * resize tool
+    * smart/aware save
+    * tabs
+    * eraser tool
+    * additional shape
+
+Version 1.0.1 (9/4/2024)
+
+Features:
+    * Redesigned User interface
+    * Menu Bar contains File tab to modify files including:
+        * Open
+        * Save
+        * Save as
+
+Known Bugs:
+    * N/A
+
+Features coming soon:
+    * JPG, BMG, & PNG support
+    * Drawing capabilities:
+        * Draw a line
+        * Change width of a line
+        * Save Modified image
+    * Color changer
+    * Help Tab in Menu Bar
+    * Image resizing tool
+
+
+Version 1.0.0 (8/30/2024)
+
+Features:
+    * Button to open an image from computer files
+    * Button to save Image to computer files
+
+Known Bugs:
+    * When saving Image under new name, image is placed into the Project folder
+    instead of the folder where the client obtained it from
+    * Image window sometimes shrinks when saving Images
