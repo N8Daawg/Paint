@@ -1,11 +1,17 @@
 version 1.1.1 (9/6/2024)
 
 Features:
-    * Eraser tool
-    * New Shapes: Square, Rectangle, Circle, Ellipse, Triangle, Right Triangle
-    * Tabs
-    * Dashed Line tool
-    * Clear Canvas Button
+    * New shapes
+        * Square, Circle, Rectangle, Ellipse, Triangle
+    * Keyboard shortcuts
+    * text label for colors
+    * dashed outline of shape
+    * resize tool
+    * smart/aware save
+    * tabs
+    * eraser tool
+    * clear canvas Button
+    * additional shape
 
 Know Bugs:
     * Cannot find saved image anywhere in local file directory
