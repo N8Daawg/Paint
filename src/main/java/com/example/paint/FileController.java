@@ -1,8 +1,6 @@
 package com.example.paint;
 
 import javafx.embed.swing.SwingFXUtils;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -15,14 +13,12 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 
 public class FileController {
-
     private Stage stage;
     MenuBar menuBar;
     private MenuItem openFile; //open file button
@@ -32,8 +28,9 @@ public class FileController {
     private ToolBar toolBar;
     private Canvas canvas;
     private File currentFile;
-    public FileController(MenuBar newMenuBar, MenuItem newOpenFile, MenuItem newSaveFile, MenuItem newSaveAsFile, MenuItem newAbout,
-                          ToolBar newToolBar, Canvas newCanvas){
+    private Boolean recentlySaved;
+    public FileController(MenuBar newMenuBar, MenuItem newOpenFile, MenuItem newSaveFile, MenuItem newSaveAsFile,
+                          MenuItem newAbout, ToolBar newToolBar, Canvas newCanvas){
 
         menuBar = newMenuBar;
         openFile = newOpenFile;
@@ -42,35 +39,34 @@ public class FileController {
         about = newAbout;
         canvas = newCanvas;
         toolBar = newToolBar;
+        recentlySaved = true;
 
         openFile.setOnAction(e -> {
-            onOpenFile();
+            openFile();
         });
         saveFile.setOnAction(e -> {
-            try {
-                onSaveFile();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
+            try { recentlySaved = saveFile();
+            } catch (IOException ex) { throw new RuntimeException(ex);
             }
         });
         saveAsFile.setOnAction(e -> {
-            try {
-                onSaveAsFile();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
+            try { recentlySaved = saveAsFile();
+            } catch (IOException ex) { throw new RuntimeException(ex);
             }
-
         });
         about.setOnAction(e -> {
             showHelpWindow();
         });
+    }
+    public Boolean wasRecentlySaved(){
+        return recentlySaved;
     }
 
     /*---------------------------------------------------------------------------*/
     /*------------------------------Help window control--------------------------*/
     /*---------------------------------------------------------------------------*/
 
-    protected void onOpenFile(){
+    private void openFile(){
         if (stage == null){ // in case the program hasn't grabbed the stage yet, grab it.
             stage = (Stage) menuBar.getScene().getWindow();
         }
@@ -79,19 +75,21 @@ public class FileController {
         fileChooserSetup(fileChooser, currentFile, "File Selection"); // format the FileChooser
         currentFile = fileChooser.showOpenDialog(stage); //grab a file
 
-        Image currentImage = new Image(String.valueOf(currentFile)); //create Image from file that was grabbed
+        if(currentFile != null){
+            Image currentImage = new Image(String.valueOf(currentFile)); //create Image from file that was grabbed
 
-        canvas.setHeight(currentImage.getHeight()); //resize canvas to new image constraints
-        canvas.setWidth(currentImage.getWidth());
+            canvas.setHeight(currentImage.getHeight()); //resize canvas to new image constraints
+            canvas.setWidth(currentImage.getWidth());
 
-        //resize the stage to fit the new image (have not tested if image is larger than the Monitor's screen)
-        stage.setHeight(canvas.getHeight() + menuBar.getHeight() + toolBar.getHeight() + 50);
-        stage.setWidth(currentImage.getWidth()+25);
+            //resize the stage to fit the new image (have not tested if image is larger than the Monitor's screen)
+            stage.setHeight(canvas.getHeight() + menuBar.getHeight() + toolBar.getHeight() + 50);
+            stage.setWidth(currentImage.getWidth()+25);
 
-        canvas.getGraphicsContext2D().drawImage(currentImage, 0,0);
+            canvas.getGraphicsContext2D().drawImage(currentImage, 0,0);
+        }
     }
 
-    protected void onSaveFile() throws IOException {
+    public Boolean saveFile() throws IOException {
         if(currentFile != null) { // if we are already working on an existing file
             String extension = getExtension(currentFile.toPath()); //get file extension
 
@@ -100,10 +98,12 @@ public class FileController {
             ImageIO.write(saveFile, extension, currentFile); //write the buffered image
         } else { //there is no file being worked on
             System.out.println("some error message saying you dont have a file to save yet");
+            saveAsFile();
         }
+        return true;
     }
 
-    protected void onSaveAsFile() throws IOException {
+    private boolean saveAsFile() throws IOException {
         if (stage == null){ // in case the program hasn't grabbed the stage yet, grab it.
             stage = (Stage) menuBar.getScene().getWindow();
         }
@@ -111,16 +111,18 @@ public class FileController {
         FileChooser fileChooser = new FileChooser(); //create a fileChooser to show the open dialog
         fileChooserSetup(fileChooser, currentFile, "Save"); // format the FileChooser
         currentFile = fileChooser.showSaveDialog(stage); //Create the file name that is being saved
-        String extension = getExtension(currentFile.toPath()); //get file extension
+        if(currentFile != null){
+            String extension = getExtension(currentFile.toPath()); //get file extension
 
-        Image currentImage = canvas.snapshot(null, null);
-        BufferedImage saveFile = SwingFXUtils.fromFXImage(currentImage, null); //transform image to buffered image
-        ImageIO.write(saveFile, extension, currentFile); //write the buffered image
-
+            Image currentImage = canvas.snapshot(null, null);
+            BufferedImage saveFile = SwingFXUtils.fromFXImage(currentImage, null); //transform image to buffered image
+            ImageIO.write(saveFile, extension, currentFile); //write the buffered image
+        }
+        return true;
     }
 
 
-    public void showHelpWindow() {
+    private void showHelpWindow() {
         if (stage == null){ // in case the program hasn't grabbed the stage yet, grab it.
             stage = (Stage) menuBar.getScene().getWindow();
         }
@@ -142,7 +144,7 @@ public class FileController {
     /*---------------------------------------------------------------------------*/
 
     // Nifty method I created to format all FileChoosers the program creates
-    public static void fileChooserSetup(FileChooser f, File currentfile, String title){
+    private static void fileChooserSetup(FileChooser f, File currentfile, String title){
         f.setTitle(title); // set FileChooser's title to a string "title" that is passed to the function
         f.getExtensionFilters().add( //add ExtensionFilter for Image files
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.bmp")
@@ -155,7 +157,7 @@ public class FileController {
 
     // method to read file extensions found from GFG website:
     // https://www.geeksforgeeks.org/how-to-get-the-file-extension-in-java/
-    public static String getExtension(Path path) {
+    private static String getExtension(Path path) {
         String fileName = path.getFileName().toString();
         int dotIndex = fileName.lastIndexOf(".");
 

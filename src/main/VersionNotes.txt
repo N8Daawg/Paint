@@ -1,3 +1,27 @@
+version 1.1.1 (9/6/2024)
+
+Features:
+    * Eraser tool
+    * New Shapes: Square, Rectangle, Circle, Ellipse, Triangle, Right Triangle
+    * Tabs
+    * Dashed Line tool
+    * Clear Canvas Button
+
+Know Bugs:
+    * Cannot find saved image anywhere in local file directory
+
+Coming soon:
+    * undo and redo - abstract datatype stack
+    * provide black canvas and clear canvas (with safety tools)
+    * draw regular side polygon
+    * live draw
+    * select and move a piece of the image
+    * allow the addition of text from user-typed input to your image
+    * git
+
+Links:
+    https://github.com/N8Daawg/Paint
+
 version 1.1.0 (9/6/2024)
 
 Features:
@@ -15,7 +39,7 @@ Know Bugs:
 
 Features coming soon:
     * New shapes
-        * Square, Circle, Rectangle, Elipse, Triangle
+        * Square, Circle, Rectangle, Ellipse, Triangle
     * Keyboard shortcuts
     * text label for colors
     * dashed outline of shape

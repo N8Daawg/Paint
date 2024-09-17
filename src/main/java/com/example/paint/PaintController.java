@@ -1,104 +1,37 @@
 package com.example.paint;
 
-import com.example.paint.Tools.*;
+import com.example.paint.Tabs.TabPaneController;
 import javafx.fxml.FXML;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-
-import java.util.Objects;
+import javafx.stage.WindowEvent;
 
 public class PaintController {
-    @FXML
-    private Pane pane;
-    @FXML
-    private MenuBar menuBar;
-    @FXML
-    private MenuItem openFile; //open file button
-    @FXML
-    private MenuItem saveFile; //save file button
-    @FXML
-    private MenuItem saveAsFile; //save as file button
-    @FXML
-    private MenuItem about; //opens the help window
+    private static final int initialWindowSizeX = 720;
+    private static final int initialWindowSizeY = 480;
 
     @FXML
-    private ToolBar tb;
-    @FXML
-    private ChoiceBox<String> shapeChooser;
-    @FXML
-    private ColorPicker colorPicker;
-    @FXML
-    private TextField brushWidthChooser;
-    @FXML
-    private CheckBox eraserBox;
-
-    @FXML
-    private Canvas canvas;
-
-    private boolean recentlySaved = false;
+    private TabPane tabPane;
+    private static TabPaneController tpc;
     /*---------------------------------------------------------------------------*/
-    /*-------------------------------Canvas Controls-----------------------------*/
+    /*--------------------------Controller initialization------------------------*/
     /*---------------------------------------------------------------------------*/
-    int lineSwitch = 0;
-
     @FXML
     private void initialize() {
-
-        FileController fc = new FileController(menuBar, openFile, saveFile, saveAsFile, about, tb, canvas);
-        //canvas.setHeight(pane.getHeight() - menuBar.getHeight() - tb.getHeight()+50);
-        //canvas.setWidth(pane.getWidth());
-
-
-
-        shapeChooser.getItems().addAll("free", "line", "rectangle");
-        shapeChooser.setValue("rectangle");
-        colorPicker.setValue(Color.BLACK);
-        brushWidthChooser.setText("6");
-        setListeners();
-
+        // creates a file controller to manage the menuBar
+        Tab tabAdder = tabPane.getTabs().get(0);
+        Tab initialTab = tabPane.getTabs().get(1);
+        tpc = new TabPaneController(tabPane, tabAdder, initialTab);
+        tabPane.getSelectionModel().select(initialTab);
 
     }
 
-
-
-    @FXML
-    protected void setListeners() {
-        if(eraserBox.isSelected()){
-            drawTool tool = new eraserTool(
-                    canvas.getGraphicsContext2D(),
-                    brushWidthChooser,
-                    colorPicker,
-                    eraserBox);
-            tool.setAttributes();
-        } else if (Objects.equals(shapeChooser.getValue(), "free")) {
-            drawTool tool = new freeDrawTool(
-                    canvas.getGraphicsContext2D(),
-                    brushWidthChooser,
-                    colorPicker,
-                    eraserBox);
-            tool.setAttributes();
-        } else if(Objects.equals(shapeChooser.getValue(), "line")){
-            drawTool tool = new lineTool(
-                    canvas.getGraphicsContext2D(),
-                    brushWidthChooser,
-                    colorPicker,
-                    eraserBox);
-            tool.setAttributes();
-        } else if (Objects.equals(shapeChooser.getValue(), "rectangle")) {
-            drawTool tool = new rectangleTool(
-                    canvas.getGraphicsContext2D(),
-                    brushWidthChooser,
-                    colorPicker,
-                    eraserBox);
-            tool.setAttributes();
-        }
+    public static void shortcutsSetup(){
+        tpc.shortCutSetup();
     }
-
-    /*---------------------------------------------------------------------------*/
-    /*-------------------------------Drawing Controls----------------------------*/
-    /*---------------------------------------------------------------------------*/
-
+    public static void smartCLoseWindow(WindowEvent e){
+        tpc.tryCloseAll(e);
+    }
+    public static void resize(){
+        tpc.resize(initialWindowSizeX, initialWindowSizeY);
+    }
 }
