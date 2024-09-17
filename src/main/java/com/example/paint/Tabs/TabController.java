@@ -158,10 +158,12 @@ public class TabController {
 
         getTab().getTabPane().setPrefWidth(window.getWidth());
         toolBar.setPrefWidth(window.getWidth());
+
         canvas.setWidth(window.getWidth()*0.97);
         canvas.setLayoutX((window.getWidth()-canvas.getWidth())/2);
 
         canvas.setLayoutY(canvasInitialY+(window.getWidth()-canvas.getWidth())/2);
+
         canvas.setHeight(window.getHeight()-canvasInitialY);
         canvas.getGraphicsContext2D().strokeRect(0,0,canvas.getWidth(),canvas.getHeight());
     }
