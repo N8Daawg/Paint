@@ -2,16 +2,20 @@ package com.example.paint.Tabs;
 
 import com.example.paint.FileController;
 import com.example.paint.drawTools.DrawController;
+import javafx.event.Event;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
+import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Stack;
 
 
 public class TabController {
@@ -19,11 +23,14 @@ public class TabController {
     private MenuBar menuBar;
     private ToolBar toolBar;
     private Canvas canvas;
+    private Canvas liveDrawCanvas;
     private FileController fileController;
     private DrawController drawController;
     private Boolean recentlySaved;
-    private Button closeTab;
     private static double canvasInitialY=69;
+    private WritableImage currentState;
+    private Stack<WritableImage> undoStack;
+    private Stack<WritableImage> redoStack;
     public TabController(Tab T){
         t = T;
         menuBar = null;
@@ -31,6 +38,7 @@ public class TabController {
         canvas = null;
         fileController = null;
         drawController = null;
+        recentlySaved = true;
     }
     public TabController(Tab T, MenuBar mb, ToolBar tb, Canvas c){
         t = T;
@@ -38,11 +46,13 @@ public class TabController {
         menuBar = mb;
         toolBar = tb;
         canvas = c;
-        canvas.getGraphicsContext2D().setFill(Color.BLUEVIOLET);
-        canvas.getGraphicsContext2D().strokeRect(0,0,canvas.getWidth(), canvas.getHeight());
 
-        HBox cbcontainer = (HBox) t.getGraphic();
-        closeTab = (Button) cbcontainer.getChildren().get(1);
+        liveDrawCanvas = new Canvas(canvas.getWidth(), canvas.getHeight());
+        liveDrawCanvas.setLayoutX(canvas.getLayoutX());
+        liveDrawCanvas.setLayoutY(canvas.getLayoutY());
+        AnchorPane parent = (AnchorPane) canvas.getParent();
+        parent.getChildren().add(liveDrawCanvas);
+        liveDrawCanvas.toBack();
 
         HBox tbcontainer = (HBox) tb.getItems().get(0);
         Button clearScreen = (Button) tbcontainer.getChildren().get(4);
@@ -59,15 +69,21 @@ public class TabController {
 
         drawController = new DrawController(
                 canvas.getGraphicsContext2D(),
+                liveDrawCanvas.getGraphicsContext2D(),
                 toolBar, fileController
         );
 
-        recentlySaved = true;
+        currentState = canvas.snapshot(null, null);
 
-        clearScreen.setOnAction(e -> drawController.clearScreen());
+        recentlySaved = true;
+        undoStack = new Stack<>();
+        redoStack = new Stack<>();
+
+        clearScreen.setOnAction(e -> clearScreen());
         toolBar.setOnMouseMoved(e -> drawController.setListeners(recentlySaved));
-        canvas.setOnMouseEntered(e -> drawController.setListeners(recentlySaved));
-        closeTab.setOnAction(e -> deleteTab());
+        canvas.setOnMouseEntered(e -> setListeners());
+
+        getTab().setOnCloseRequest(e -> deleteTab(e));
     }
 
     protected Tab getTab(){
@@ -79,20 +95,66 @@ public class TabController {
     public FileController getFileController() {
         return fileController;
     }
-
     public Boolean wasRecentlySaved() {
         return recentlySaved;
+    }
+    private void setListeners(){
+        drawController.setListeners(recentlySaved);
+        canvas.setOnMousePressed(e -> drawController.getPressEvent(e));
+        canvas.setOnMouseDragged(e -> drawController.getDragEvent(e));
+        canvas.setOnMouseReleased(e -> {
+                drawController.getReleaseEvent(e);
+                recentlySaved = false;
+                undoStack.push(currentState);
+                currentState = canvas.snapshot(null, null);
+        });
+    }
+    private void clearScreen(){
+        if(!recentlySaved){
+            Group root = new Group();
+            Button SAEButton = new Button("Save and exit");
+            Button closeButton = new Button("Close anyway");
+            Button cancelButton = new Button("Cancel");
+            root.getChildren().add(new VBox(
+                            new Label("This tab is not saved. Are you sure you would like to clear the screen?"),
+                            new HBox(SAEButton, closeButton, cancelButton)
+                    )
+            );
+
+            Scene clearingScreen = new Scene(root, 340, 65);
+            Stage clearingWindow = new Stage();
+            clearingWindow.setTitle("Clear Screen?");
+            clearingWindow.setScene(clearingScreen);
+            clearingWindow.show();
+
+            SAEButton.setOnAction(buttonEvent -> {try {
+                fileController.saveFile();
+                drawController.clearScreen();
+            } catch (IOException ex) { throw new RuntimeException(ex);
+            }
+            });
+            closeButton.setOnAction(buttonEvent -> {
+                clearingWindow.close();
+                TabPaneController.removeTab(this, getTab());
+            });
+            cancelButton.setOnAction(buttonEvent -> {
+                clearingWindow.close();
+            });
+        } else{
+            drawController.clearScreen();
+        }
     }
     public void setRecentlySaved() {
         if (this.drawController==null){
             recentlySaved = true;
         } else{
-            drawController.setRecentlySaved();
             recentlySaved = drawController.wasRecentlySaved();
+            drawController.setRecentlySaved();
         }
     }
 
-    protected void deleteTab(){
+    protected void deleteTab(Event e){
+        e.consume();
         setRecentlySaved();
         if(!recentlySaved){
             Group root = new Group();
@@ -111,13 +173,15 @@ public class TabController {
             tryCloseWindow.setScene(unsavedTabs);
             tryCloseWindow.show();
 
-            SAEButton.setOnAction(buttonEvent -> {try { fileController.saveFile();
-                } catch (IOException e) { throw new RuntimeException(e);
+            SAEButton.setOnAction(buttonEvent -> {try {
+                fileController.saveFile();
+                TabPaneController.removeTab(this, getTab());
+                } catch (IOException ex) { throw new RuntimeException(ex);
                 }
             });
             closeButton.setOnAction(buttonEvent -> {
-                TabPaneController.removeTab(this, getTab());
                 tryCloseWindow.close();
+                TabPaneController.removeTab(this, getTab());
             });
             cancelButton.setOnAction(buttonEvent -> {
                 tryCloseWindow.close();
@@ -165,6 +229,26 @@ public class TabController {
         canvas.setLayoutY(canvasInitialY+(window.getWidth()-canvas.getWidth())/2);
 
         canvas.setHeight(window.getHeight()-canvasInitialY);
-        canvas.getGraphicsContext2D().strokeRect(0,0,canvas.getWidth(),canvas.getHeight());
+
+    }
+    protected void undo(){
+        if(!undoStack.isEmpty()){
+            canvas.getGraphicsContext2D().drawImage(undoStack.pop(),0,0);
+            redoStack.push(currentState);
+            currentState = canvas.snapshot(null, null);
+        }
+    }
+    protected void redo(){
+        if(!redoStack.isEmpty()){
+            canvas.getGraphicsContext2D().drawImage(redoStack.pop(),0,0);
+            undoStack.push(currentState);
+            currentState = canvas.snapshot(null, null);
+        }
+    }
+
+    protected void paste(MouseEvent me) {
+        if(drawController.getClipBoard() != null){
+            drawController.paste(me);
+        }
     }
 }

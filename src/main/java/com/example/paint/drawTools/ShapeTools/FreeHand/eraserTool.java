@@ -1,4 +1,4 @@
-package com.example.paint.drawTools.FreeHand;
+package com.example.paint.drawTools.ShapeTools.FreeHand;
 
 import com.example.paint.drawTools.drawTool;
 import javafx.scene.canvas.GraphicsContext;
@@ -6,8 +6,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 public class eraserTool extends drawTool {
-    public eraserTool(GraphicsContext g) {
-        super(g);
+    public eraserTool(GraphicsContext g, GraphicsContext LDGC) {
+        super(g, LDGC);
     }
 
     @Override
@@ -21,19 +21,19 @@ public class eraserTool extends drawTool {
         isDashedLine = dashedLine;
     }
     @Override
-    public void setAttributes(Color color, double size, Boolean dottedLine) {
-        setup(color, size, dottedLine);
+    public void setAttributes(Color color, double size, Boolean dottedLine, Boolean recentlySaved) {
+        setup(color, size, dottedLine, recentlySaved);
     }
 
     /*---------------------------------------------------------------------------*/
     /*-------------------------------Free Draw Events----------------------------*/
     /*---------------------------------------------------------------------------*/
     @Override
-    protected void getPressEvent(MouseEvent e) {
+    public void getPressEvent(MouseEvent e) {
 
     }
     @Override
-    protected void getDragEvent(MouseEvent e) {
+    public void getDragEvent(MouseEvent e) {
         anchorX = e.getX()-brushSize/2;
         anchorY = e.getY()-brushSize/2;
 
@@ -41,7 +41,7 @@ public class eraserTool extends drawTool {
 
     }
     @Override
-    protected void getReleaseEvent(MouseEvent e) {
+    public void getReleaseEvent(MouseEvent e) {
         recentlySaved = false;
     }
 

@@ -1,14 +1,14 @@
-package com.example.paint.drawTools.ThreeSides;
+package com.example.paint.drawTools.ShapeTools.ThreeSides;
 
-import com.example.paint.drawTools.shapeTool;
+import com.example.paint.drawTools.ShapeTools.shapeTool;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 
 public class triangleTool extends shapeTool {
-    public triangleTool(GraphicsContext g) {
-        super(g);
+    public triangleTool(GraphicsContext g, GraphicsContext LDGC) {
+        super(g, LDGC);
     }
-    protected void drawTriangle(double[] xcoors, double[] ycoors){
+    protected void drawTriangle(GraphicsContext currentgc, double[] xcoors, double[] ycoors){
         recentlySaved = false;
         if(isDashedLine){
             double perimeter = (
@@ -16,33 +16,42 @@ public class triangleTool extends shapeTool {
                     Math.sqrt(Math.pow((xcoors[2]-xcoors[1]) ,2)+Math.pow(ycoors[2]-ycoors[1],2)) +
                     Math.sqrt(Math.pow((xcoors[2]-xcoors[0]) ,2)+Math.pow(ycoors[2]-ycoors[0],2))
                     );
-            gc.setLineDashes(createLineDashes(perimeter));
+            currentgc.setLineDashes(createLineDashes(perimeter));
         }
-        gc.strokePolygon(
+        currentgc.strokePolygon(
                 xcoors,
                 ycoors,
                 3);
     }
+    protected void liveDrawTriangle(double[] xcoors, double[] ycoors){
+        clearCanvas(ldgc);
+        drawTriangle(ldgc, xcoors, ycoors);
+    }
 
     @Override
-    protected void getPressEvent(MouseEvent e) {
+    public void getPressEvent(MouseEvent e) {
         anchorX = e.getX();
         anchorY = e.getY();
 
     }
 
     @Override
-    protected void getDragEvent(MouseEvent e) {
-
-    }
-
-    @Override
-    protected void getReleaseEvent(MouseEvent e) {
-        recentlySaved=true;
-        drawTriangle(
+    public void getDragEvent(MouseEvent e) {
+        liveDrawTriangle(
                 new double[]{anchorX, anchorX+((e.getX()-anchorX)/2), e.getX()},
                 new double[]{anchorY, e.getY(), anchorY}
         );
+    }
+
+    @Override
+    public void getReleaseEvent(MouseEvent e) {
+        recentlySaved=true;
+        clearCanvas(ldgc);
+        drawTriangle(gc,
+                new double[]{anchorX, anchorX+((e.getX()-anchorX)/2), e.getX()},
+                new double[]{anchorY, e.getY(), anchorY}
+        );
+        clearCanvas(ldgc);
     }
 
     @Override

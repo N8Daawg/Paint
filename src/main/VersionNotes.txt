@@ -1,3 +1,26 @@
+version 1.1.2 (9/20/2024)
+Features:
+   * undo and redo
+    * provide black canvas and clear canvas (with safety tools)
+    * draw regular side polygon
+    * live draw
+    * select and move a piece of the image
+    * allow the addition of text from user-typed input to your image
+    * git
+
+Know Bugs:
+    * Cannot find saved image anywhere in local file directory
+    * selection tool has issues with being dragged in different directions
+    * Polygon algorithm works for n sides but userinput for n does not work
+
+Coming soon:
+    * The software shall have at least 3 unit tests.
+    * The software shall have a timer that allows for autosave.  (threading not required but probably a good idea)
+    * The timer's countdown shall be optionally (as in some way to choose on/off) visible to the user.  Bonus/optional: Reset the timer on a user's save.
+    * The software shall incorporate a webserver to presents one or more of the images (in tabs), as selected by the user.  If no images are selected, an appropriate message will be displayed or the functionality will be offline.
+    * The code shall have some JavaDoc commenting.
+    * The software shall have the ability to save in an alternative file format than the one that was the original for the image.
+
 version 1.1.1 (9/6/2024)
 
 Features:
@@ -17,7 +40,7 @@ Know Bugs:
     * Cannot find saved image anywhere in local file directory
 
 Coming soon:
-    * undo and redo - abstract datatype stack
+    * undo and redo
     * provide black canvas and clear canvas (with safety tools)
     * draw regular side polygon
     * live draw

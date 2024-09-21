@@ -23,9 +23,6 @@ public class TabCopyer {
         return new AnchorPane();
     }
 
-
-    protected  static HBox copyTabLabel() { return new HBox(new Label("New Project "), new Button("-"));}
-
     /*---------------------------------------------------------------------------*/
     /*-------------------------------Copying MenuBar-----------------------------*/
     /*---------------------------------------------------------------------------*/

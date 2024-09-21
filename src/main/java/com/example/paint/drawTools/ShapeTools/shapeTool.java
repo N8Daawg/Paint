@@ -1,17 +1,18 @@
-package com.example.paint.drawTools;
+package com.example.paint.drawTools.ShapeTools;
 
+import com.example.paint.drawTools.drawTool;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
-public class shapeTool extends drawTool{
+public class shapeTool extends drawTool {
     protected static final int numOfDashes = 6;
-    public shapeTool(GraphicsContext g) {
-        super(g);
+    public shapeTool(GraphicsContext g, GraphicsContext LDGC) {
+        super(g, LDGC);
     }
     @Override
-    public void setAttributes(Color color, double size, Boolean dashedLine) {
-        setup(color, size, dashedLine);
+    public void setAttributes(Color color, double size, Boolean dashedLine, Boolean recentlySaved) {
+        setup(color, size, dashedLine, recentlySaved);
     }
 
     protected void setColor(Color color){
@@ -20,7 +21,8 @@ public class shapeTool extends drawTool{
     }
     protected void setSize(double size){
         brushSize = size;
-        gc.setLineWidth(size);
+        gc.setLineWidth(brushSize);
+        ldgc.setLineWidth(brushSize);
     }
     protected void setDashedLine(Boolean dashedLine){
         isDashedLine = dashedLine;
@@ -37,17 +39,17 @@ public class shapeTool extends drawTool{
     }
 
     @Override
-    protected void getPressEvent(MouseEvent e) {
+    public void getPressEvent(MouseEvent e) {
 
     }
 
     @Override
-    protected void getDragEvent(MouseEvent e) {
+    public void getDragEvent(MouseEvent e) {
 
     }
 
     @Override
-    protected void getReleaseEvent(MouseEvent e) {
+    public void getReleaseEvent(MouseEvent e) {
 
     }
 

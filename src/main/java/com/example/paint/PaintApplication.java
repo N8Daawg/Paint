@@ -12,13 +12,13 @@ public class PaintApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(PaintApplication.class.getResource("Paint-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+        Scene scene = new Scene(fxmlLoader.load(), 720, 480);
 
         stage.setTitle("Paint");
         stage.setScene(scene);
         PaintController.shortcutsSetup();
         stage.setOnCloseRequest(e -> PaintController.smartCLoseWindow(e)); //setup for smart save
-        PaintController.resize();
+        //PaintController.resize();
         stage.show();
     }
 

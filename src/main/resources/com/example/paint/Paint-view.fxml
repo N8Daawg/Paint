@@ -18,18 +18,18 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.paint.PaintController">
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="609.0" prefWidth="818.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.paint.PaintController">
    <children>
-      <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tabPane">
         <tabs>
-            <Tab>
+            <Tab closable="false">
                <graphic>
                   <Button fx:id="tabAdderButton" alignment="CENTER" contentDisplay="TOP" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="21.0" prefWidth="27.0" text="+" textAlignment="CENTER" />
                </graphic>
             </Tab>
-          <Tab>
+          <Tab text="Project 1">
             <content>
-              <AnchorPane>
+              <AnchorPane prefHeight="556.0" prefWidth="812.0">
                      <children>
                         <MenuBar fx:id="menuBar">
                           <menus>
@@ -87,18 +87,10 @@
                               </HBox>
                            </items>
                         </ToolBar>
-                        <Canvas fx:id="canvas" height="389.0" layoutY="69.0" width="460.0" />
+                        <Canvas fx:id="canvas" height="400.0" layoutY="69.0" width="627.0" />
                      </children>
                   </AnchorPane>
             </content>
-               <graphic>
-                  <HBox alignment="CENTER" prefHeight="22.0" prefWidth="95.0" spacing="10.0">
-                     <children>
-                        <Label alignment="CENTER" prefHeight="26.0" text="Project 1" textAlignment="CENTER" />
-                        <Button alignment="CENTER" contentDisplay="TOP" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="18.0" text="-" textAlignment="CENTER" />
-                     </children>
-                  </HBox>
-               </graphic>
           </Tab>
         </tabs>
       </TabPane>
