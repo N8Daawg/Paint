@@ -94,7 +94,6 @@ public class TabPaneController {
      * Fish for some shortcuts
      *
      * @param ke the keyevent being tracked
-     * @param me
      * @throws IOException
      */
     private void fishForShortcuts(KeyEvent ke) throws IOException { //creates key combos and fish for them
