@@ -2,15 +2,18 @@ package com.example.paint.Tabs;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
-import javafx.scene.input.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -72,24 +75,25 @@ public class TabPaneController {
         tabs.add(new TabController(nt, mb, tb, cv));
     }
 
-    /**
-     * a wrapper to set up the keyboard shortcuts
-     */
-    public void shortCutSetup(){
-        tabPane.getScene().addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
-        @Override
-        public void handle(KeyEvent keyEvent){ try {//add event filter to fish for shortcuts
-            fishForShortcuts(keyEvent);
-        } catch (IOException e) { throw new RuntimeException(e);
-        }}
-    });
-    }
-
     final KeyCombination saveCombo = new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN);
     final KeyCombination JPun = new KeyCodeCombination(KeyCode.J, KeyCombination.CONTROL_DOWN);
     final KeyCombination undoCombo = new KeyCodeCombination(KeyCode.Z, KeyCombination.CONTROL_DOWN);
     final KeyCombination redoCombo = new KeyCodeCombination(KeyCode.Y, KeyCombination.CONTROL_DOWN);
     final KeyCombination pasteCombo = new KeyCodeCombination(KeyCode.P, KeyCombination.CONTROL_DOWN);
+
+    /**
+     * a wrapper to set up the keyboard shortcuts
+     */
+    public void shortCutSetup(){
+        tabPane.getScene().addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent){ try {//add event filter to fish for shortcuts
+                fishForShortcuts(keyEvent);
+            } catch (IOException e) { throw new RuntimeException(e);
+            }}
+        });
+    }
+
     /**
      * Fish for some shortcuts
      *
@@ -182,9 +186,6 @@ public class TabPaneController {
     private void closeAll(ActionEvent buttonEvent, Stage closingWindow) {
         closingWindow.close();
 
-        Node source = (Node) buttonEvent.getSource();
-        Stage saveWindow = (Stage) source.getScene().getWindow();
-        saveWindow.close();
     }
 
     /**

@@ -79,4 +79,9 @@ public class polygonTool extends shapeTool {
         double[][] xy = generateShapeArrays(anchorX, anchorY, e.getX(), e.getY());
         drawPolygon(gc, xy[0],xy[1]);
     }
+
+    @Override
+    public String toString() {
+        return "Polygon";
+    }
 }

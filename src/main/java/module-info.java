@@ -25,4 +25,6 @@ module com.example.paint {
     opens com.example.paint.drawTools.ShapeTools to javafx.fxml;
     exports com.example.paint.drawTools.MiscTools;
     opens com.example.paint.drawTools.MiscTools to javafx.fxml;
+    exports com.example.paint.Timer;
+    opens com.example.paint.Timer to javafx.fxml;
 }

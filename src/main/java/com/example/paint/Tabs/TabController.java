@@ -1,7 +1,10 @@
 package com.example.paint.Tabs;
 
 import com.example.paint.FileController;
+import com.example.paint.Timer.autoSaveTimer;
 import com.example.paint.drawTools.DrawController;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -10,10 +13,14 @@ import javafx.scene.control.*;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.Stack;
 
@@ -31,6 +38,8 @@ public class TabController {
     private WritableImage currentState;
     private Stack<WritableImage> undoStack;
     private Stack<WritableImage> redoStack;
+    private Label timerLabel;
+    private autoSaveTimer timer;
     public TabController(Tab T){
         t = T;
         menuBar = null;
@@ -84,6 +93,27 @@ public class TabController {
         canvas.setOnMouseEntered(e -> setListeners());
 
         getTab().setOnCloseRequest(e -> deleteTab(e));
+
+        BorderPane borderPane = (BorderPane) getTab().getTabPane().getParent();
+        timerLabel = (Label) borderPane.getBottom();
+        timer = new autoSaveTimer(timerLabel);
+        int delay = 1000;
+        ActionListener tick = e -> {
+            if(getTab().isSelected()) {
+                Platform.runLater(timer);
+                if (timer.ended()) {
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            try { fileController.saveFile();
+                            } catch (IOException ex) { throw new RuntimeException(ex);
+                            }
+                        }
+                    });
+                }
+            }
+        };
+        new Timer(delay,tick).start();
     }
 
     protected Tab getTab(){
@@ -112,8 +142,8 @@ public class TabController {
     private void clearScreen(){
         if(!recentlySaved){
             Group root = new Group();
-            Button SAEButton = new Button("Save and exit");
-            Button closeButton = new Button("Close anyway");
+            Button SAEButton = new Button("Save and clear");
+            Button closeButton = new Button("Clear anyway");
             Button cancelButton = new Button("Cancel");
             root.getChildren().add(new VBox(
                             new Label("This tab is not saved. Are you sure you would like to clear the screen?"),
@@ -135,7 +165,7 @@ public class TabController {
             });
             closeButton.setOnAction(buttonEvent -> {
                 clearingWindow.close();
-                TabPaneController.removeTab(this, getTab());
+                drawController.clearScreen();
             });
             cancelButton.setOnAction(buttonEvent -> {
                 clearingWindow.close();
@@ -166,7 +196,6 @@ public class TabController {
                             new HBox(SAEButton, closeButton, cancelButton)
                     )
             );
-
             Scene unsavedTabs = new Scene(root, 340, 65);
             Stage tryCloseWindow = new Stage();
             tryCloseWindow.setTitle("Close whole Project?");
