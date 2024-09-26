@@ -18,24 +18,25 @@
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-web</artifactId>
-      <version>19</version>
+      <version>23</version>
     </dependency>
-
     <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-swing -->
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-swing</artifactId>
-      <version>19</version>
+      <version>23</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-controls -->
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
-      <version>17.0.6</version>
+      <version>23</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-fxml -->
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-fxml</artifactId>
-      <version>17.0.6</version>
+      <version>23</version>
     </dependency>
 
 <dependency>
