@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="477.0" prefWidth="702.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="477.0" prefWidth="702.0">
+         <tabs>
+            <Tab text="Untitled Tab 1">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0">
+                     <children>
+                        <MenuBar fx:id="menuBar" AnchorPane.bottomAnchor="422.4" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="569.5999999999999" AnchorPane.topAnchor="0.0">
+                           <menus>
+                              <Menu mnemonicParsing="false" text="File">
+                                 <items>
+                                    <MenuItem fx:id="openFile" mnemonicParsing="false" text="Open" />
+                                    <MenuItem fx:id="saveFile" mnemonicParsing="false" text="Save" />
+                                    <MenuItem fx:id="saveAsFile" mnemonicParsing="false" text="Save As" />
+                                    <MenuItem mnemonicParsing="false" text="Close" />
+                                 </items>
+                              </Menu>
+                              <Menu mnemonicParsing="false" text="Edit">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" text="Resize Canvas" />
+                                    <MenuItem mnemonicParsing="false" text="Delete" />
+                                 </items>
+                              </Menu>
+                              <Menu mnemonicParsing="false" text="Help">
+                                 <items>
+                                    <MenuItem fx:id="about" mnemonicParsing="false" text="About" />
+                                 </items>
+                              </Menu>
+                           </menus>
+                        </MenuBar>
+                        <ToolBar fx:id="tb" layoutY="26.0" prefHeight="44.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="26.0">
+                           <items>
+                              <HBox alignment="CENTER" prefHeight="34.0" spacing="10.0">
+                                 <children>
+                                    <HBox alignment="CENTER" prefHeight="34.0">
+                                       <children>
+                                          <Label text="Color: " />
+                                          <ColorPicker />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="34.0">
+                                       <children>
+                                          <Label text="Shape: " />
+                                          <ChoiceBox />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="34.0">
+                                       <children>
+                                          <Label text="Dahsed Shape? " />
+                                          <CheckBox mnemonicParsing="false" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="34.0">
+                                       <children>
+                                          <Label text="Brush Width: " />
+                                          <TextField prefHeight="26.0" prefWidth="66.0" />
+                                       </children>
+                                    </HBox>
+                                    <Button mnemonicParsing="false" text="Clear Canvas" />
+                                 </children>
+                              </HBox>
+                           </items>
+                        </ToolBar>
+                        <ScrollPane layoutY="70.0" maxHeight="-Infinity" maxWidth="-Infinity" snapToPixel="false" AnchorPane.bottomAnchor="1.1999999999999886" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
+                           <content>
+                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="700.0" />
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Untitled Tab 2">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </children>
+</Pane>
