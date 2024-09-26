@@ -5,26 +5,26 @@ module com.example.paint {
     requires javafx.web;
 
 
-    opens paint to javafx.fxml;
-    exports paint;
-    exports paint.drawTools;
-    opens paint.drawTools to javafx.fxml;
-    exports paint.drawTools.ShapeTools.ZeroSides;
-    opens paint.drawTools.ShapeTools.ZeroSides to javafx.fxml;
-    exports paint.drawTools.ShapeTools.OneSide;
-    opens paint.drawTools.ShapeTools.OneSide to javafx.fxml;
-    exports paint.drawTools.ShapeTools.FourSides;
-    opens paint.drawTools.ShapeTools.FourSides to javafx.fxml;
-    exports paint.drawTools.ShapeTools.ThreeSides;
-    opens paint.drawTools.ShapeTools.ThreeSides to javafx.fxml;
-    exports paint.drawTools.ShapeTools.FreeHand;
-    opens paint.drawTools.ShapeTools.FreeHand to javafx.fxml;
-    exports paint.Tabs;
-    opens paint.Tabs to javafx.fxml;
-    exports paint.drawTools.ShapeTools;
-    opens paint.drawTools.ShapeTools to javafx.fxml;
-    exports paint.drawTools.MiscTools;
-    opens paint.drawTools.MiscTools to javafx.fxml;
-    exports paint.Timer;
-    opens paint.Timer to javafx.fxml;
+    opens com.example.paint to javafx.fxml;
+    exports com.example.paint;
+    exports com.example.paint.drawTools;
+    opens com.example.paint.drawTools to javafx.fxml;
+    exports com.example.paint.drawTools.ShapeTools.ZeroSides;
+    opens com.example.paint.drawTools.ShapeTools.ZeroSides to javafx.fxml;
+    exports com.example.paint.drawTools.ShapeTools.OneSide;
+    opens com.example.paint.drawTools.ShapeTools.OneSide to javafx.fxml;
+    exports com.example.paint.drawTools.ShapeTools.FourSides;
+    opens com.example.paint.drawTools.ShapeTools.FourSides to javafx.fxml;
+    exports com.example.paint.drawTools.ShapeTools.ThreeSides;
+    opens com.example.paint.drawTools.ShapeTools.ThreeSides to javafx.fxml;
+    exports com.example.paint.drawTools.ShapeTools.FreeHand;
+    opens com.example.paint.drawTools.ShapeTools.FreeHand to javafx.fxml;
+    exports com.example.paint.Tabs;
+    opens com.example.paint.Tabs to javafx.fxml;
+    exports com.example.paint.drawTools.ShapeTools;
+    opens com.example.paint.drawTools.ShapeTools to javafx.fxml;
+    exports com.example.paint.drawTools.MiscTools;
+    opens com.example.paint.drawTools.MiscTools to javafx.fxml;
+    exports com.example.paint.Timer;
+    opens com.example.paint.Timer to javafx.fxml;
 }
