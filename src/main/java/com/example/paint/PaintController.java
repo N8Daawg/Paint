@@ -1,21 +1,16 @@
 package com.example.paint;
 
 import com.example.paint.Tabs.TabPaneController;
-import com.example.paint.Timer.autoSaveTimer;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.WindowEvent;
 
-import javax.swing.*;
-import java.awt.event.ActionListener;
 
 /**
  * The type Paint controller.
  */
 public class PaintController {
-    private Label timerLabel;
     private static final int initialWindowSizeX = 637;
     private static final int initialWindowSizeY = 498;
 
@@ -38,20 +33,17 @@ public class PaintController {
 
     }
 
-    /**
-     * Shortcuts setup.
-     */
-    public static void shortcutsSetup(){
-        tpc.shortCutSetup();
+    public static void postInitializationSetup(){
+        tpc.postInitializationSetup();
     }
 
     /**
      * Smart c lose window.
      *
-     * @param e the e
+     * @param windowEvent the window event
      */
-    public static void smartCLoseWindow(WindowEvent e){
-        tpc.tryCloseAll(e);
+    public static void smartCLoseWindow(WindowEvent windowEvent){
+        tpc.tryCloseAll(windowEvent);
     }
 
     /**

@@ -2,8 +2,10 @@ package com.example.paint.Tabs;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import java.util.Optional;
+
+
+
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -13,8 +15,6 @@ import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -47,19 +47,17 @@ public class TabPaneController {
 
         templateTab = new TabController(initialTab, templateMenuBar, templateToolBar, templateCanvas);
 
-        tabs = new ArrayList<TabController>();
+        tabs = new ArrayList<>();
         tabs.add(new TabController(ta));
         tabs.add(templateTab);
 
         tabAdderButton = (Button) tabs.get(0).getTab().getGraphic();
-        setup();
     }
 
-    /**
-     * setup wrapper for the tabAdderButton
-     */
-    private void setup() {
+    public void postInitializationSetup(){
         tabAdderButton.setOnAction(e -> addTab());
+        shortCutSetup();
+        tabs.get(1).postInitializationSetup();
     }
 
     /**
@@ -109,20 +107,18 @@ public class TabPaneController {
      * a wrapper to set up the keyboard shortcuts
      */
     public void shortCutSetup(){
-        tabPane.getScene().addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent){ try {//add event filter to fish for shortcuts
-                fishForShortcuts(keyEvent);
+        tabPane.getScene().addEventFilter(KeyEvent.KEY_PRESSED, keyEvent -> { //add event filter to fish for shortcuts
+            try { fishForShortcuts(keyEvent);
             } catch (IOException e) { throw new RuntimeException(e);
-            }}
+            }
         });
     }
 
     /**
      * Fish for some shortcuts
      *
-     * @param ke the keyevent being tracked
-     * @throws IOException
+     * @param ke the key event being tracked
+     * @throws IOException throws an IO exception sometimes with the saveFile method
      */
     private void fishForShortcuts(KeyEvent ke) throws IOException { //creates key combos and fish for them
         if(saveCombo.match(ke)){ //A wild saveCombo appeared!
@@ -159,7 +155,7 @@ public class TabPaneController {
     }
 
     /**
-     * opens a dialog to get the user to save all of thier projects before closing
+     * opens a dialog to get the user to save all of their projects before closing
      *
      * @param windowEvent the closing window event
      */
@@ -169,25 +165,20 @@ public class TabPaneController {
 
         if(!modifiedTabs.isEmpty()){
             windowEvent.consume();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Exit Program?");
+            alert.setHeaderText("You have one or more unsaved projects");
+            alert.setContentText("Are you sure you would like to exit?");
 
-            Group root = new Group();
-            Button SAEButton = new Button("Save and exit");
-            Button closeButton = new Button("Close anyway");
-            Button cancelButton = new Button("Cancel");
+            ButtonType buttonTypeSAE = new ButtonType("Save and Exit");
+            ButtonType buttonTypeClear = new ButtonType("Exit anyway");
+            ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-            root.getChildren().add(new VBox(
-                    new Label("You have unsaved projects. Are you sure you would like to exit?"),
-                    new HBox(SAEButton, closeButton, cancelButton)
-                    )
-            );
+            alert.getButtonTypes().setAll(buttonTypeSAE, buttonTypeClear, buttonTypeCancel);
 
-            Scene unsavedTabs = new Scene(root, 340, 65);
-            Stage tryCloseWindow = new Stage();
-            tryCloseWindow.setTitle("Close whole Project?");
-            tryCloseWindow.setScene(unsavedTabs);
-            tryCloseWindow.show();
-
-            SAEButton.setOnAction(e -> {
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == buttonTypeSAE){
+                // ... user chose "One"
                 for(TabController tab:modifiedTabs){
                     try {
                         tab.getFileController().saveFile();
@@ -195,23 +186,19 @@ public class TabPaneController {
                         throw new RuntimeException(ex);
                     }
                 }
-                closeAll(e, closingWindow);
-            });
-            closeButton.setOnAction(e -> closeAll(e, closingWindow));
-            cancelButton.setOnAction(e -> {
-                tryCloseWindow.close();
-            });
+                alert.close();
+                closingWindow.close();
+            } else if (result.get() == buttonTypeClear) {
+                // ... user chose "Two"
+                alert.close();
+                closingWindow.close();
+            } else {
+                // ... user chose CANCEL or closed the dialog
+                alert.close();
+            }
+        } else {
+            System.exit(0);
         }
-    }
-
-    /**
-     * Saves all tabs and closes the window
-     * @param buttonEvent the event happening
-     * @param closingWindow the window wanting to be closed
-     */
-    private void closeAll(ActionEvent buttonEvent, Stage closingWindow) {
-        closingWindow.close();
-
     }
 
     /**

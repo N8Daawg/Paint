@@ -14,11 +14,11 @@ public class PaintApplication extends Application {
 
         stage.setTitle("Paint");
         stage.setScene(scene);
-        PaintController.shortcutsSetup();
-        stage.setOnCloseRequest(PaintController::smartCLoseWindow); //setup for smart save
-        //PaintController.resize();
         stage.show();
 
+        PaintController.postInitializationSetup();
+        stage.setOnCloseRequest(PaintController::smartCLoseWindow); //setup for smart save
+        //PaintController.resize();
     }
 
     public static void main(String[] args) {

@@ -1,8 +1,6 @@
 package com.example.paint;
 
 import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -12,7 +10,9 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Path;
+import java.util.Optional;
 
 /**
  * The type File controller.
@@ -24,7 +24,6 @@ public class FileController {
     private final MenuItem saveFile; //save file button
     private final MenuItem saveAsFile; //save as file button
     private final MenuItem about; //opens the help window
-    private final ToolBar toolBar;
     private final Canvas canvas;
     private File currentFile;
     private Boolean recentlySaved;
@@ -32,42 +31,50 @@ public class FileController {
     /**
      * Instantiates a new File controller.
      *
-     * @param newMenuBar    the new menu bar
-     * @param newOpenFile   the new open file
-     * @param newSaveFile   the new save file
-     * @param newSaveAsFile the new save as file
-     * @param newAbout      the new about
-     * @param newToolBar    the new tool bar
-     * @param newCanvas     the new canvas
+     * @param newMenuBar the new menu bar
+     * @param newCanvas  the new canvas
      */
-    public FileController(MenuBar newMenuBar, MenuItem newOpenFile, MenuItem newSaveFile, MenuItem newSaveAsFile,
-                          MenuItem newAbout, ToolBar newToolBar, Canvas newCanvas){
-
+    public FileController(MenuBar newMenuBar, Canvas newCanvas){
         menuBar = newMenuBar;
-        openFile = newOpenFile;
-        saveFile = newSaveFile;
-        saveAsFile = newSaveAsFile;
-        about = newAbout;
-        canvas = newCanvas;
-        toolBar = newToolBar;
-        recentlySaved = true;
 
-        openFile.setOnAction(e -> {
-            openFile();
-        });
-        saveFile.setOnAction(e -> {
-            try { recentlySaved = saveFile();
-            } catch (IOException ex) { throw new RuntimeException(ex);
-            }
-        });
-        saveAsFile.setOnAction(e -> {
-            try { recentlySaved = saveAsFile();
-            } catch (IOException ex) { throw new RuntimeException(ex);
-            }
-        });
-        about.setOnAction(e -> {
-            showHelpWindow();
-        });
+        Menu fileMenu = menuBar.getMenus().get(0);
+        openFile = fileMenu.getItems().get(0);
+        saveFile = fileMenu.getItems().get(1);
+        saveAsFile = fileMenu.getItems().get(2);
+
+        Menu helpMenu = menuBar.getMenus().get(2);
+        about = helpMenu.getItems().get(0);
+
+        canvas = newCanvas;
+        recentlySaved = true;
+        postInitSetup();
+    }
+
+    /**
+     * Post init setup.
+     */
+    public void postInitSetup(){
+        if (menuBar.getScene() != null){
+            stage = (Stage) menuBar.getScene().getWindow(); // attempt to grab the stage.
+            openFile.setOnAction(e -> {
+                try { openFile();
+                } catch (MalformedURLException ex) { throw new RuntimeException(ex);
+                }
+            });
+            saveFile.setOnAction(e -> {
+                try { recentlySaved = saveFile();
+                } catch (IOException ex) { throw new RuntimeException(ex);
+                }
+            });
+            saveAsFile.setOnAction(e -> {
+                try { recentlySaved = saveAsFile();
+                } catch (IOException ex) { throw new RuntimeException(ex);
+                }
+            });
+            about.setOnAction(e -> {
+                showHelpWindow();
+            });
+        }
     }
 
     /**
@@ -83,25 +90,13 @@ public class FileController {
     /*------------------------------Help window control--------------------------*/
     /*---------------------------------------------------------------------------*/
 
-    private void openFile(){
-        if (stage == null){ // in case the program hasn't grabbed the stage yet, grab it.
-            stage = (Stage) menuBar.getScene().getWindow();
-        }
-
+    private void openFile() throws MalformedURLException {
         FileChooser fileChooser = new FileChooser(); //create a fileChooser to show the open dialog
         fileChooserSetup(fileChooser, currentFile, "File Selection"); // format the FileChooser
         currentFile = fileChooser.showOpenDialog(stage); //grab a file
 
         if(currentFile != null){
-            Image currentImage = new Image(String.valueOf(currentFile)); //create Image from file that was grabbed
-
-            canvas.setHeight(currentImage.getHeight()); //resize canvas to new image constraints
-            canvas.setWidth(currentImage.getWidth());
-
-            //resize the stage to fit the new image (have not tested if image is larger than the Monitor's screen)
-            stage.setHeight(canvas.getHeight() + menuBar.getHeight() + toolBar.getHeight() + 50);
-            stage.setWidth(currentImage.getWidth()+25);
-
+            Image currentImage = new Image(String.valueOf(currentFile.toURI().toURL()));//create Image from file that was grabbed
             canvas.getGraphicsContext2D().drawImage(currentImage, 0,0);
         }
     }
@@ -121,15 +116,17 @@ public class FileController {
             ImageIO.write(saveFile, extension, currentFile); //write the buffered image
         } else { //there is no file being worked on
             System.out.println("some error message saying you dont have a file to save yet");
-            saveAsFile();
+            return saveAsFile();
         }
         return true;
     }
 
     private boolean saveAsFile() throws IOException {
-        if (stage == null){ // in case the program hasn't grabbed the stage yet, grab it.
-            stage = (Stage) menuBar.getScene().getWindow();
+        File previousFile=null;
+        if(currentFile !=null){
+            previousFile = currentFile;
         }
+
 
         FileChooser fileChooser = new FileChooser(); //create a fileChooser to show the open dialog
         fileChooserSetup(fileChooser, currentFile, "Save"); // format the FileChooser
@@ -137,29 +134,42 @@ public class FileController {
         if(currentFile != null){
             String extension = getExtension(currentFile.toPath()); //get file extension
 
-            Image currentImage = canvas.snapshot(null, null);
-            BufferedImage saveFile = SwingFXUtils.fromFXImage(currentImage, null); //transform image to buffered image
-            ImageIO.write(saveFile, extension, currentFile); //write the buffered image
+            if(previousFile != null && !getExtension(previousFile.toPath()).equals(extension)){
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirmation Dialog");
+                alert.setHeaderText("Look, a Confirmation Dialog");
+                alert.setContentText("Are you ok with this?");
+
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK){
+                    // ... user chose OK
+                    Image currentImage = canvas.snapshot(null, null);
+                    BufferedImage saveFile = SwingFXUtils.fromFXImage(currentImage, null); //transform image to buffered image
+                    ImageIO.write(saveFile, extension, currentFile); //write the buffered image
+                    return true;
+                } else {
+                    // ... user chose CANCEL or closed the dialog
+                    currentFile = previousFile;
+                    return false;
+                }
+            } else{
+                Image currentImage = canvas.snapshot(null, null);
+                BufferedImage saveFile = SwingFXUtils.fromFXImage(currentImage, null); //transform image to buffered image
+                ImageIO.write(saveFile, extension, currentFile); //write the buffered image
+                return true;
+            }
         }
-        return true;
+        return saveAsFile();
     }
 
 
     private void showHelpWindow() {
-        if (stage == null){ // in case the program hasn't grabbed the stage yet, grab it.
-            stage = (Stage) menuBar.getScene().getWindow();
-        }
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText("I'm a help window. I tell you stuff about your program");
 
-        Group root = new Group();
-        Scene helpscene = new Scene(root, 320, 480);
-        Label helpLabel = new Label();
-        helpLabel.setText("This is a help window. I tell you what to do.");
-        root.getChildren().add(helpLabel);
-
-        Stage helpwindow = new Stage();
-        helpwindow.setTitle("Help");
-        helpwindow.setScene(helpscene);
-        helpwindow.show();
+        alert.showAndWait();
     }
 
     /*---------------------------------------------------------------------------*/

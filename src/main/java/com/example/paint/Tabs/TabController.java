@@ -24,11 +24,10 @@ import java.util.Stack;
  * The type Tab controller.
  */
 public class TabController {
-    private final Tab t;
+    private final Tab tab;
     private final MenuBar menuBar;
     private final ToolBar toolBar;
     private final Canvas canvas;
-    private Canvas liveDrawCanvas;
     private final FileController fileController;
     private final DrawController drawController;
     private Boolean recentlySaved;
@@ -36,7 +35,6 @@ public class TabController {
     private WritableImage currentState;
     private Stack<WritableImage> undoStack;
     private Stack<WritableImage> redoStack;
-    private Label timerLabel;
     private autoSaveTimer timer;
 
     /**
@@ -45,7 +43,7 @@ public class TabController {
      * @param T the t
      */
     public TabController(Tab T){
-        t = T;
+        tab = T;
         menuBar = null;
         toolBar = null;
         canvas = null;
@@ -63,31 +61,23 @@ public class TabController {
      * @param c  the c
      */
     public TabController(Tab T, MenuBar mb, ToolBar tb, Canvas c){
-        t = T;
-
+        tab = T;
         menuBar = mb;
         toolBar = tb;
         canvas = c;
 
-        liveDrawCanvas = new Canvas(canvas.getWidth(), canvas.getHeight());
+
+        Canvas liveDrawCanvas = new Canvas(canvas.getWidth(), canvas.getHeight());
         liveDrawCanvas.setLayoutX(canvas.getLayoutX());
         liveDrawCanvas.setLayoutY(canvas.getLayoutY());
         AnchorPane parent = (AnchorPane) canvas.getParent();
         parent.getChildren().add(liveDrawCanvas);
         liveDrawCanvas.toBack();
 
-        HBox tbcontainer = (HBox) tb.getItems().get(0);
-        Button clearScreen = (Button) tbcontainer.getChildren().get(4);
 
-
-        fileController = new FileController(
-                menuBar,
-                menuBar.getMenus().get(0).getItems().get(0),
-                menuBar.getMenus().get(0).getItems().get(1),
-                menuBar.getMenus().get(0).getItems().get(2),
-                menuBar.getMenus().get(2).getItems().get(0),
-                toolBar, canvas);
-        menuBar.getMenus().get(1).getItems().get(0).setOnAction(e -> { openResizeWindow(); });
+        fileController = new FileController(menuBar, canvas);
+        menuBar.getMenus().get(1).getItems().get(0).setOnAction(e -> openResizeWindow());
+        menuBar.getMenus().get(1).getItems().get(1).setOnAction(e -> setTimerVisibility());
 
         drawController = new DrawController(
                 canvas.getGraphicsContext2D(),
@@ -101,33 +91,38 @@ public class TabController {
         undoStack = new Stack<>();
         redoStack = new Stack<>();
 
+        if(canvas.getScene() != null) {
+            postInitializationSetup();
+        }
+    }
+
+    public void postInitializationSetup(){
+        HBox tbcontainer = (HBox) toolBar.getItems().get(0);
+        Button clearScreen = (Button) tbcontainer.getChildren().get(4);
         clearScreen.setOnAction(e -> {
             try {clearScreen();
             } catch (IOException ex) { throw new RuntimeException(ex);
             }
         });
-        toolBar.setOnMouseMoved(e -> drawController.setListeners(recentlySaved));
         canvas.setOnMouseEntered(e -> setListeners());
-
         getTab().setOnCloseRequest(e -> {
             try {deleteTab(e);} catch (IOException ex) {throw new RuntimeException(ex);}
         });
 
         BorderPane borderPane = (BorderPane) getTab().getTabPane().getParent();
-        timerLabel = (Label) borderPane.getBottom();
+        Label timerLabel = (Label) borderPane.getBottom();
         timer = new autoSaveTimer(timerLabel);
         int delay = 1000;
         ActionListener tick = e -> {
             if(getTab().isSelected()) {
                 Platform.runLater(timer);
                 if (timer.ended()) {
-                    Platform.runLater(() -> {
-                        try {fileController.saveFile();} catch (IOException ex) {throw new RuntimeException(ex);}
-                    });
+                    Platform.runLater(() -> { try {fileController.saveFile();} catch (IOException ex) {throw new RuntimeException(ex);} });
                 }
             }
         };
         new Timer(delay,tick).start();
+        fileController.postInitSetup();
     }
 
     /**
@@ -136,7 +131,7 @@ public class TabController {
      * @return the tab
      */
     protected Tab getTab(){
-        return t;
+        return tab;
     }
 
     /**
@@ -179,8 +174,8 @@ public class TabController {
     }
     private void setListeners(){
         drawController.setListeners(recentlySaved);
-        canvas.setOnMousePressed(e -> drawController.getPressEvent(e));
-        canvas.setOnMouseDragged(e -> drawController.getDragEvent(e));
+        canvas.setOnMousePressed(drawController::getPressEvent);
+        canvas.setOnMouseDragged(drawController::getDragEvent);
         canvas.setOnMouseReleased(e -> {
                 drawController.getReleaseEvent(e);
                 recentlySaved = false;
@@ -189,6 +184,7 @@ public class TabController {
         });
     }
     private void clearScreen() throws IOException {
+
         if(!recentlySaved){
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Clear Screen?");
@@ -270,6 +266,33 @@ public class TabController {
         }
     }
 
+    private void setTimerVisibility(){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Timer Visible");
+        alert.setHeaderText(null);
+        alert.setContentText("Choose whether you would like to see the autoSave timer");
+
+        ButtonType buttonTypeVisible = new ButtonType("Visible");
+        ButtonType buttonTypeInvisible = new ButtonType("Invisible");
+        ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(buttonTypeVisible, buttonTypeInvisible, buttonTypeCancel);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == buttonTypeVisible){
+            // ... user chose "One"
+            timer.setVisibility(true);
+            alert.close();
+        } else if (result.get() == buttonTypeInvisible) {
+            // ... user chose "Two"
+            timer.setVisibility(false);
+            alert.close();
+        } else {
+            // ... user chose CANCEL or closed the dialog
+            alert.close();
+        }
+    }
+
     /**
      * Open resize window.
      */
@@ -302,14 +325,12 @@ public class TabController {
         loginButton.setDisable(true);
 
         // Do some validation (using the Java 8 lambda syntax).
-        width.textProperty().addListener((observable, oldValue, newValue) -> {
-            loginButton.setDisable(newValue.trim().isEmpty());
-        });
+        width.textProperty().addListener((observable, oldValue, newValue) -> loginButton.setDisable(newValue.trim().isEmpty()));
 
         dialog.getDialogPane().setContent(grid);
 
         // Request focus on the width field by default.
-        Platform.runLater(() -> width.requestFocus());
+        Platform.runLater(width::requestFocus);
 
         // Convert the result to a width-password-pair when the login button is clicked.
         dialog.setResultConverter(dialogButton -> {

@@ -43,6 +43,7 @@
                               <Menu mnemonicParsing="false" text="Edit">
                                  <items>
                                     <MenuItem mnemonicParsing="false" text="Resize Canvas" />
+                                    <MenuItem mnemonicParsing="false" text="Show Timer" />
                                     <MenuItem mnemonicParsing="false" text="Delete" />
                                  </items>
                               </Menu>
@@ -95,6 +96,6 @@
       </TabPane>
    </center>
    <bottom>
-      <Label text="Label" BorderPane.alignment="BOTTOM_LEFT" />
+      <Label text="Time until AutoSave: 1:00" BorderPane.alignment="BOTTOM_LEFT" />
    </bottom>
 </BorderPane>

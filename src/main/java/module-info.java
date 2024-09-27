@@ -3,6 +3,7 @@ module com.example.paint {
     requires javafx.fxml;
     requires javafx.swing;
     requires javafx.web;
+    requires jdk.httpserver;
 
 
     opens com.example.paint to javafx.fxml;
@@ -27,4 +28,6 @@ module com.example.paint {
     opens com.example.paint.drawTools.MiscTools to javafx.fxml;
     exports com.example.paint.Timer;
     opens com.example.paint.Timer to javafx.fxml;
+    exports com.example.paint.webServer;
+    opens com.example.paint.webServer to javafx.fxml;
 }

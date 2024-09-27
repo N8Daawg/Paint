@@ -51,6 +51,7 @@ public class TabCopyer {
         newm.setText(template.getText());
         ObservableList<MenuItem> items = newm.getItems();
         for (MenuItem item:template.getItems()){
+
             items.add(copyMenuItems(item));
         }
         return newm;

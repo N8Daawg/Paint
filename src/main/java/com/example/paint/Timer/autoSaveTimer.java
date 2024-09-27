@@ -7,11 +7,13 @@ import javafx.scene.control.Label;
  */
 public class autoSaveTimer implements Runnable {
     /**
-     * The Minutes to midnight.
+     * The starting time left on the countdown.
      */
     final int minutesToMidnight = 1;
     private final Label timerLabel;
     private countdownClock timer;
+    private boolean showTimer;
+    private boolean visibilityChanged;
 
     /**
      * Instantiates a new Auto save timer.
@@ -21,6 +23,8 @@ public class autoSaveTimer implements Runnable {
     public autoSaveTimer(Label TimerLabel){
         timerLabel = TimerLabel;
         timer = new countdownClock(minutesToMidnight);
+        showTimer = true;
+        visibilityChanged = false;
     }
 
     /**
@@ -28,13 +32,6 @@ public class autoSaveTimer implements Runnable {
      */
     public void resetTimer(){
         timer = new countdownClock(minutesToMidnight);
-    }
-
-    /**
-     * Auto save.
-     */
-    public void autoSave(){
-
     }
 
     /**
@@ -46,10 +43,33 @@ public class autoSaveTimer implements Runnable {
         return timer.ended();
     }
 
+    /**
+     * Set visibility.
+     *
+     * @param visible the visible
+     */
+    public void setVisibility(Boolean visible){
+        if(visible){ showTimer();
+        } else { hideTimer();
+        }
+    }
+    private void showTimer(){
+        showTimer = true;
+        visibilityChanged = true;
+    }
+    private void hideTimer(){
+        showTimer = false;
+        visibilityChanged = true;
+    }
+
     @Override
     public void run() {
         if(timer.ended()){
             resetTimer();
+        }
+        if(visibilityChanged){
+            timerLabel.setVisible(showTimer);
+            visibilityChanged = false;
         }
         timerLabel.setText("Time until AutoSave: " +timer.toString());
         timer.countDown();

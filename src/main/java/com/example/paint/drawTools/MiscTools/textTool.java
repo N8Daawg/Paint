@@ -1,14 +1,11 @@
 package com.example.paint.drawTools.MiscTools;
 
 import com.example.paint.drawTools.drawTool;
-import javafx.event.EventHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.TextField;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-
-import java.io.IOException;
 
 /**
  * The type Text tool.
@@ -22,16 +19,17 @@ public class textTool extends drawTool {
      */
     public textTool(GraphicsContext g, GraphicsContext LDGC) {
         super(g, LDGC);
+        gc.setLineWidth(1);
     }
 
     @Override
     protected void setColor(Color color) {
-
+        gc.setStroke(color);
     }
 
     @Override
     protected void setSize(double size) {
-
+        gc.setLineWidth(size);
     }
 
     @Override
@@ -41,13 +39,12 @@ public class textTool extends drawTool {
 
     @Override
     public void setAttributes(Color color, double size, Boolean dashedLine, Boolean recentlySaved) {
-
+        setup(color,1, false, wasRecentlySaved());
     }
 
     @Override
     public void getPressEvent(MouseEvent e) {
         anchorX = e.getX(); anchorY = e.getY();
-
 
     }
 
@@ -62,17 +59,13 @@ public class textTool extends drawTool {
         userinput.setLayoutX(e.getX());userinput.setLayoutY(e.getY()+50);
 
         AnchorPane parent = (AnchorPane) gc.getCanvas().getParent();
-        parent.getScene().addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent){ //add event filter to fish for shortcuts
-                if(keyEvent.getCode()==KeyCode.ENTER){
-                    parent.getChildren().remove(userinput);
-                    gc.strokeText(userinput.getText(), anchorX, anchorY);
-                }
+        parent.getChildren().add(userinput);
+        parent.getScene().addEventFilter(KeyEvent.KEY_PRESSED, keyEvent -> { //add event filter to fish for shortcuts
+            if(keyEvent.getCode()==KeyCode.ENTER){
+                gc.strokeText(userinput.getText(), anchorX, anchorY);
+                parent.getChildren().remove(userinput);
             }
         });
-
-        parent.getChildren().add(userinput);
     }
 
     public String toString(){
