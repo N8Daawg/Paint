@@ -65,7 +65,7 @@ Features:
         * Save Modified image
     * Color changer
     * Help Tab in Menu Bar
-    * Image resizing tool
+    * file resizing tool
 
 Know Bugs:
     * Difficulty finding saved images in local file explorer
@@ -102,16 +102,16 @@ Features coming soon:
         * Save Modified image
     * Color changer
     * Help Tab in Menu Bar
-    * Image resizing tool
+    * file resizing tool
 
 
 Version 1.0.0 (8/30/2024)
 
 Features:
     * Button to open an image from computer files
-    * Button to save Image to computer files
+    * Button to save file to computer files
 
 Known Bugs:
-    * When saving Image under new name, image is placed into the Project folder
+    * When saving file under new name, image is placed into the Project folder
     instead of the folder where the client obtained it from
-    * Image window sometimes shrinks when saving Images
+    * file window sometimes shrinks when saving Images
