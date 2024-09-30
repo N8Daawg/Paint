@@ -3,11 +3,8 @@ package paint;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import paint.fileAndServerManagment.webServer.webServer;
 
-import java.io.File;
 import java.io.IOException;
 
 public class PaintApplication extends Application {
@@ -21,7 +18,7 @@ public class PaintApplication extends Application {
         stage.show();
 
         PaintController.postInitializationSetup();
-        stage.setOnCloseRequest(PaintController::smartCLoseWindow); //setup for smart save
+        stage.setOnCloseRequest(PaintController::smartCloseWindow); //setup for smart save
         //PaintController.resize();
     }
 

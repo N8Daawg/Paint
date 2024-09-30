@@ -11,9 +11,19 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 
+/**
+ * The type Image to server task.
+ */
 public class imageToServerTask implements Runnable {
     private final HttpExchange exchange;
     private final File file;
+
+    /**
+     * Instantiates a new Image to server task.
+     *
+     * @param Exchange the HTTP exchange
+     * @param file     the file being displayed
+     */
     public imageToServerTask(HttpExchange Exchange, File file){
         exchange = Exchange;
         this.file = file;

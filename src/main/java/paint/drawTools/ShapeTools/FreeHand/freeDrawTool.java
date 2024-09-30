@@ -22,18 +22,18 @@ public class freeDrawTool extends shapeTool {
     /*-------------------------------Free Draw Events----------------------------*/
     /*---------------------------------------------------------------------------*/
     @Override
-    public void getPressEvent(MouseEvent e) {
+    public void getPressEvent(MouseEvent mouseEvent) {
         isDashedLine = false; gc.beginPath();
     }
     @Override
-    public void getDragEvent(MouseEvent e) {
+    public void getDragEvent(MouseEvent mouseEvent) {
         gc.setLineCap(StrokeLineCap.ROUND);
-        gc.lineTo(e.getX(), e.getY());
+        gc.lineTo(mouseEvent.getX(), mouseEvent.getY());
         gc.stroke();
     }
     @Override
-    public void getReleaseEvent(MouseEvent e) {
-        gc.lineTo(e.getX(), e.getY());
+    public void getReleaseEvent(MouseEvent mouseEvent) {
+        gc.lineTo(mouseEvent.getX(), mouseEvent.getY());
         gc.stroke();
         gc.closePath();
         recentlySaved=false;

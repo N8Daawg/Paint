@@ -31,22 +31,22 @@ public class selectorTool extends rectangleTool {
     }
 
     @Override
-    public void getPressEvent(MouseEvent e) {
+    public void getPressEvent(MouseEvent mouseEvent) {
         if(selecting){
-            super.getPressEvent(e);
+            super.getPressEvent(mouseEvent);
         } else{
-            grabbingx = e.getX();
-            grabbingy = e.getY();
+            grabbingx = mouseEvent.getX();
+            grabbingy = mouseEvent.getY();
         }
     }
 
     @Override
-    public void getDragEvent(MouseEvent e) {
+    public void getDragEvent(MouseEvent mouseEvent) {
         if(selecting) {
-            super.getDragEvent(e);
+            super.getDragEvent(mouseEvent);
         } else{
-            double translatex = e.getX()-grabbingx;
-            double translatey = e.getY()-grabbingy;
+            double translatex = mouseEvent.getX()-grabbingx;
+            double translatey = mouseEvent.getY()-grabbingy;
             liveDrawRectangle(
                     new double[]{anchorX+translatex, anchorX+translatex, finalx+translatex, finalx+translatex},
                     new double[]{anchorY+translatey, finaly+translatey, finaly+translatey, anchorY+translatey}
@@ -56,10 +56,10 @@ public class selectorTool extends rectangleTool {
     }
 
     @Override
-    public void getReleaseEvent(MouseEvent e) {
+    public void getReleaseEvent(MouseEvent mouseEvent) {
         clearCanvas(ldgc);
         if(selecting){
-            finalx = e.getX(); finaly=e.getY();
+            finalx = mouseEvent.getX(); finaly=mouseEvent.getY();
 
             SnapshotParameters sp = new SnapshotParameters();
             sp.setViewport(new Rectangle2D(anchorX, anchorY+69.6, finalx-anchorX, finaly-anchorY));
@@ -70,7 +70,7 @@ public class selectorTool extends rectangleTool {
             selecting = false;
         } else {
 
-            gc.drawImage(clipboard, anchorX+(e.getX()-grabbingx),anchorY+(e.getY()-grabbingy));
+            gc.drawImage(clipboard, anchorX+(mouseEvent.getX()-grabbingx),anchorY+(mouseEvent.getY()-grabbingy));
             selecting = true;
         }
     }

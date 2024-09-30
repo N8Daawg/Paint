@@ -28,11 +28,13 @@ public class FileController {
     private File currentFile;
     private Boolean recentlySaved;
     private final webServer server; //the connected webserver to display saved images
+
     /**
      * Instantiates a new File controller.
      *
-     * @param newMenuBar the new menu bar
-     * @param newCanvas  the new canvas
+     * @param newMenuBar the menu bar
+     * @param newCanvas  the canvas to be saved
+     * @param Server     the server storing the images
      */
     public FileController(MenuBar newMenuBar, Canvas newCanvas, webServer Server) {
         menuBar = newMenuBar;
@@ -87,7 +89,7 @@ public class FileController {
     /**
      * Was recently saved boolean.
      *
-     * @return the boolean
+     * @return returns whether the file was recently saved or not
      */
     public Boolean wasRecentlySaved(){
         return recentlySaved;
@@ -109,9 +111,9 @@ public class FileController {
     }
 
     /**
-     * Save file boolean.
+     * saves the current file.
      *
-     * @return the boolean
+     * @return returns if the file saving was successful
      * @throws IOException the io exception
      */
     public Boolean saveFile() throws IOException {
@@ -177,7 +179,7 @@ public class FileController {
     /*---------------------------------------------------------------------------*/
 
     private void updateServer(){
-        server.setFile(currentFile);
+        server.updateServerFile(currentFile);
         System.out.println("Server file updated to be " + currentFile);
     }
 
@@ -193,7 +195,13 @@ public class FileController {
         }
     }
 
-    // method to read file extensions found from GFG website:
+    /**
+     * Gets an extension of a file.
+     *
+     * @param path the path of a file
+     * @return the extension of a file
+     */
+// method to read file extensions found from GFG website:
     // https://www.geeksforgeeks.org/how-to-get-the-file-extension-in-java/
     protected static String getExtension(Path path) {
         String fileName = path.getFileName().toString();

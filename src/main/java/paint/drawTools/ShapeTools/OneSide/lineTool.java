@@ -1,5 +1,6 @@
 package paint.drawTools.ShapeTools.OneSide;
 
+import javafx.scene.input.MouseEvent;
 import paint.drawTools.ShapeTools.shapeTool;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -39,21 +40,21 @@ public class lineTool extends shapeTool {
     /*-----------------------------------Line Events-----------------------------*/
     /*---------------------------------------------------------------------------*/
     @Override
-    public void getPressEvent(javafx.scene.input.MouseEvent e) {
-        anchorX = e.getX();
-        anchorY = e.getY();
+    public void getPressEvent(MouseEvent mouseEvent) {
+        anchorX = mouseEvent.getX();
+        anchorY = mouseEvent.getY();
     }
 
     @Override
-    public void getDragEvent(javafx.scene.input.MouseEvent e) {
-        liveDrawLine(anchorX, anchorY, e.getX(), e.getY());
+    public void getDragEvent(MouseEvent mouseEvent) {
+        liveDrawLine(anchorX, anchorY, mouseEvent.getX(), mouseEvent.getY());
     }
 
     @Override
-    public void getReleaseEvent(javafx.scene.input.MouseEvent e) {
+    public void getReleaseEvent(MouseEvent mouseEvent) {
         recentlySaved = false;
         clearCanvas(ldgc);
-        drawLine(gc, anchorX, anchorY, e.getX(), e.getY());
+        drawLine(gc, anchorX, anchorY, mouseEvent.getX(), mouseEvent.getY());
     }
 
     @Override

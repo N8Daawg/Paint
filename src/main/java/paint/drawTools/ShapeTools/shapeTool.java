@@ -59,17 +59,17 @@ public class shapeTool extends drawTool {
     }
 
     @Override
-    public void getPressEvent(MouseEvent e) {
+    public void getPressEvent(MouseEvent mouseEvent) {
 
     }
 
     @Override
-    public void getDragEvent(MouseEvent e) {
+    public void getDragEvent(MouseEvent mouseEvent) {
 
     }
 
     @Override
-    public void getReleaseEvent(MouseEvent e) {
+    public void getReleaseEvent(MouseEvent mouseEvent) {
 
     }
 

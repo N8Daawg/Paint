@@ -43,20 +43,20 @@ public class textTool extends drawTool {
     }
 
     @Override
-    public void getPressEvent(MouseEvent e) {
-        anchorX = e.getX(); anchorY = e.getY();
+    public void getPressEvent(MouseEvent mouseEvent) {
+        anchorX = mouseEvent.getX(); anchorY = mouseEvent.getY();
 
     }
 
     @Override
-    public void getDragEvent(MouseEvent e) {
+    public void getDragEvent(MouseEvent mouseEvent) {
 
     }
 
     @Override
-    public void getReleaseEvent(MouseEvent e) {
+    public void getReleaseEvent(MouseEvent mouseEvent) {
         TextField userinput = new TextField("Your text here");
-        userinput.setLayoutX(e.getX());userinput.setLayoutY(e.getY()+50);
+        userinput.setLayoutX(mouseEvent.getX());userinput.setLayoutY(mouseEvent.getY()+50);
 
         AnchorPane parent = (AnchorPane) gc.getCanvas().getParent();
         parent.getChildren().add(userinput);

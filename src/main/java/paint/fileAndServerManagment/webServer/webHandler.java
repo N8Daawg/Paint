@@ -6,11 +6,22 @@ import com.sun.net.httpserver.HttpHandler;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * The type Web handler.
+ */
 public class webHandler implements HttpHandler {
     private File transferredfile;
 
+    /**
+     * Instantiates a new Web handler.
+     */
     public webHandler(){this.transferredfile = null;}
 
+    /**
+     * Sets transferredfile.
+     *
+     * @param transferedfile the file that is being transfered to the web server
+     */
     public void setTransferredfile(File transferedfile) {
         this.transferredfile = transferedfile;
     }

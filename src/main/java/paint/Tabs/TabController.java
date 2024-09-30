@@ -15,8 +15,6 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import paint.fileAndServerManagment.webServer.webServer;
 
-import javax.swing.*;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.Stack;
@@ -165,7 +163,7 @@ public class TabController {
     private void setListeners(){
         drawController.setListeners(recentlySaved);
         canvas.setOnMousePressed(drawController::getPressEvent);
-        canvas.setOnMouseDragged(drawController::getDragEvent);
+        canvas.setOnMouseDragged(e1 -> drawController.getDragEvent(e1));
         canvas.setOnMouseReleased(e -> {
                 drawController.getReleaseEvent(e);
                 recentlySaved = false;

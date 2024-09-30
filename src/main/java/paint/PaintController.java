@@ -33,21 +33,24 @@ public class PaintController {
 
     }
 
+    /**
+     * Post initialization setup.
+     */
     public static void postInitializationSetup(){
         tpc.postInitializationSetup();
     }
 
     /**
-     * Smart c lose window.
+     * close the window with a smart close feature
      *
      * @param windowEvent the window event
      */
-    public static void smartCLoseWindow(WindowEvent windowEvent){
+    public static void smartCloseWindow(WindowEvent windowEvent){
         tpc.tryCloseAll(windowEvent);
     }
 
     /**
-     * Resize.
+     * Resize the window
      */
     public static void resize(){
         TabPaneController.resize(initialWindowSizeX, initialWindowSizeY);

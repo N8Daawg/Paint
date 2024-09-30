@@ -36,22 +36,16 @@ public class DrawController {
     private final drawTool[] toolsList;
     private final FileController fileController;
     private boolean recentlySaved;
-    /**
-     * The Selector tool.
-     */
-    selectorTool selectorTool;
-    /**
-     * The Polygon tool.
-     */
-    polygonTool polygonTool;
+    private final selectorTool selectorTool;
+    private final polygonTool polygonTool;
 
     /**
      * Instantiates a new Draw controller.
      *
-     * @param g     the g
-     * @param LDGC  the ldgc
-     * @param tb    the tb
-     * @param filec the filec
+     * @param g     the graphics context
+     * @param LDGC  the live draw graphics context
+     * @param tb    the tool bar
+     * @param filec the file controller
      */
     public DrawController(GraphicsContext g, GraphicsContext LDGC, ToolBar tb, FileController filec){
         gc = g;
@@ -92,14 +86,14 @@ public class DrawController {
     }
 
     /**
-     * Clears the current Screen
+     * Clear screen.
      */
     public void clearScreen(){
         gc.clearRect(0,0,gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
     }
 
     /**
-     * wrapper method for when the cursor enters the canvas
+     * Set listeners.
      *
      * @param recentlySaved the recently saved
      */
@@ -127,26 +121,26 @@ public class DrawController {
     }
 
     /**
-     * Get press event.
+     * gets the selected tool's Press event
      *
-     * @param e the mouse event
+     * @param mouseEvent the mouse event
      */
-    public void getPressEvent(javafx.scene.input.MouseEvent e){currentTool.getPressEvent(e);}
+    public void getPressEvent(MouseEvent mouseEvent){currentTool.getPressEvent(mouseEvent);}
 
     /**
-     * Get drag event.
+     * gets the selected tool's Drag event.
      *
-     * @param e the mouse event
+     * @param mouseEvent the mouse event
      */
-    public void getDragEvent(javafx.scene.input.MouseEvent e){ currentTool.getDragEvent(e);}
+    public void getDragEvent(MouseEvent mouseEvent){currentTool.getDragEvent(mouseEvent);}
 
     /**
-     * Get release event.
+     *gets the selected tool's Release event
      *
-     * @param e the mouse event
+     * @param mouseEvent the mouse event
      */
-    public void getReleaseEvent(javafx.scene.input.MouseEvent e){
-        currentTool.getReleaseEvent(e);
+    public void getReleaseEvent(MouseEvent mouseEvent){
+        currentTool.getReleaseEvent(mouseEvent);
     }
 
     /**
@@ -160,7 +154,7 @@ public class DrawController {
     /**
      * Was recently saved boolean.
      *
-     * @return the boolean
+     * @return whether the file was recently saved or not
      */
     public boolean wasRecentlySaved() {
         recentlySaved = currentTool.wasRecentlySaved();
@@ -170,7 +164,7 @@ public class DrawController {
     /**
      * Get clip board image.
      *
-     * @return the image
+     * @return the image on the clipboard
      */
     public Image getClipBoard(){
         return selectorTool.getClipBoard();
@@ -179,9 +173,9 @@ public class DrawController {
     /**
      * Paste.
      *
-     * @param me the mouse event
+     * @param mouseEvent the mouse event
      */
-    public void paste(MouseEvent me) {
-        selectorTool.paste(me);
+    public void paste(MouseEvent mouseEvent) {
+        selectorTool.paste(mouseEvent);
     }
 }

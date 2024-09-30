@@ -1,6 +1,7 @@
 package paint.drawTools;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 /**
@@ -43,8 +44,8 @@ public abstract class drawTool {
     /**
      * Instantiates a new Draw tool.
      *
-     * @param g    the g
-     * @param LDGC the ldgc
+     * @param g    the graphics context
+     * @param LDGC the live draw graphics context
      */
     public drawTool(GraphicsContext g, GraphicsContext LDGC){
         gc = g;
@@ -111,23 +112,23 @@ public abstract class drawTool {
     /**
      * Gets press event.
      *
-     * @param e the e
+     * @param mouseEvent
      */
-    public abstract void getPressEvent(javafx.scene.input.MouseEvent e);
+    public abstract void getPressEvent(MouseEvent mouseEvent);
 
     /**
      * Gets drag event.
      *
-     * @param e the e
+     * @param mouseEvent
      */
-    public abstract void getDragEvent(javafx.scene.input.MouseEvent e);
+    public abstract void getDragEvent(MouseEvent mouseEvent);
 
     /**
      * Gets release event.
      *
-     * @param e the e
+     * @param mouseEvent
      */
-    public abstract void getReleaseEvent(javafx.scene.input.MouseEvent e);
+    public abstract void getReleaseEvent(MouseEvent mouseEvent);
 
     /**
      * Was recently saved boolean.

@@ -38,19 +38,19 @@ public class eraserTool extends drawTool {
     /*-------------------------------Free Draw Events----------------------------*/
     /*---------------------------------------------------------------------------*/
     @Override
-    public void getPressEvent(MouseEvent e) {
+    public void getPressEvent(MouseEvent mouseEvent) {
 
     }
     @Override
-    public void getDragEvent(MouseEvent e) {
-        anchorX = e.getX()-brushSize/2;
-        anchorY = e.getY()-brushSize/2;
+    public void getDragEvent(MouseEvent mouseEvent) {
+        anchorX = mouseEvent.getX()-brushSize/2;
+        anchorY = mouseEvent.getY()-brushSize/2;
 
         gc.clearRect(anchorX,anchorY,brushSize,brushSize);
 
     }
     @Override
-    public void getReleaseEvent(MouseEvent e) {
+    public void getReleaseEvent(MouseEvent mouseEvent) {
         recentlySaved = false;
     }
 

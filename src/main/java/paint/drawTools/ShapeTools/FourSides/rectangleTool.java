@@ -56,26 +56,26 @@ public class rectangleTool extends shapeTool {
     /*---------------------------------------------------------------------------*/
 
     @Override
-    public void getPressEvent(MouseEvent e) {
-        anchorX = e.getX();
-        anchorY = e.getY();
+    public void getPressEvent(MouseEvent mouseEvent) {
+        anchorX = mouseEvent.getX();
+        anchorY = mouseEvent.getY();
 
     }
 
     @Override
-    public void getDragEvent(MouseEvent e) {
+    public void getDragEvent(MouseEvent mouseEvent) {
         liveDrawRectangle(
-                new double[]{anchorX, anchorX, e.getX(), e.getX()},
-                new double[]{anchorY, e.getY(), e.getY(), anchorY}
+                new double[]{anchorX, anchorX, mouseEvent.getX(), mouseEvent.getX()},
+                new double[]{anchorY, mouseEvent.getY(), mouseEvent.getY(), anchorY}
         );
     }
 
     @Override
-    public void getReleaseEvent(MouseEvent e) {
+    public void getReleaseEvent(MouseEvent mouseEvent) {
         drawRectangle(
                 gc,
-                new double[]{anchorX, anchorX, e.getX(), e.getX()},
-                new double[]{anchorY, e.getY(), e.getY(), anchorY}
+                new double[]{anchorX, anchorX, mouseEvent.getX(), mouseEvent.getX()},
+                new double[]{anchorY, mouseEvent.getY(), mouseEvent.getY(), anchorY}
         );
         clearCanvas(ldgc);
     }

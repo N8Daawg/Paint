@@ -53,27 +53,27 @@ public class triangleTool extends shapeTool {
     }
 
     @Override
-    public void getPressEvent(MouseEvent e) {
-        anchorX = e.getX();
-        anchorY = e.getY();
+    public void getPressEvent(MouseEvent mouseEvent) {
+        anchorX = mouseEvent.getX();
+        anchorY = mouseEvent.getY();
 
     }
 
     @Override
-    public void getDragEvent(MouseEvent e) {
+    public void getDragEvent(MouseEvent mouseEvent) {
         liveDrawTriangle(
-                new double[]{anchorX, anchorX+((e.getX()-anchorX)/2), e.getX()},
-                new double[]{anchorY, e.getY(), anchorY}
+                new double[]{anchorX, anchorX+((mouseEvent.getX()-anchorX)/2), mouseEvent.getX()},
+                new double[]{anchorY, mouseEvent.getY(), anchorY}
         );
     }
 
     @Override
-    public void getReleaseEvent(MouseEvent e) {
+    public void getReleaseEvent(MouseEvent mouseEvent) {
         recentlySaved=true;
         clearCanvas(ldgc);
         drawTriangle(gc,
-                new double[]{anchorX, anchorX+((e.getX()-anchorX)/2), e.getX()},
-                new double[]{anchorY, e.getY(), anchorY}
+                new double[]{anchorX, anchorX+((mouseEvent.getX()-anchorX)/2), mouseEvent.getX()},
+                new double[]{anchorY, mouseEvent.getY(), anchorY}
         );
         clearCanvas(ldgc);
     }

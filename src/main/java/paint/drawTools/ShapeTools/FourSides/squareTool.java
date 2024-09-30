@@ -39,10 +39,10 @@ public class squareTool extends rectangleTool {
 
     }
     @Override
-    public void getDragEvent(MouseEvent e) {
+    public void getDragEvent(MouseEvent mouseEvent) {
         double finalX; double finalY;
 
-        double[] deltas = correctBounts(new double[]{(e.getX()-anchorX), (e.getY()-anchorY)});
+        double[] deltas = correctBounts(new double[]{(mouseEvent.getX()-anchorX), (mouseEvent.getY()-anchorY)});
         finalX = anchorX+deltas[0];
         finalY = anchorY+deltas[1];
 
@@ -53,12 +53,12 @@ public class squareTool extends rectangleTool {
     }
 
     @Override
-    public void getReleaseEvent(MouseEvent e) {
+    public void getReleaseEvent(MouseEvent mouseEvent) {
         clearCanvas(ldgc);
 
         double finalX; double finalY;
 
-        double[] deltas = correctBounts(new double[]{(e.getX()-anchorX), (e.getY()-anchorY)});
+        double[] deltas = correctBounts(new double[]{(mouseEvent.getX()-anchorX), (mouseEvent.getY()-anchorY)});
         finalX = anchorX+deltas[0];
         finalY = anchorY+deltas[1];
 

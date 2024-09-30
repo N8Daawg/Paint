@@ -4,7 +4,6 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
-
 import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -39,8 +38,8 @@ public class TabPaneController {
     /**
      * Instantiates a new Tab pane controller.
      *
-     * @param tp         the tp
-     * @param ta         the ta
+     * @param tp         the tab pane
+     * @param ta         the tab adder button
      * @param initialTab the initial tab
      */
     public TabPaneController(TabPane tp, Tab ta, Tab initialTab) {
@@ -64,6 +63,9 @@ public class TabPaneController {
         tabAdderButton = (Button) tabs.get(0).getTab().getGraphic();
     }
 
+    /**
+     * Post initialization setup.
+     */
     public void postInitializationSetup(){
         BorderPane borderPane = (BorderPane) tabPane.getParent();
         Label timerLabel = (Label) borderPane.getBottom();
@@ -247,11 +249,11 @@ public class TabPaneController {
     /**
      * Resized the canvas
      *
-     * @param x the x
-     * @param y the y
+     * @param width the new width of the canvas
+     * @param height the height of the canvas
      */
-    public static void resize(double x, double y){
+    public static void resize(double width, double height){
         TabController currenTab = tabs.get(tabSelector.getSelectedIndex());
-        currenTab.resize(x, y);
+        currenTab.resize(width, height);
     }
 }

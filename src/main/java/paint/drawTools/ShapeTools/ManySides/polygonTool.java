@@ -97,21 +97,21 @@ public class polygonTool extends shapeTool {
     }
 
     @Override
-    public void getPressEvent(MouseEvent e) {
-        anchorX = e.getX();
-        anchorY = e.getY();
+    public void getPressEvent(MouseEvent mouseEvent) {
+        anchorX = mouseEvent.getX();
+        anchorY = mouseEvent.getY();
     }
 
     @Override
-    public void getDragEvent(MouseEvent e) {
-        double[][] xy = generateShapeArrays(anchorX,anchorY,e.getX(),e.getY());
+    public void getDragEvent(MouseEvent mouseEvent) {
+        double[][] xy = generateShapeArrays(anchorX,anchorY,mouseEvent.getX(),mouseEvent.getY());
         liveDrawPolygon(xy[0],xy[1]);
     }
 
     @Override
-    public void getReleaseEvent(MouseEvent e) {
+    public void getReleaseEvent(MouseEvent mouseEvent) {
         clearCanvas(ldgc);
-        double[][] xy = generateShapeArrays(anchorX, anchorY, e.getX(), e.getY());
+        double[][] xy = generateShapeArrays(anchorX, anchorY, mouseEvent.getX(), mouseEvent.getY());
         drawPolygon(gc, xy[0],xy[1]);
     }
 

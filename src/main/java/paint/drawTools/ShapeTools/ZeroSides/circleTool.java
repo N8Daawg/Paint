@@ -18,20 +18,20 @@ public class circleTool extends ellipseTool {
     }
 
     @Override
-    public void getDragEvent(MouseEvent e) {
-        if (e.getX() < e.getY()) {
-            liveDrawEllipse( anchorX, anchorY, e.getX(), anchorY+(e.getX()-anchorX));
+    public void getDragEvent(MouseEvent mouseEvent) {
+        if (mouseEvent.getX() < mouseEvent.getY()) {
+            liveDrawEllipse( anchorX, anchorY, mouseEvent.getX(), anchorY+(mouseEvent.getX()-anchorX));
         } else {
-            liveDrawEllipse( anchorX, anchorY,anchorX+(e.getY()-anchorY), e.getY());
+            liveDrawEllipse( anchorX, anchorY,anchorX+(mouseEvent.getY()-anchorY), mouseEvent.getY());
         }
     }
     @Override
-    public void getReleaseEvent(MouseEvent e) {
+    public void getReleaseEvent(MouseEvent mouseEvent) {
         clearCanvas(ldgc);
-        if (e.getX() < e.getY()) {
-            drawEllipse(gc, anchorX, anchorY, e.getX(), anchorY+(e.getX()-anchorX));
+        if (mouseEvent.getX() < mouseEvent.getY()) {
+            drawEllipse(gc, anchorX, anchorY, mouseEvent.getX(), anchorY+(mouseEvent.getX()-anchorX));
         } else {
-            drawEllipse(gc, anchorX, anchorY,anchorX+(e.getY()-anchorY), e.getY());
+            drawEllipse(gc, anchorX, anchorY,anchorX+(mouseEvent.getY()-anchorY), mouseEvent.getY());
         }
     }
 

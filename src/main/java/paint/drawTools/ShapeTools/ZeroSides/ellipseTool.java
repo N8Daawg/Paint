@@ -58,21 +58,21 @@ public class ellipseTool extends shapeTool {
         drawEllipse(ldgc, anchorX, anchorY, finalX, finalY);
     }
     @Override
-    public void getPressEvent(MouseEvent e) {
-        anchorX = e.getX();
-        anchorY = e.getY();
+    public void getPressEvent(MouseEvent mouseEvent) {
+        anchorX = mouseEvent.getX();
+        anchorY = mouseEvent.getY();
     }
 
     @Override
-    public void getDragEvent(MouseEvent e) {
-        liveDrawEllipse(anchorX, anchorY, e.getX(), e.getY());
+    public void getDragEvent(MouseEvent mouseEvent) {
+        liveDrawEllipse(anchorX, anchorY, mouseEvent.getX(), mouseEvent.getY());
 
     }
 
     @Override
-    public void getReleaseEvent(MouseEvent e) {
+    public void getReleaseEvent(MouseEvent mouseEvent) {
         clearCanvas(ldgc);
-        drawEllipse(gc, anchorX, anchorY, e.getX(), e.getY()
+        drawEllipse(gc, anchorX, anchorY, mouseEvent.getX(), mouseEvent.getY()
         );
     }
 
