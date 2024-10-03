@@ -1,5 +1,6 @@
 package paint.Tabs;
 
+import paint.PaintApplication;
 import paint.fileAndServerManagment.webServer.FileController;
 import paint.Timer.autoSaveTimer;
 import paint.drawTools.DrawController;
@@ -18,12 +19,14 @@ import paint.fileAndServerManagment.webServer.webServer;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.Stack;
+import java.util.logging.Logger;
 
 
 /**
  * The type Tab controller.
  */
 public class TabController {
+    private static Logger logger = Logger.getLogger(PaintApplication.loggerName);
     private final Tab tab;
     private final MenuBar menuBar;
     private final ToolBar toolBar;
@@ -172,7 +175,6 @@ public class TabController {
         });
     }
     private void clearScreen() throws IOException {
-
         if(!recentlySaved){
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Clear Screen?");

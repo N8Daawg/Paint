@@ -1,0 +1,33 @@
+INFO10-01-2024 13:47:03 || PaintApplication.main() : My first log
+INFO10-01-2024 13:47:03 || PaintApplication.main() : My first log
+INFO10-01-2024 13:47:03 || PaintApplication.main() : Hi How r u?
+INFO10-01-2024 13:48:33 || PaintApplication.main() : My first log
+INFO10-01-2024 13:48:33 || PaintApplication.main() : My first log
+INFO10-01-2024 13:48:33 || PaintApplication.main() : Hi How r u?
+INFO10-01-2024 14:00:37 || PaintApplication.main() : My first log
+INFO10-01-2024 14:00:37 || PaintApplication.main() : My first log
+INFO10-01-2024 14:00:37 || PaintApplication.main() : Hi How r u?
+INFO10-01-2024 14:01:50 || PaintApplication.main() : My first log
+INFO10-01-2024 14:01:50 || PaintApplication.main() : My first log
+INFO10-01-2024 14:01:50 || PaintApplication.main() : Hi How r u?
+INFO10-01-2024 14:09:23 || PaintApplication.main() : My first log
+INFO10-01-2024 14:09:23 || PaintApplication.main() : My first log
+INFO10-01-2024 14:09:23 || PaintApplication.main() : Hi How r u?
+INFO10-01-2024 14:10:19 || PaintApplication.main() : My first log
+INFO10-01-2024 14:10:19 || PaintApplication.main() : My first log
+INFO10-01-2024 14:10:19 || PaintApplication.main() : Hi How r u?
+INFO10-01-2024 14:18:46 || PaintApplication.main() : My first log
+INFO10-01-2024 14:18:46 || PaintApplication.main() : My first log
+INFO10-01-2024 14:18:46 || PaintApplication.main() : Hi How r u?
+INFO 10-01-2024 14:24:38 || PaintApplication.loggerSetup() : My first log
+INFO 10-01-2024 14:24:38 || PaintApplication.loggerSetup() : My first log
+INFO 10-01-2024 14:24:38 || PaintApplication.loggerSetup() : Hi How r u?
+INFO: 10-01-2024 14:39:44 || PaintController.initialize() : initializing Controller
+INFO: 10-01-2024 14:44:05 || PaintController.initialize() : initializing Controller
+INFO: 10-01-2024 14:44:05 || PaintApplication.start() : Starting Paint
+INFO: 10-02-2024 11:45:57 || PaintController.initialize() : initializing Controller
+INFO: 10-02-2024 11:45:57 || PaintApplication.start() : Starting Paint
+INFO: 10-02-2024 16:03:35 || PaintApplication.start() : Starting Paint
+INFO: 10-02-2024 16:03:59 || TabPaneController.tryCloseAll() : Exiting Paint
+INFO: 10-02-2024 17:23:11 || PaintApplication.start() : Starting Paint
+INFO: 10-02-2024 17:35:46 || PaintApplication.start() : Starting Paint

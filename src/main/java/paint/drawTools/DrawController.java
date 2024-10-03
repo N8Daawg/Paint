@@ -71,6 +71,7 @@ public class DrawController {
         shapeChooser.setValue(toolsList[1]);
 
 
+
         HBox dashedLineCheckContainer = (HBox) toolbarContainer.getChildren().get(2);
         dashedlineChecker = (CheckBox) dashedLineCheckContainer.getChildren().get(1);
 

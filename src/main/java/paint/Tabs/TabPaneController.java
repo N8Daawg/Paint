@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -18,6 +19,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import paint.PaintApplication;
 import paint.Timer.autoSaveTimer;
 import paint.fileAndServerManagment.webServer.webServer;
 
@@ -27,6 +29,7 @@ import javax.swing.*;
  * The type Tab pane controller.
  */
 public class TabPaneController {
+    private static Logger logger = Logger.getLogger(PaintApplication.loggerName);
     private static TabPane tabPane;
     private static SelectionModel<Tab> tabSelector;
     private static ArrayList<TabController> tabs;
@@ -106,73 +109,11 @@ public class TabPaneController {
 
         p.getChildren().addAll(mb, tb, cv);
 
+        logger.info("A new tab was opened");
         tabPane.getTabs().add(nt);
         tabSelector.select(nt);
-
         tabs.add(new TabController(nt, mb, tb, cv, server, timer));
     }
-
-    /**
-     * The Save combo.
-     */
-    final KeyCombination saveCombo = new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN);
-    /**
-     * The J pun.
-     */
-    final KeyCombination JPun = new KeyCodeCombination(KeyCode.J, KeyCombination.CONTROL_DOWN);
-    /**
-     * The Undo combo.
-     */
-    final KeyCombination undoCombo = new KeyCodeCombination(KeyCode.Z, KeyCombination.CONTROL_DOWN);
-    /**
-     * The Redo combo.
-     */
-    final KeyCombination redoCombo = new KeyCodeCombination(KeyCode.Y, KeyCombination.CONTROL_DOWN);
-    /**
-     * The Paste combo.
-     */
-    final KeyCombination pasteCombo = new KeyCodeCombination(KeyCode.P, KeyCombination.CONTROL_DOWN);
-
-    /**
-     * a wrapper to set up the keyboard shortcuts
-     */
-    public void shortCutSetup(){
-        tabPane.getScene().addEventFilter(KeyEvent.KEY_PRESSED, keyEvent -> { //add event filter to fish for shortcuts
-            try { fishForShortcuts(keyEvent);
-            } catch (IOException e) { throw new RuntimeException(e);
-            }
-        });
-    }
-
-    /**
-     * Fish for some shortcuts
-     *
-     * @param ke the key event being tracked
-     * @throws IOException throws an IO exception sometimes with the saveFile method
-     */
-    private void fishForShortcuts(KeyEvent ke) throws IOException { //creates key combos and fish for them
-        if(saveCombo.match(ke)){ //A wild saveCombo appeared!
-            tabs.get(tabSelector.getSelectedIndex()).getFileController().saveFile();
-        } else if(JPun.match(ke)){
-            Group root = new Group();
-            WebView webView = new WebView();
-            root.getChildren().add(webView);
-
-            Scene easterEgg = new Scene(root, 720, 460);
-            Stage easterWindow = new Stage();
-            easterWindow.setScene(easterEgg);
-            easterWindow.show();
-
-            webView.getEngine().load("https://blackbirdvalpo.com/");
-        } else if(undoCombo.match(ke)){
-            tabs.get(tabSelector.getSelectedIndex()).undo();
-        } else if(redoCombo.match(ke)){
-            tabs.get(tabSelector.getSelectedIndex()).redo();
-        } else if(pasteCombo.match(ke)){
-            //tabs.get(tabSelector.getSelectedIndex()).paste(me);
-        }
-    }
-
     /**
      * removes a given tab
      *
@@ -180,6 +121,7 @@ public class TabPaneController {
      * @param t  the tab being removed
      */
     public static void removeTab(TabController tc, Tab t){
+        logger.info("A tab was closed");
         tabPane.getTabs().remove(t);
         tabs.remove(tc);
     }
@@ -227,6 +169,7 @@ public class TabPaneController {
                 alert.close();
             }
         } else {
+            logger.info("Exiting Paint");
             System.exit(0);
         }
     }
@@ -255,5 +198,70 @@ public class TabPaneController {
     public static void resize(double width, double height){
         TabController currenTab = tabs.get(tabSelector.getSelectedIndex());
         currenTab.resize(width, height);
+    }
+
+    private final KeyCombination openCombo = new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN);
+    /**
+     * The Save combo key combination.
+     */
+    private final KeyCombination saveCombo = new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN);
+    private final KeyCombination saveAsCombo = new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN);
+    /**
+     * The J pun key combination.
+     */
+    private final KeyCombination JPun = new KeyCodeCombination(KeyCode.J, KeyCombination.CONTROL_DOWN);
+    /**
+     * The Undo combo key combination.
+     */
+    private final KeyCombination undoCombo = new KeyCodeCombination(KeyCode.Z, KeyCombination.CONTROL_DOWN);
+    /**
+     * The Redo combo key combination.
+     */
+    private final KeyCombination redoCombo = new KeyCodeCombination(KeyCode.Y, KeyCombination.CONTROL_DOWN);
+    /**
+     * The Paste combo key combination.
+     */
+    private final KeyCombination pasteCombo = new KeyCodeCombination(KeyCode.P, KeyCombination.CONTROL_DOWN);
+
+
+    /**
+     * a wrapper to set up the keyboard shortcuts
+     */
+    public void shortCutSetup(){
+        tabPane.getScene().addEventFilter(KeyEvent.KEY_PRESSED, keyEvent -> { //add event filter to fish for shortcuts
+            try { fishForShortcuts(keyEvent);
+            } catch (IOException e) { throw new RuntimeException(e);
+            }
+        });
+    }
+
+    /**
+     * Fish for some shortcuts
+     *
+     * @param ke the key event being tracked
+     * @throws IOException throws an IO exception sometimes with the saveFile method
+     */
+    private void fishForShortcuts(KeyEvent ke) throws IOException { //creates key combos and fish for them
+        if(saveCombo.match(ke)){ //A wild saveCombo appeared!
+            tabs.get(tabSelector.getSelectedIndex()).getFileController().saveFile();
+        } else if(JPun.match(ke)){
+            Group root = new Group();
+            WebView webView = new WebView();
+            root.getChildren().add(webView);
+
+            Scene easterEgg = new Scene(root, 720, 460);
+            Stage easterWindow = new Stage();
+            easterWindow.setScene(easterEgg);
+            easterWindow.show();
+
+            webView.getEngine().load("https://blackbirdvalpo.com/");
+            logger.info("They found my easter egg ^o^");
+        } else if(undoCombo.match(ke)){
+            tabs.get(tabSelector.getSelectedIndex()).undo();
+        } else if(redoCombo.match(ke)){
+            tabs.get(tabSelector.getSelectedIndex()).redo();
+        } else if(pasteCombo.match(ke)){
+            //tabs.get(tabSelector.getSelectedIndex()).paste(me);
+        }
     }
 }
