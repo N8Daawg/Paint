@@ -31,27 +31,26 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.shape.Rectangle?>
 
-
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paint.PaintController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paint.PaintController">
    <center>
       <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1280.0" BorderPane.alignment="TOP_LEFT">
          <tabs>
             <Tab closable="false">
                <graphic>
-                  <Button fx:id="tabAdderButton1" alignment="CENTER" contentDisplay="TOP" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="21.0" prefWidth="27.0" text="+" textAlignment="CENTER" />
+                  <Button alignment="CENTER" contentDisplay="TOP" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="21.0" prefWidth="27.0" text="+" textAlignment="CENTER" />
                </graphic>
             </Tab>
             <Tab text="Project 1">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="444.0" prefWidth="709.0">
                      <children>
-                        <MenuBar fx:id="menuBar" AnchorPane.bottomAnchor="422.4" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="569.5999999999999" AnchorPane.topAnchor="0.0">
+                        <MenuBar prefHeight="20.0" prefWidth="132.0" AnchorPane.bottomAnchor="731.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1148.0" AnchorPane.topAnchor="0.0">
                            <menus>
                               <Menu mnemonicParsing="false" text="File">
                                  <items>
-                                    <MenuItem fx:id="openFile" mnemonicParsing="false" text="Open" />
-                                    <MenuItem fx:id="saveFile" mnemonicParsing="false" text="Save" />
-                                    <MenuItem fx:id="saveAsFile" mnemonicParsing="false" text="Save As" />
+                                    <MenuItem mnemonicParsing="false" text="Open" />
+                                    <MenuItem mnemonicParsing="false" text="Save" />
+                                    <MenuItem mnemonicParsing="false" text="Save As" />
                                     <MenuItem mnemonicParsing="false" text="Close" />
                                  </items>
                               </Menu>
@@ -64,12 +63,12 @@
                               </Menu>
                               <Menu mnemonicParsing="false" text="Help">
                                  <items>
-                                    <MenuItem fx:id="about" mnemonicParsing="false" text="About" />
+                                    <MenuItem mnemonicParsing="false" text="About" />
                                  </items>
                               </Menu>
                            </menus>
                         </MenuBar>
-                        <ToolBar fx:id="tb" layoutY="26.0" prefWidth="1280.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="26.0">
+                        <ToolBar layoutY="26.0" prefWidth="1280.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="26.0">
                            <items>
                               <VBox alignment="CENTER" spacing="10.0">
                                  <children>
@@ -100,10 +99,38 @@
                                         <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <Button mnemonicParsing="false" text="Rotate" />
-                                          <Button mnemonicParsing="false" text="Mirror" GridPane.columnIndex="1" />
-                                          <Button mnemonicParsing="false" text="Resize" GridPane.rowIndex="1" />
-                                          <Button mnemonicParsing="false" text="Clear" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <Button mnemonicParsing="false">
+                                             <graphic>
+                                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../Icons/rotate-image.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic></Button>
+                                          <Button mnemonicParsing="false" GridPane.columnIndex="1">
+                                             <graphic>
+                                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../Icons/mirror-image.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic></Button>
+                                          <Button mnemonicParsing="false" GridPane.rowIndex="1">
+                                             <graphic>
+                                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../Icons/resize-image.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic></Button>
+                                          <Button mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <graphic>
+                                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../Icons/clear.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic></Button>
                                        </children>
                                     </GridPane>
                                     <Label text="Canvas" />
@@ -114,12 +141,19 @@
                                  <children>
                                     <HBox alignment="CENTER">
                                        <children>
-                                          <Button mnemonicParsing="false" text="Pencil" />
+                                          <Button mnemonicParsing="false">
+                                             <graphic>
+                                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../Icons/pencil.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic></Button>
                                           <Button mnemonicParsing="false">
                                              <graphic>
                                                 <ImageView fitHeight="30.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
-                                                      <Image url="@../Icons/eraserIcon.png" />
+                                                      <Image url="@../Icons/eraser.png" />
                                                    </image>
                                                    <viewport>
                                                       <Rectangle2D />
@@ -153,7 +187,7 @@
                                  <children>
                                     <ScrollPane>
                                        <content>
-                                          <GridPane hgap="2.0" vgap="2.0">
+                                          <GridPane hgap="2.0" prefHeight="60.0" vgap="2.0">
                                             <columnConstraints>
                                               <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
                                               <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
@@ -226,9 +260,9 @@
                               </VBox>
                            </items>
                         </ToolBar>
-                        <ScrollPane layoutY="115.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="334.0" prefWidth="1280.0" snapToPixel="false" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="113.0">
+                        <ScrollPane layoutY="124.8" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="625.0" prefWidth="1280.0" snapToPixel="false" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="125.0">
                            <content>
-                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="635.0" prefWidth="1265.0">
+                              <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="635.0" prefWidth="1266.0">
                                  <children>
                                     <Canvas blendMode="SRC_ATOP" height="600.0" width="1200.0" />
                                  </children>

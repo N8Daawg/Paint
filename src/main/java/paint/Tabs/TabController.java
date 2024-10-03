@@ -68,14 +68,13 @@ public class TabController {
         AnchorPane pane = (AnchorPane) tab.getContent();
         menuBar = (MenuBar) pane.getChildren().get(0);
         toolBar = (ToolBar) pane.getChildren().get(1);
-        ScrollPane scp = (ScrollPane) pane.getChildren().get(2);
-        StackPane stp = (StackPane) scp.getContent();
-        canvas = (Canvas) stp.getChildren().get(0);
+        canvas = (Canvas) ((StackPane) ((ScrollPane) pane.getChildren().get(2)).getContent()).getChildren().get(0);
 
         Canvas liveDrawCanvas = new Canvas(canvas.getWidth(), canvas.getHeight());
         liveDrawCanvas.setLayoutX(canvas.getLayoutX());
         liveDrawCanvas.setLayoutY(canvas.getLayoutY());
-        stp.getChildren().add(liveDrawCanvas);
+        ((StackPane) ((ScrollPane) pane.getChildren().get(2)).getContent()).getChildren().add(
+                liveDrawCanvas);
         liveDrawCanvas.toBack();
 
         timer = Timer;
@@ -96,7 +95,14 @@ public class TabController {
         undoStack = new Stack<>();
         redoStack = new Stack<>();
 
+
+        /*
+        System.out.println(
+                ((ScrollPane)((StackPane) canvas.getParent()).getParent())
+        );
+         */
         if(canvas.getScene() != null) {
+            System.out.println("test");
             postInitializationSetup();
         }
     }
@@ -105,7 +111,7 @@ public class TabController {
      * Post initialization setup.
      */
     public void postInitializationSetup(){
-        canvas.setOnMouseEntered(e -> setListeners());
+        canvas.setOnMouseEntered(event -> setListeners());
         getTab().setOnCloseRequest(e -> {
             try {deleteTab(e);} catch (IOException ex) {throw new RuntimeException(ex);}
         });

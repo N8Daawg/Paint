@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -95,16 +96,14 @@ public class TabPaneController {
     protected void addTab(){
         Tab nt = new Tab();
         nt.setText("New Project");
+        try{
+            AnchorPane root = new FXMLLoader(PaintApplication.class.getResource("Tab-view.fxml")).load();
+            nt.setContent(root);
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
 
-        AnchorPane p = TabCopyer.copyAnchorPane();
-        nt.setContent(p);
-
-        MenuBar mb  = TabCopyer.copyMenubar(templateTab.getMenuBar());
-        ToolBar tb = TabCopyer.copyToolBar(templateTab.getToolBar());
-        Canvas cv = TabCopyer.copyCanvas(templateTab.getCanvas());
-
-        p.getChildren().addAll(mb, tb, cv);
-
+        //System.out.println(((AnchorPane) nt.getContent()).getChildren());
         logger.info("A new tab was opened");
         tabPane.getTabs().add(nt);
         tabSelector.select(nt);
