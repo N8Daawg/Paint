@@ -16,6 +16,7 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -29,7 +30,7 @@ import javax.swing.*;
  * The type Tab pane controller.
  */
 public class TabPaneController {
-    private static Logger logger = Logger.getLogger(PaintApplication.loggerName);
+    private static final Logger logger = Logger.getLogger(PaintApplication.loggerName);
     private static TabPane tabPane;
     private static SelectionModel<Tab> tabSelector;
     private static ArrayList<TabController> tabs;
@@ -52,12 +53,7 @@ public class TabPaneController {
         tabPane = tp;
         tabSelector = tp.getSelectionModel();
 
-        AnchorPane p = (AnchorPane) initialTab.getContent();
-        MenuBar templateMenuBar = (MenuBar) p.getChildren().get(0);
-        ToolBar templateToolBar = (ToolBar) p.getChildren().get(1);
-        Canvas templateCanvas = (Canvas) p.getChildren().get(2);
-
-        templateTab = new TabController(initialTab, templateMenuBar, templateToolBar, templateCanvas, server, timer);
+        templateTab = new TabController(initialTab, server, timer);
 
         tabs = new ArrayList<>();
         tabs.add(new TabController(ta));
@@ -86,7 +82,7 @@ public class TabPaneController {
                 } catch (IOException ex) {throw new RuntimeException(ex);} });
             }
         };
-        new Timer(delay,tick).start();
+        //new Timer(delay,tick).start();
 
         tabAdderButton.setOnAction(e -> addTab());
         shortCutSetup();
@@ -112,7 +108,7 @@ public class TabPaneController {
         logger.info("A new tab was opened");
         tabPane.getTabs().add(nt);
         tabSelector.select(nt);
-        tabs.add(new TabController(nt, mb, tb, cv, server, timer));
+        tabs.add(new TabController(nt, server, timer));
     }
     /**
      * removes a given tab

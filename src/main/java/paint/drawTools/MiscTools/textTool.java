@@ -1,5 +1,6 @@
 package paint.drawTools.MiscTools;
 
+import javafx.scene.layout.StackPane;
 import paint.drawTools.drawTool;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.TextField;
@@ -58,7 +59,7 @@ public class textTool extends drawTool {
         TextField userinput = new TextField("Your text here");
         userinput.setLayoutX(mouseEvent.getX());userinput.setLayoutY(mouseEvent.getY()+50);
 
-        AnchorPane parent = (AnchorPane) gc.getCanvas().getParent();
+        StackPane parent = (StackPane) gc.getCanvas().getParent();
         parent.getChildren().add(userinput);
         parent.getScene().addEventFilter(KeyEvent.KEY_PRESSED, keyEvent -> { //add event filter to fish for shortcuts
             if(keyEvent.getCode()==KeyCode.ENTER){

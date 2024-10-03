@@ -26,7 +26,7 @@ import java.util.logging.Logger;
  * The type Tab controller.
  */
 public class TabController {
-    private static Logger logger = Logger.getLogger(PaintApplication.loggerName);
+    private static final Logger logger = Logger.getLogger(PaintApplication.loggerName);
     private final Tab tab;
     private final MenuBar menuBar;
     private final ToolBar toolBar;
@@ -59,26 +59,26 @@ public class TabController {
     /**
      * Instantiates a new Tab controller.
      *
-     * @param T  the t
-     * @param mb the mb
-     * @param tb the tb
-     * @param c  the c
+     * @param T      the tab
+     * @param server the server
+     * @param Timer  the timer
      */
-    public TabController(Tab T, MenuBar mb, ToolBar tb, Canvas c, webServer server, autoSaveTimer Timer) {
+    public TabController(Tab T, webServer server, autoSaveTimer Timer) {
         tab = T;
-        menuBar = mb;
-        toolBar = tb;
-        canvas = c;
-        timer = Timer;
-
+        AnchorPane pane = (AnchorPane) tab.getContent();
+        menuBar = (MenuBar) pane.getChildren().get(0);
+        toolBar = (ToolBar) pane.getChildren().get(1);
+        ScrollPane scp = (ScrollPane) pane.getChildren().get(2);
+        StackPane stp = (StackPane) scp.getContent();
+        canvas = (Canvas) stp.getChildren().get(0);
 
         Canvas liveDrawCanvas = new Canvas(canvas.getWidth(), canvas.getHeight());
         liveDrawCanvas.setLayoutX(canvas.getLayoutX());
         liveDrawCanvas.setLayoutY(canvas.getLayoutY());
-        AnchorPane parent = (AnchorPane) canvas.getParent();
-        parent.getChildren().add(liveDrawCanvas);
+        stp.getChildren().add(liveDrawCanvas);
         liveDrawCanvas.toBack();
 
+        timer = Timer;
 
         fileController = new FileController(menuBar, canvas, server);
         menuBar.getMenus().get(1).getItems().get(0).setOnAction(e -> openResizeWindow());
@@ -101,14 +101,10 @@ public class TabController {
         }
     }
 
+    /**
+     * Post initialization setup.
+     */
     public void postInitializationSetup(){
-        HBox tbcontainer = (HBox) toolBar.getItems().get(0);
-        Button clearScreen = (Button) tbcontainer.getChildren().get(4);
-        clearScreen.setOnAction(e -> {
-            try {clearScreen();
-            } catch (IOException ex) { throw new RuntimeException(ex);
-            }
-        });
         canvas.setOnMouseEntered(e -> setListeners());
         getTab().setOnCloseRequest(e -> {
             try {deleteTab(e);} catch (IOException ex) {throw new RuntimeException(ex);}
@@ -378,10 +374,16 @@ public class TabController {
         }
     }
 
+    /**
+     * Save.
+     */
     protected void save(){
 
     }
 
+    /**
+     * Openfile.
+     */
     protected void openfile(){
 
     }

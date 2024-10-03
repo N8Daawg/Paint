@@ -6,17 +6,19 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.WindowEvent;
 
+import java.util.logging.Logger;
+
 
 /**
  * The type Paint controller.
  */
 public class PaintController {
+    private static final Logger otherLogger = Logger.getLogger("PaintController");
     private static final int initialWindowSizeX = 637;
     private static final int initialWindowSizeY = 498;
 
     @FXML
     private BorderPane borderPane;
-    //private TabPane tabPane;
     private static TabPaneController tpc;
     /*---------------------------------------------------------------------------*/
     /*--------------------------Controller initialization------------------------*/
@@ -24,13 +26,13 @@ public class PaintController {
     @FXML
     private void initialize() {
         // creates a file controller to manage the menuBar
+        otherLogger.info("PaintController.initialize");
 
         TabPane tabPane = (TabPane) borderPane.getCenter();
         Tab tabAdder = tabPane.getTabs().get(0);
         Tab initialTab = tabPane.getTabs().get(1);
         tpc = new TabPaneController(tabPane, tabAdder, initialTab);
         tabPane.getSelectionModel().select(initialTab);
-
     }
 
     /**

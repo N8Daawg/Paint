@@ -1,5 +1,10 @@
 package paint.drawTools;
 
+import javafx.event.ActionEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import paint.PaintApplication;
+import paint.drawTools.ShapeTools.ManySides.starTool;
 import paint.fileAndServerManagment.webServer.FileController;
 import paint.drawTools.MiscTools.selectorTool;
 import paint.drawTools.MiscTools.textTool;
@@ -20,18 +25,17 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
+import java.util.logging.Logger;
+
 /**
  * The type Draw controller.
  */
 public class DrawController {
-
+    private static final Logger logger = Logger.getLogger(PaintApplication.loggerName);
     private final GraphicsContext gc;
     private final GraphicsContext ldgc;
     private final ToolBar toolBar;
     private final ColorPicker colorPicker;
-    private final ChoiceBox<drawTool> shapeChooser;
-    private final CheckBox dashedlineChecker;
-    private final TextField brushWidthChooser;
     private drawTool currentTool;
     private final drawTool[] toolsList;
     private final FileController fileController;
@@ -53,37 +57,103 @@ public class DrawController {
         toolBar = tb;
         fileController = filec;
 
-        HBox toolbarContainer = (HBox) toolBar.getItems().get(0);
-
-        HBox colorPickerContainer = (HBox) toolbarContainer.getChildren().get(0);
-        colorPicker = (ColorPicker) colorPickerContainer.getChildren().get(1);
-        colorPicker.setValue(Color.BLACK);
-
-        HBox shapeChooserContainer = (HBox) toolbarContainer.getChildren().get(1);
-        shapeChooser = (ChoiceBox<drawTool>) shapeChooserContainer.getChildren().get(1);
-
         selectorTool = new selectorTool(gc,ldgc);
         polygonTool = new polygonTool(gc, ldgc);
-        toolsList = new drawTool[]{selectorTool, polygonTool, new textTool(gc,ldgc), new eraserTool(gc,ldgc), new freeDrawTool(gc,ldgc), new lineTool(gc,ldgc),
-                new squareTool(gc,ldgc), new rectangleTool(gc,ldgc), new triangleTool(gc,ldgc), new rightTriangleTool(gc,ldgc),
-                new circleTool(gc,ldgc), new ellipseTool(gc,ldgc)};
-        shapeChooser.getItems().addAll(toolsList);
-        shapeChooser.setValue(toolsList[1]);
+        toolsList = new drawTool[]{
+                selectorTool,                    //  0 Selector
+                new freeDrawTool(gc, ldgc),      //  1 Pencil
+                new eraserTool(gc, ldgc),        //  2 Eraser
+                new textTool(gc, ldgc),          //  3 Text
+                new lineTool(gc, ldgc),          //  4 Line
+                new circleTool(gc, ldgc),        //  5 Circle
+                new ellipseTool(gc, ldgc),       //  6 Ellipse
+                new squareTool(gc, ldgc),        //  7 Square
+                new rectangleTool(gc, ldgc),     //  8 Rectangle
+                polygonTool,                     //  9 Polygon
+                new triangleTool(gc, ldgc),      // 10 Triangle
+                new rightTriangleTool(gc, ldgc), // 11 Right Triangle
+                new starTool(gc, ldgc)           // 12 Star
+        };
+        currentTool = toolsList[1];
+
+        // Selection tool
+        VBox selectionContainer = (VBox) toolBar.getItems().get(0);
+        ((Button) selectionContainer.getChildren().get(0)).setOnAction(
+                event -> {selectTool(0);}
+        );
+
+        // Canvas Tools
+        VBox canvasToolsContainer = (VBox) toolBar.getItems().get(2);
+        ((Button) ((GridPane) canvasToolsContainer.getChildren().get(0)).getChildren().get(0)).setOnAction(
+                event -> {clearScreen();}
+        );
+
+        // Tools tool
+        VBox toolsToolsContainer = (VBox) toolBar.getItems().get(4);
+        HBox toolsContainer = (HBox) toolsToolsContainer.getChildren().get(0);
+        ((Button) toolsContainer.getChildren().get(0)).setOnAction( // pencil tool button
+                event -> {selectTool(1);}
+        );
+        ((Button) toolsContainer.getChildren().get(1)).setOnAction( // eraser tool button
+                event -> {selectTool(2);}
+        );
+        ((Button) toolsContainer.getChildren().get(2)).setOnAction( // text tool button
+                event -> {selectTool(3);}
+        );
+
+        // Brush tool
+        VBox brushToolsContainer = (VBox) toolBar.getItems().get(6);
+        Spinner<Integer> brushWidthSpinner = (Spinner<Integer>) brushToolsContainer.getChildren().get(0);
+
+        // Shape tools
+        VBox shapeToolsContainer = (VBox) toolBar.getItems().get(8);
+        GridPane shapeGridPane = (GridPane)((ScrollPane) shapeToolsContainer.getChildren().get(0)).getContent();
+        ((Button) shapeGridPane.getChildren().get(0)).setOnAction( // line tool Button
+                event -> {selectTool(4);}
+        );
+        ((Button) shapeGridPane.getChildren().get(1)).setOnAction( // Circle tool Button
+                event -> {selectTool(5);}
+        );
+        ((Button) shapeGridPane.getChildren().get(2)).setOnAction( // Oval tool Button
+                event -> {selectTool(6);}
+        );
+        ((Button) shapeGridPane.getChildren().get(3)).setOnAction( // Square tool Button
+                event -> {selectTool(7);}
+        );
+        ((Button) shapeGridPane.getChildren().get(4)).setOnAction( // Rectangle tool Button
+                event -> {selectTool(8);}
+        );
+        ((Button) shapeGridPane.getChildren().get(5)).setOnAction( // polygon tool Button
+                event -> {selectTool(9);}
+        );
+        ((Button) shapeGridPane.getChildren().get(6)).setOnAction( // Triangle tool Button
+                event -> {selectTool(10);}
+        );
+        ((Button) shapeGridPane.getChildren().get(7)).setOnAction( // right Triangle toolButton
+                event -> {selectTool(11);}
+        );
+        ((Button) shapeGridPane.getChildren().get(8)).setOnAction( // Star tool Button
+                event -> {/*selectTool(12)*/}
+        );
 
 
-
-        HBox dashedLineCheckContainer = (HBox) toolbarContainer.getChildren().get(2);
-        dashedlineChecker = (CheckBox) dashedLineCheckContainer.getChildren().get(1);
-
-        HBox brushWidthContainer = (HBox) toolbarContainer.getChildren().get(3);
-        brushWidthChooser = (TextField) brushWidthContainer.getChildren().get(1);
-        brushWidthChooser.setPrefWidth(66);
-        brushWidthChooser.setText("6");
+        // color tool
+        VBox colorToolContainer = (VBox) toolBar.getItems().get(10);
+        colorPicker = (ColorPicker) colorToolContainer.getChildren().get(0);
+        colorPicker.setValue(Color.BLACK);
 
 
         recentlySaved = false;
-        setListeners(true);
+        //setListeners(true);
+    }
 
+    private void selectTool(int toolIndex){
+        currentTool = toolsList[toolIndex];
+        if(currentTool == polygonTool){ //prompt user for number of polygon sides
+            polygonTool.setPolygonSides(6);
+        }
+
+        logger.info(currentTool.toString() + " wes selected");
     }
 
     /**
@@ -108,15 +178,10 @@ public class DrawController {
      * @param recentlySaved the recently saved
      */
     protected void setCurrentTool(Boolean recentlySaved){
-        currentTool= shapeChooser.getValue();
-        if(currentTool==polygonTool){
-            polygonTool.setPolygonSides(9);
-        }
-
         currentTool.setAttributes(
                 colorPicker.getValue(),
-                Double.parseDouble(brushWidthChooser.getText()),
-                dashedlineChecker.isSelected(),
+                6,
+                false,
                 recentlySaved
         );
     }

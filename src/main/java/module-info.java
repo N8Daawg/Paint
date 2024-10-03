@@ -5,6 +5,7 @@ module com.example.paint {
     requires javafx.web;
     requires jdk.httpserver;
     requires java.logging;
+    requires java.compiler;
 
 
     opens paint to javafx.fxml;

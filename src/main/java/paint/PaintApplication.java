@@ -12,22 +12,23 @@ import java.util.logging.*;
 
 public class PaintApplication extends Application {
     public static final String loggerName = "Paint Logger";
-    private static Logger logger = Logger.getLogger(loggerName);
+    private static final Logger logger = Logger.getLogger(loggerName);
     @Override
     public void start(Stage stage) throws IOException {
         loggerSetup();
-        FXMLLoader fxmlLoader = new FXMLLoader(PaintApplication.class.getResource("test-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 720, 480);
+        FXMLLoader fxmlLoader = new FXMLLoader(PaintApplication.class.getResource("new-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 1280, 700);
         stage.setTitle("Paint");
         stage.setScene(scene);
 
         logger.info("Starting Paint");
         stage.show();
 
-        //PaintController.postInitializationSetup();
-        //stage.setOnCloseRequest(PaintController::smartCloseWindow); //setup for smart save
+        PaintController.postInitializationSetup();
+        stage.setOnCloseRequest(PaintController::smartCloseWindow); //setup for smart save
         //PaintController.resize();
     }
+
     public static void loggerSetup(){
         logger.setUseParentHandlers(false);
         FileHandler fh;
@@ -46,8 +47,8 @@ public class PaintApplication extends Application {
                             + logTime.format(cal.getTime())
                             + " || "
                             + record.getSourceClassName().substring(
-                            record.getSourceClassName().lastIndexOf(".")+1,
-                            record.getSourceClassName().length())
+                            record.getSourceClassName().lastIndexOf(".")+1
+                    )
                             + "."
                             + record.getSourceMethodName()
                             + "() : "

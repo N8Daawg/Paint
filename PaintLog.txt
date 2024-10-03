@@ -31,3 +31,52 @@ INFO: 10-02-2024 16:03:35 || PaintApplication.start() : Starting Paint
 INFO: 10-02-2024 16:03:59 || TabPaneController.tryCloseAll() : Exiting Paint
 INFO: 10-02-2024 17:23:11 || PaintApplication.start() : Starting Paint
 INFO: 10-02-2024 17:35:46 || PaintApplication.start() : Starting Paint
+INFO: 10-02-2024 20:18:35 || PaintApplication.start() : Starting Paint
+INFO: 10-02-2024 20:22:28 || PaintApplication.start() : Starting Paint
+INFO: 10-02-2024 22:19:12 || PaintApplication.start() : Starting Paint
+INFO: 10-02-2024 23:14:17 || PaintApplication.start() : Starting Paint
+INFO: 10-02-2024 23:35:46 || PaintApplication.start() : Starting Paint
+INFO: 10-03-2024 00:02:40 || PaintApplication.start() : Starting Paint
+INFO: 10-03-2024 00:19:34 || PaintApplication.start() : Starting Paint
+INFO: 10-03-2024 00:40:55 || PaintApplication.start() : Starting Paint
+INFO: 10-03-2024 00:42:09 || PaintApplication.start() : Starting Paint
+INFO: 10-03-2024 00:49:56 || PaintApplication.start() : Starting Paint
+INFO: 10-03-2024 01:21:24 || PaintApplication.start() : Starting Paint
+INFO: 10-03-2024 01:26:44 || PaintApplication.start() : Starting Paint
+INFO: 10-03-2024 01:29:02 || PaintApplication.start() : Starting Paint
+INFO: 10-03-2024 01:31:23 || PaintApplication.start() : Starting Paint
+INFO: 10-03-2024 01:32:09 || PaintApplication.start() : Starting Paint
+INFO: 10-03-2024 01:35:55 || PaintApplication.start() : Starting Paint
+INFO: 10-03-2024 01:36:53 || PaintApplication.start() : Starting Paint
+INFO: 10-03-2024 01:37:48 || PaintApplication.start() : Starting Paint
+INFO: 10-03-2024 01:38:46 || PaintApplication.start() : Starting Paint
+INFO: 10-03-2024 01:48:03 || PaintApplication.start() : Starting Paint
+INFO: 10-03-2024 01:48:12 || DrawController.selectTool() : Free Draw wes selected
+INFO: 10-03-2024 02:09:29 || PaintApplication.start() : Starting Paint
+INFO: 10-03-2024 02:09:33 || DrawController.selectTool() : Free Draw wes selected
+INFO: 10-03-2024 02:09:35 || DrawController.selectTool() : Line wes selected
+INFO: 10-03-2024 02:09:38 || DrawController.selectTool() : Rectangle wes selected
+INFO: 10-03-2024 02:09:44 || DrawController.selectTool() : Triangle wes selected
+INFO: 10-03-2024 02:09:49 || DrawController.selectTool() : Polygon wes selected
+INFO: 10-03-2024 02:09:55 || DrawController.selectTool() : Right Triangle wes selected
+INFO: 10-03-2024 02:09:59 || DrawController.selectTool() : Rectangle wes selected
+INFO: 10-03-2024 02:10:01 || DrawController.selectTool() : Square wes selected
+INFO: 10-03-2024 02:10:05 || DrawController.selectTool() : Ellipse wes selected
+INFO: 10-03-2024 02:10:08 || DrawController.selectTool() : Circle wes selected
+INFO: 10-03-2024 02:11:01 || PaintApplication.start() : Starting Paint
+INFO: 10-03-2024 02:11:09 || DrawController.selectTool() : Line wes selected
+INFO: 10-03-2024 02:11:11 || DrawController.selectTool() : Circle wes selected
+INFO: 10-03-2024 02:11:13 || DrawController.selectTool() : Ellipse wes selected
+INFO: 10-03-2024 02:11:16 || DrawController.selectTool() : Square wes selected
+INFO: 10-03-2024 02:11:19 || DrawController.selectTool() : Rectangle wes selected
+INFO: 10-03-2024 02:11:23 || DrawController.selectTool() : Right Triangle wes selected
+INFO: 10-03-2024 02:19:45 || DrawController.selectTool() : Polygon wes selected
+INFO: 10-03-2024 02:19:51 || DrawController.selectTool() : Triangle wes selected
+INFO: 10-03-2024 02:22:34 || PaintApplication.start() : Starting Paint
+INFO: 10-03-2024 02:22:36 || DrawController.selectTool() : Triangle wes selected
+INFO: 10-03-2024 02:22:38 || DrawController.selectTool() : Right Triangle wes selected
+INFO: 10-03-2024 02:22:42 || DrawController.selectTool() : Polygon wes selected
+INFO: 10-03-2024 02:22:56 || DrawController.selectTool() : Free Draw wes selected
+INFO: 10-03-2024 02:23:02 || DrawController.selectTool() : text wes selected
+INFO: 10-03-2024 02:23:48 || DrawController.selectTool() : Line wes selected
+INFO: 10-03-2024 02:23:51 || DrawController.selectTool() : selector wes selected
