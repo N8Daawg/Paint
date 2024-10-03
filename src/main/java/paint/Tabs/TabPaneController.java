@@ -83,6 +83,7 @@ public class TabPaneController {
                 } catch (IOException ex) {throw new RuntimeException(ex);} });
             }
         };
+        // AutoSaver turned off for now cause it was annoying af while testing
         //new Timer(delay,tick).start();
 
         tabAdderButton.setOnAction(e -> addTab());
@@ -103,7 +104,6 @@ public class TabPaneController {
             throw new RuntimeException(ex);
         }
 
-        //System.out.println(((AnchorPane) nt.getContent()).getChildren());
         logger.info("A new tab was opened");
         tabPane.getTabs().add(nt);
         tabSelector.select(nt);

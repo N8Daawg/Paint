@@ -96,13 +96,8 @@ public class TabController {
         redoStack = new Stack<>();
 
 
-        /*
-        System.out.println(
-                ((ScrollPane)((StackPane) canvas.getParent()).getParent())
-        );
-         */
-        if(canvas.getScene() != null) {
-            System.out.println("test");
+
+        if(pane.getChildren().get(2).getScene() != null) {
             postInitializationSetup();
         }
     }
