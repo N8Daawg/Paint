@@ -1,6 +1,7 @@
-package paint.fileAndServerManagment.webServer;
+package paint.fileAndServerManagment;
 
 import com.sun.net.httpserver.HttpServer;
+import paint.threadedLogger;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,11 +13,15 @@ import java.net.InetSocketAddress;
 public class webServer{
     private File file;
     private webHandler handler;
+    private final threadedLogger logger;
 
     /**
      * Instantiates a new Web server.
      */
-    public webServer(){file = null;}
+    public webServer(threadedLogger logger){
+        file = null;
+        this.logger = logger;
+    }
 
     /**
      * void to start the webserver.
@@ -28,9 +33,9 @@ public class webServer{
             server.createContext("/Tab_Image", handler);
             server.setExecutor(null);
             server.start();
-            System.out.println("Server is running on port 8000.../net localhost:8000/Tab_Image");
+            logger.sendMessage("Server is running on port 8000.../net localhost:8000/Tab_Image");
         } catch (IOException e){
-            System.out.println("Error starting the web server: " + e.getMessage());
+            logger.sendMessage("Error starting the web server: " + e.getMessage());
         }
     }
 
@@ -42,5 +47,6 @@ public class webServer{
     public void updateServerFile(File file){
         this.file = file;
         handler.setTransferredfile(file);
+        logger.sendMessage("Server updated file: " + file.toString());
     }
 }

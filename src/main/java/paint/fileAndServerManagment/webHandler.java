@@ -1,4 +1,4 @@
-package paint.fileAndServerManagment.webServer;
+package paint.fileAndServerManagment;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;

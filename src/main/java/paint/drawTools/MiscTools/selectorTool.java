@@ -62,7 +62,7 @@ public class selectorTool extends rectangleTool {
             finalx = mouseEvent.getX(); finaly=mouseEvent.getY();
 
             SnapshotParameters sp = new SnapshotParameters();
-            sp.setViewport(new Rectangle2D(anchorX, anchorY+69.6, finalx-anchorX, finaly-anchorY));
+            sp.setViewport(new Rectangle2D(anchorX+gc.getCanvas().getLayoutX(), anchorY+gc.getCanvas().getLayoutY(), finalx-anchorX, finaly-anchorY));
             clipboard = gc.getCanvas().snapshot(sp,null);
 
             //gc.clearRect(anchorX,anchorY,e.getX(),e.getY());

@@ -1,4 +1,4 @@
-package paint.fileAndServerManagment.webServer;
+package paint.fileAndServerManagment;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.Canvas;
@@ -6,6 +6,9 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.controlsfx.control.Notifications;
+import paint.threadedLogger;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -28,6 +31,7 @@ public class FileController {
     private File currentFile;
     private Boolean recentlySaved;
     private final webServer server; //the connected webserver to display saved images
+    private final threadedLogger logger;
 
     /**
      * Instantiates a new File controller.
@@ -36,13 +40,13 @@ public class FileController {
      * @param newCanvas  the canvas to be saved
      * @param Server     the server storing the images
      */
-    public FileController(MenuBar newMenuBar, Canvas newCanvas, webServer Server) {
+    public FileController(MenuBar newMenuBar, Canvas newCanvas, webServer Server, threadedLogger Logger) {
         menuBar = newMenuBar;
 
         Menu fileMenu = menuBar.getMenus().get(0);
         openFile = fileMenu.getItems().get(0);
-        saveFile = fileMenu.getItems().get(1);
-        saveAsFile = fileMenu.getItems().get(2);
+        saveFile = fileMenu.getItems().get(2);
+        saveAsFile = fileMenu.getItems().get(3);
 
         Menu helpMenu = menuBar.getMenus().get(2);
         about = helpMenu.getItems().get(0);
@@ -50,6 +54,7 @@ public class FileController {
         canvas = newCanvas;
         recentlySaved = true;
         server = Server;
+        logger = Logger;
         postInitSetup();
     }
 
@@ -60,25 +65,13 @@ public class FileController {
         if (menuBar.getScene() != null){
             stage = (Stage) menuBar.getScene().getWindow(); // attempt to grab the stage.
             openFile.setOnAction(e -> {
-                try {
-                    openFile();
-                } catch (MalformedURLException ex) {
-                    throw new RuntimeException(ex);
-                }
+                openFile();
             });
             saveFile.setOnAction(e -> {
-                try {
-                    recentlySaved = saveFile();
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
+                recentlySaved = saveFile();
             });
             saveAsFile.setOnAction(e -> {
-                try {
-                    recentlySaved = saveAsFile();
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
+                recentlySaved = saveAsFile();
             });
             about.setOnAction(e -> {
                 showHelpWindow();
@@ -99,14 +92,21 @@ public class FileController {
     /*------------------------------Help window control--------------------------*/
     /*---------------------------------------------------------------------------*/
 
-    private void openFile() throws MalformedURLException {
+    public void openFile() {
         FileChooser fileChooser = new FileChooser(); //create a fileChooser to show the open dialog
         fileChooserSetup(fileChooser, currentFile, "File Selection"); // format the FileChooser
         currentFile = fileChooser.showOpenDialog(stage); //grab a file
 
         if(currentFile != null){
-            Image currentImage = new Image(String.valueOf(currentFile.toURI().toURL()));//create Image from file that was grabbed
-            canvas.getGraphicsContext2D().drawImage(currentImage, 0,0);
+            try {
+                Image currentImage = new Image(String.valueOf(currentFile.toURI().toURL()));//create Image from file that was grabbed
+                canvas.getGraphicsContext2D().drawImage(currentImage,
+                        (canvas.getWidth()-currentImage.getWidth())/2,
+                        (canvas.getHeight()-currentImage.getHeight())/2
+                );
+            } catch (MalformedURLException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 
@@ -116,15 +116,24 @@ public class FileController {
      * @return returns if the file saving was successful
      * @throws IOException the io exception
      */
-    public Boolean saveFile() throws IOException {
+    public Boolean saveFile() {
         if(currentFile != null) { // if we are already working on an existing file
             String extension = getExtension(currentFile.toPath()); //get file extension
 
-            Image currentImage = canvas.snapshot(null,null);
-            BufferedImage saveFile = SwingFXUtils.fromFXImage(currentImage, null); //transform image to buffered image
-            ImageIO.write(saveFile, extension, currentFile); //write the buffered image
+            try {
+                Image currentImage = canvas.snapshot(null,null);
+                BufferedImage saveFile = SwingFXUtils.fromFXImage(currentImage, null); //transform image to buffered image
+                ImageIO.write(saveFile, extension, currentFile); //write the buffered image
+                Notifications.create()
+                        .title(currentFile.toString())
+                        .text(currentFile.toString() + "was saved")
+                        .showInformation();
 
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
             updateServer();
+
         } else { //there is no file being worked on
             System.out.println("some error message saying you dont have a file to save yet");
             return saveAsFile();
@@ -132,7 +141,7 @@ public class FileController {
         return true;
     }
 
-    private boolean saveAsFile() throws IOException {
+    private boolean saveAsFile() {
         File previousFile=null;
         if(currentFile !=null){
             previousFile = currentFile;

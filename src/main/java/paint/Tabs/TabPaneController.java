@@ -4,12 +4,11 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.logging.Logger;
+
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
@@ -17,13 +16,13 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import paint.PaintApplication;
 import paint.Timer.autoSaveTimer;
-import paint.fileAndServerManagment.webServer.webServer;
+import paint.fileAndServerManagment.webServer;
+import paint.threadedLogger;
 
 import javax.swing.*;
 
@@ -31,34 +30,33 @@ import javax.swing.*;
  * The type Tab pane controller.
  */
 public class TabPaneController {
-    private static final Logger logger = Logger.getLogger(PaintApplication.loggerName);
+    private static threadedLogger logger;
     private static TabPane tabPane;
     private static SelectionModel<Tab> tabSelector;
     private static ArrayList<TabController> tabs;
     private final Button tabAdderButton;
-    private final TabController templateTab;
     private autoSaveTimer timer;
-    private webServer server;
+    private final webServer server;
 
     /**
      * Instantiates a new Tab pane controller.
      *
      * @param tp         the tab pane
      * @param ta         the tab adder button
-     * @param initialTab the initial tab
      */
-    public TabPaneController(TabPane tp, Tab ta, Tab initialTab) {
-        webServer server = new webServer(); // creation of web server to display all saved images
+    public TabPaneController(TabPane tp, Tab ta) {
+        logger = new threadedLogger();
+        logger.sendMessage("Starting Paint");
+
+        server = new webServer(logger); // creation of web server to display all saved images
         server.run();
 
         tabPane = tp;
         tabSelector = tp.getSelectionModel();
 
-        templateTab = new TabController(initialTab, server, timer);
-
         tabs = new ArrayList<>();
         tabs.add(new TabController(ta));
-        tabs.add(templateTab);
+        addTab();
 
         tabAdderButton = (Button) tabs.get(0).getTab().getGraphic();
     }
@@ -74,17 +72,17 @@ public class TabPaneController {
         ActionListener tick = e -> {
             Platform.runLater(timer);
             if (timer.ended()) {
-                Platform.runLater(() -> { try {
-                    for(TabController tab:tabs){
+                Platform.runLater(() -> {
+                    for (TabController tab : tabs) {
                         if (tab.getFileController() != null) {
                             tab.getFileController().saveFile();
                         }
                     }
-                } catch (IOException ex) {throw new RuntimeException(ex);} });
+                });
             }
         };
         // AutoSaver turned off for now cause it was annoying af while testing
-        //new Timer(delay,tick).start();
+        new Timer(delay,tick).start();
 
         tabAdderButton.setOnAction(e -> addTab());
         shortCutSetup();
@@ -103,11 +101,11 @@ public class TabPaneController {
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
-
-        logger.info("A new tab was opened");
+        logger.sendMessage("A new tab was opened");
         tabPane.getTabs().add(nt);
         tabSelector.select(nt);
-        tabs.add(new TabController(nt, server, timer));
+        tabs.add(new TabController(nt, server, timer, logger));
+        tabs.get(tabSelector.getSelectedIndex()).getMenuBar().getMenus().get(0).getItems().get(1).setOnAction(event -> {importImage();});
     }
     /**
      * removes a given tab
@@ -116,7 +114,7 @@ public class TabPaneController {
      * @param t  the tab being removed
      */
     public static void removeTab(TabController tc, Tab t){
-        logger.info("A tab was closed");
+        logger.sendMessage("A tab was closed");
         tabPane.getTabs().remove(t);
         tabs.remove(tc);
     }
@@ -147,11 +145,7 @@ public class TabPaneController {
             if (result.get() == buttonTypeSAE){
                 // ... user chose "One"
                 for(TabController tab:modifiedTabs){
-                    try {
-                        tab.getFileController().saveFile();
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
+                    tab.getFileController().saveFile();
                 }
                 alert.close();
                 closingWindow.close();
@@ -164,7 +158,7 @@ public class TabPaneController {
                 alert.close();
             }
         } else {
-            logger.info("Exiting Paint");
+            logger.sendMessage("Exiting Paint");
             System.exit(0);
         }
     }
@@ -195,12 +189,16 @@ public class TabPaneController {
         currenTab.resize(width, height);
     }
 
+    protected void importImage(){
+        addTab();
+        tabs.get(tabSelector.getSelectedIndex()).openfile();
+    }
+
     private final KeyCombination openCombo = new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN);
     /**
      * The Save combo key combination.
      */
     private final KeyCombination saveCombo = new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN);
-    private final KeyCombination saveAsCombo = new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN);
     /**
      * The J pun key combination.
      */
@@ -238,7 +236,9 @@ public class TabPaneController {
      */
     private void fishForShortcuts(KeyEvent ke) throws IOException { //creates key combos and fish for them
         if(saveCombo.match(ke)){ //A wild saveCombo appeared!
-            tabs.get(tabSelector.getSelectedIndex()).getFileController().saveFile();
+            tabs.get(tabSelector.getSelectedIndex()).save();
+        } else if(openCombo.match(ke)) {
+            tabs.get(tabSelector.getSelectedIndex()).openfile();
         } else if(JPun.match(ke)){
             Group root = new Group();
             WebView webView = new WebView();
@@ -250,7 +250,7 @@ public class TabPaneController {
             easterWindow.show();
 
             webView.getEngine().load("https://blackbirdvalpo.com/");
-            logger.info("They found my easter egg ^o^");
+            logger.sendMessage("They found my easter egg ^o^");
         } else if(undoCombo.match(ke)){
             tabs.get(tabSelector.getSelectedIndex()).undo();
         } else if(redoCombo.match(ke)){

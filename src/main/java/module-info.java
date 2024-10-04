@@ -1,11 +1,11 @@
 module com.example.paint {
-    requires javafx.controls;
     requires javafx.fxml;
     requires javafx.swing;
     requires javafx.web;
     requires jdk.httpserver;
-    requires java.logging;
     requires java.compiler;
+    requires org.controlsfx.controls;
+    requires java.logging;
 
 
     opens paint to javafx.fxml;
@@ -30,6 +30,6 @@ module com.example.paint {
     opens paint.drawTools.MiscTools to javafx.fxml;
     exports paint.Timer;
     opens paint.Timer to javafx.fxml;
-    exports paint.fileAndServerManagment.webServer;
-    opens paint.fileAndServerManagment.webServer to javafx.fxml;
+    exports paint.fileAndServerManagment;
+    opens paint.fileAndServerManagment to javafx.fxml;
 }

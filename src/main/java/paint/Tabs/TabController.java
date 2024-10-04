@@ -1,7 +1,7 @@
 package paint.Tabs;
 
-import paint.PaintApplication;
-import paint.fileAndServerManagment.webServer.FileController;
+import paint.PaintController;
+import paint.fileAndServerManagment.FileController;
 import paint.Timer.autoSaveTimer;
 import paint.drawTools.DrawController;
 import javafx.application.Platform;
@@ -14,19 +14,18 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import paint.fileAndServerManagment.webServer.webServer;
+import paint.fileAndServerManagment.webServer;
+import paint.threadedLogger;
 
 import java.io.IOException;
 import java.util.Optional;
 import java.util.Stack;
-import java.util.logging.Logger;
 
 
 /**
  * The type Tab controller.
  */
 public class TabController {
-    private static final Logger logger = Logger.getLogger(PaintApplication.loggerName);
     private final Tab tab;
     private final MenuBar menuBar;
     private final ToolBar toolBar;
@@ -39,6 +38,7 @@ public class TabController {
     private Stack<WritableImage> undoStack;
     private Stack<WritableImage> redoStack;
     private final autoSaveTimer timer;
+    private final threadedLogger logger;
 
     /**
      * Instantiates a new Tab controller.
@@ -54,6 +54,7 @@ public class TabController {
         drawController = null;
         recentlySaved = true;
         timer = null;
+        logger = null;
     }
 
     /**
@@ -63,11 +64,14 @@ public class TabController {
      * @param server the server
      * @param Timer  the timer
      */
-    public TabController(Tab T, webServer server, autoSaveTimer Timer) {
+    public TabController(Tab T, webServer server, autoSaveTimer Timer, threadedLogger Logger) {
         tab = T;
         AnchorPane pane = (AnchorPane) tab.getContent();
         menuBar = (MenuBar) pane.getChildren().get(0);
         toolBar = (ToolBar) pane.getChildren().get(1);
+        ((Button) ((GridPane) ((VBox) toolBar.getItems().get(2)).getChildren().get(0)).getChildren().get(3)).setOnAction( // clear screen button
+                event -> clearScreen()
+        );
         canvas = (Canvas) ((StackPane) ((ScrollPane) pane.getChildren().get(2)).getContent()).getChildren().get(0);
 
         Canvas liveDrawCanvas = new Canvas(canvas.getWidth(), canvas.getHeight());
@@ -78,15 +82,17 @@ public class TabController {
         liveDrawCanvas.toBack();
 
         timer = Timer;
+        logger = Logger;
 
-        fileController = new FileController(menuBar, canvas, server);
-        menuBar.getMenus().get(1).getItems().get(0).setOnAction(e -> openResizeWindow());
-        menuBar.getMenus().get(1).getItems().get(1).setOnAction(e -> setTimerVisibility());
+        fileController = new FileController(menuBar, canvas, server, logger);
+        menuBar.getMenus().get(0).getItems().get(1).setOnAction(event -> {});
+        menuBar.getMenus().get(1).getItems().get(0).setOnAction(event -> openResizeWindow());
+        menuBar.getMenus().get(1).getItems().get(1).setOnAction(event -> setTimerVisibility());
 
         drawController = new DrawController(
                 canvas.getGraphicsContext2D(),
                 liveDrawCanvas.getGraphicsContext2D(),
-                toolBar, fileController
+                toolBar, fileController, logger
         );
 
         currentState = canvas.snapshot(null, null);
@@ -160,10 +166,11 @@ public class TabController {
     public Boolean wasRecentlySaved() {
         return recentlySaved;
     }
+
     private void setListeners(){
         drawController.setListeners(recentlySaved);
         canvas.setOnMousePressed(drawController::getPressEvent);
-        canvas.setOnMouseDragged(e1 -> drawController.getDragEvent(e1));
+        canvas.setOnMouseDragged(drawController::getDragEvent);
         canvas.setOnMouseReleased(e -> {
                 drawController.getReleaseEvent(e);
                 recentlySaved = false;
@@ -171,7 +178,7 @@ public class TabController {
                 currentState = canvas.snapshot(null, null);
         });
     }
-    private void clearScreen() throws IOException {
+    private void clearScreen() {
         if(!recentlySaved){
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Clear Screen?");
@@ -379,14 +386,14 @@ public class TabController {
      * Save.
      */
     protected void save(){
-
+        fileController.saveFile();
     }
 
     /**
      * Openfile.
      */
     protected void openfile(){
-
+        fileController.openFile();
     }
 
     /**

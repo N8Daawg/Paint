@@ -6,16 +6,15 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="borderPane" prefHeight="480.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paint.PaintController">
+<BorderPane fx:id="borderPane" prefHeight="480.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paint.PaintController">
    <center>
-      <TabPane fx:id="tabPane" BorderPane.alignment="CENTER">
+      <TabPane BorderPane.alignment="CENTER">
          <tabs>
             <Tab closable="false">
                <graphic>
-                  <Button fx:id="tabAdderButton1" alignment="CENTER" contentDisplay="TOP" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="21.0" prefWidth="27.0" text="+" textAlignment="CENTER" />
+                  <Button alignment="CENTER" contentDisplay="TOP" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="21.0" prefWidth="27.0" text="+" textAlignment="CENTER" />
                </graphic>
             </Tab>
-            <Tab text="Project 1" />
          </tabs>
       </TabPane>
    </center>

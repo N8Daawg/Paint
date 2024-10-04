@@ -106,6 +106,6 @@ public class starTool extends shapeTool {
 
     @Override
     public String toString() {
-        return "Star";
+        return "Star of sides" + sides;
     }
 }

@@ -5,6 +5,7 @@
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.CustomMenuItem?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -28,7 +29,7 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <MenuBar prefHeight="20.0" prefWidth="132.0" AnchorPane.bottomAnchor="731.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1148.0" AnchorPane.topAnchor="0.0">
          <menus>
@@ -44,6 +45,26 @@
                <items>
                   <MenuItem mnemonicParsing="false" text="Resize Canvas" />
                   <MenuItem mnemonicParsing="false" text="Show Timer" />
+                  <CustomMenuItem hideOnClick="false" mnemonicParsing="false">
+                     <content>
+                        <HBox spacing="10.0">
+                           <children>
+                              <Label text="Polygon Sides: " textFill="#010101" />
+                              <Spinner />
+                           </children>
+                        </HBox>
+                     </content>
+                  </CustomMenuItem>
+                  <CustomMenuItem mnemonicParsing="false">
+                     <content>
+                        <HBox>
+                           <children>
+                              <Label text="Star Side: " textAlignment="CENTER" textFill="#010101" />
+                              <Spinner />
+                           </children>
+                        </HBox>
+                     </content>
+                  </CustomMenuItem>
                   <MenuItem mnemonicParsing="false" text="Delete" />
                </items>
             </Menu>
@@ -93,6 +114,9 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <tooltip>
+                              <Tooltip text="Rotate Image 90*" />
+                           </tooltip>
                         </Button>
                         <Button mnemonicParsing="false" GridPane.columnIndex="1">
                            <graphic>
@@ -102,6 +126,9 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <tooltip>
+                              <Tooltip text="Mirror Image" />
+                           </tooltip>
                         </Button>
                         <Button mnemonicParsing="false" GridPane.rowIndex="1">
                            <graphic>
@@ -111,6 +138,9 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <tooltip>
+                              <Tooltip text="Resize Image" />
+                           </tooltip>
                         </Button>
                         <Button mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <graphic>
@@ -120,6 +150,9 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <tooltip>
+                              <Tooltip text="Clear Canvas" />
+                           </tooltip>
                         </Button>
                      </children>
                   </GridPane>
@@ -139,6 +172,9 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <tooltip>
+                              <Tooltip text="Pencil tool" />
+                           </tooltip>
                         </Button>
                         <Button mnemonicParsing="false">
                            <graphic>
@@ -151,6 +187,9 @@
                                  </viewport>
                               </ImageView>
                            </graphic>
+                           <tooltip>
+                              <Tooltip text="Eraser" />
+                           </tooltip>
                         </Button>
                         <Button mnemonicParsing="false">
                            <graphic>
@@ -160,6 +199,9 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <tooltip>
+                              <Tooltip text="Text" />
+                           </tooltip>
                         </Button>
                      </children>
                   </HBox>
@@ -194,46 +236,73 @@
                                  <graphic>
                                     <Line endX="-92.0" endY="-8.0" startX="-100.0" />
                                  </graphic>
+                                 <tooltip>
+                                    <Tooltip text="Line" />
+                                 </tooltip>
                               </Button>
                               <Button mnemonicParsing="false" GridPane.columnIndex="1">
                                  <graphic>
                                     <Ellipse fill="#ffffff00" radiusX="5.0" radiusY="5.0" stroke="BLACK" strokeType="INSIDE" />
                                  </graphic>
+                                 <tooltip>
+                                    <Tooltip text="Circle" />
+                                 </tooltip>
                               </Button>
                               <Button mnemonicParsing="false" GridPane.columnIndex="2">
                                  <graphic>
                                     <Ellipse fill="#ffffff00" radiusX="7.0" radiusY="5.0" stroke="BLACK" strokeType="INSIDE" />
                                  </graphic>
+                                 <tooltip>
+                                    <Tooltip text="Oval" />
+                                 </tooltip>
                               </Button>
                               <Button mnemonicParsing="false" GridPane.rowIndex="1">
                                  <graphic>
                                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="10.0" stroke="BLACK" strokeType="INSIDE" width="10.0" />
                                  </graphic>
+                                 <tooltip>
+                                    <Tooltip text="Square" />
+                                 </tooltip>
                               </Button>
                               <Button mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <graphic>
                                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="10.0" stroke="BLACK" strokeType="INSIDE" width="14.0" />
                                  </graphic>
+                                 <tooltip>
+                                    <Tooltip text="Rectangle" />
+                                 </tooltip>
                               </Button>
                               <Button mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                  <graphic>
                                     <Polygon fill="#ffffff00" points="5, 0, 0.245, 3.455, 2.06, 9.045, 7.939, 9.045, 9.755, 3.455" stroke="BLACK" strokeType="INSIDE" />
                                  </graphic>
+                                 <tooltip>
+                                    <Tooltip text="Polygon" />
+                                 </tooltip>
                               </Button>
                               <Button mnemonicParsing="false" GridPane.rowIndex="2">
                                  <graphic>
                                     <Polygon fill="#ffffff00" points="10, 10, 5, 0, 0, 10" stroke="BLACK" strokeType="INSIDE" />
                                  </graphic>
+                                 <tooltip>
+                                    <Tooltip text="Triangle" />
+                                 </tooltip>
                               </Button>
                               <Button mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <graphic>
                                     <Polygon fill="#ffffff00" points="10, 10, 0, 0, 0, 10" stroke="BLACK" strokeType="INSIDE" />
                                  </graphic>
+                                 <tooltip>
+                                    <Tooltip text="Right triangle" />
+                                 </tooltip>
                               </Button>
                               <Button mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                  <graphic>
                                     <Polygon fill="#ffffff00" points="5.000, 0.026, 3.883, 3.463, 0.269, 3.463, 3.193, 5.587, 2.076, 9.024, 5.000, 6.900, 7.924, 9.024, 6.807, 5.587, 9.731, 3.463, 6.117, 3.463" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.5" />
                                  </graphic>
+                                 <tooltip>
+                                    <Tooltip text="Star" />
+                                 </tooltip>
                               </Button>
                            </children>
                         </GridPane>

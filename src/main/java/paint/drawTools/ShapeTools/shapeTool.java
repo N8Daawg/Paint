@@ -31,6 +31,7 @@ public class shapeTool extends drawTool {
     protected void setColor(Color color){
         currentColor = color;
         gc.setStroke(color);
+        ldgc.setStroke(color);
     }
     protected void setSize(double size){
         brushSize = size;
