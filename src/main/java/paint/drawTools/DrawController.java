@@ -31,6 +31,7 @@ public class DrawController {
     private final GraphicsContext gc;
     private final ColorPicker colorPicker;
     private final Spinner<Integer> brushWidthSpinner;
+    private final ToggleButton dashToggle;
     private drawTool currentTool;
     private final drawTool[] toolsList;
     private final FileController fileController;
@@ -108,6 +109,7 @@ public class DrawController {
         ((Button) toolsContainer.getChildren().get(2)).setOnAction( // text tool button
                 event -> selectTool(3)
         );
+        dashToggle = (ToggleButton) toolsContainer.getChildren().get(3);
 
         // Brush tool
         VBox brushToolsContainer = (VBox) tb.getItems().get(6);
@@ -194,7 +196,7 @@ public class DrawController {
         currentTool.setAttributes(
                 colorPicker.getValue(),
                 brushWidthSpinner.getValue(),
-                false,
+                dashToggle.isSelected(),
                 recentlySaved
         );
     }

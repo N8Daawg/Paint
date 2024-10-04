@@ -1,0 +1,6 @@
+INFO: 10-03-2024 22:32:32 || threadedLogger.sendMessage() : Starting Paint
+INFO: 10-03-2024 22:32:32 || threadedLogger.sendMessage() : Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-03-2024 22:32:32 || threadedLogger.sendMessage() : A new tab was opened
+INFO: 10-03-2024 22:32:34 || threadedLogger.sendMessage() : Free Draw was selected
+INFO: 10-03-2024 22:32:38 || threadedLogger.sendMessage() : Line was selected
+INFO: 10-03-2024 22:32:44 || threadedLogger.sendMessage() : Circle was selected
