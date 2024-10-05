@@ -115,6 +115,6 @@ public class polygonTool extends shapeTool {
 
     @Override
     public String toString() {
-        return "Polygon of sides" + sides;
+        return "Polygon of sides " + sides;
     }
 }

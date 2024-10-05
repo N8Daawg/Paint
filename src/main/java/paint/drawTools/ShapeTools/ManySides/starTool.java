@@ -4,6 +4,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import paint.drawTools.ShapeTools.shapeTool;
 
+import java.util.Arrays;
+
 public class starTool extends polygonTool {
     /**
      * Instantiates a new Shape tool.
@@ -17,20 +19,30 @@ public class starTool extends polygonTool {
     public void setStarSides(int Sides){ setPolygonSides(Sides);}
 
     private double[][] generateStarArray(double R){
-        double[][] innercoors = generatePolyArray(R);
-        double[][] outercoors = generatePolyArray(R/2);
+        double[][] innercoors = generatePolyArray(R/4);
+        double[][] outercoors = generatePolyArray(R/8);
+        //drawPolygon(ldgc, innercoors[0], innercoors[1]);
+        //drawPolygon(ldgc, outercoors[0], outercoors[1]);
 
-        double innerx[] = innercoors[0];
-        double innery[] = innercoors[1];
-        double outerx[] = outercoors[0];
-        double outery[] = outercoors[1];
         double[][] xy = new double[2][sides*2];
-        for (int i = 0; i < (sides*2)-2; i+=2) {
-            xy[0][i] = innerx[i/2];
-            xy[0][i+1] = outerx[(i/2)+1];
-            xy[1][i] = innery[i/2];
-            xy[1][i+1] = outery[(i/2)+1];
+
+        for (int i = 0; i < (sides*2); i+=2) {
+            xy[0][i] = innercoors[0][i/2];
+            xy[0][i+1] = outercoors[0][(i/2)];
+            xy[1][i] = innercoors[1][i/2];
+            xy[1][i+1] = outercoors[1][(i/2)];
         }
+
+        /*
+        for (int i = 0; i < sides; i++) {
+            xy[0][i] = innercoors[0][i];
+            xy[1][i] = innercoors[1][i];
+        }
+        for (int i = sides; i < sides*2; i++) {
+            xy[0][i] = outercoors[0][i-sides];
+            xy[1][i] = outercoors[1][i-sides];
+        }
+         */
         return xy;
     }
 
@@ -42,7 +54,7 @@ public class starTool extends polygonTool {
      * @param ycoors    the ycoors
      */
     protected void drawStar(GraphicsContext currentgc, double[] xcoors, double[] ycoors){
-        drawPolygon(currentgc, xcoors, ycoors);
+        currentgc.strokePolygon(xcoors, ycoors, sides*2);
     }
 
     /**
@@ -52,7 +64,8 @@ public class starTool extends polygonTool {
      * @param ycoors the ycoors
      */
     protected void liveDrawStar(double[] xcoors, double[] ycoors){
-        liveDrawPolygon(xcoors, ycoors);
+        clearCanvas(ldgc);
+        drawStar(ldgc, xcoors, ycoors);
     }
 
     @Override
@@ -72,6 +85,6 @@ public class starTool extends polygonTool {
 
     @Override
     public String toString() {
-        return "Star of sides" + sides;
+        return "Star of sides " + sides;
     }
 }

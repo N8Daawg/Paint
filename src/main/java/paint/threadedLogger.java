@@ -1,7 +1,12 @@
 package paint;
 
+import javafx.scene.control.SelectionModel;
+import javafx.scene.control.Tab;
+import paint.Tabs.TabController;
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.logging.FileHandler;
@@ -12,6 +17,8 @@ import java.util.logging.Logger;
 public class threadedLogger {
     private static final String loggername = "Paint logger";
     private static Logger logger;
+    private SelectionModel<Tab> tabSelector;
+    private ArrayList<TabController> tabs;
     public threadedLogger() {
         logger = Logger.getLogger(loggername);
         logger.setUseParentHandlers(false);
@@ -29,12 +36,8 @@ public class threadedLogger {
                             + ": "
                             + logTime.format(cal.getTime())
                             + " || "
-                            + record.getSourceClassName().substring(
-                            record.getSourceClassName().lastIndexOf(".")+1
-                    )
-                            + "."
-                            + record.getSourceMethodName()
-                            + "() : "
+                            + getFilename()
+                            + ": "
                             + record.getMessage() + "\n";
                 }
             });
@@ -47,7 +50,19 @@ public class threadedLogger {
         }
 
     }
-    public void sendMessage(String message) {
-        logger.info(message);
+
+    public void updateTabs(SelectionModel<Tab> newSelector, ArrayList<TabController> newTabs) {
+        tabSelector = newSelector;
+        tabs = newTabs;
     }
+    private String getFilename(){
+        if(tabSelector != null){
+            return tabs.get(tabSelector.getSelectedIndex()).getFileController().getCurrentFile();
+        } else {
+            return "No file selected";
+        }
+
+    }
+
+    public void sendMessage(String message) {logger.info(message);}
 }

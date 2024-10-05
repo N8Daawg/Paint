@@ -38,8 +38,10 @@ public class DrawController {
     private boolean recentlySaved;
     private final selectorTool selectorTool;
     private final polygonTool polygonTool;
+    private final Spinner<Integer> polySideSpinner;
     private int polyToolSides = 5;
     private final starTool starTool;
+    private final Spinner<Integer> starSideSpinner;
     private int starToolSides = 5;
     private final threadedLogger logger;
 
@@ -51,10 +53,13 @@ public class DrawController {
      * @param tb    the tool bar
      * @param filec the file controller
      */
-    public DrawController(GraphicsContext g, GraphicsContext LDGC, ToolBar tb, FileController filec, threadedLogger Logger){
+    public DrawController(GraphicsContext g, GraphicsContext LDGC, Spinner<Integer> PolySideSpinner, Spinner<Integer> StarSideSpinner, ToolBar tb,
+                          FileController filec, threadedLogger Logger){
         gc = g;
         fileController = filec;
         logger = Logger;
+        polySideSpinner = PolySideSpinner;
+        starSideSpinner = StarSideSpinner;
 
         selectorTool = new selectorTool(gc, LDGC);
         polygonTool = new polygonTool(gc, LDGC);
@@ -162,9 +167,9 @@ public class DrawController {
     private void selectTool(int toolIndex){
         currentTool = toolsList[toolIndex];
         if(currentTool == polygonTool){ //prompt user for number of polygon sides
-            polygonTool.setPolygonSides(polyToolSides);
+            polygonTool.setPolygonSides(polySideSpinner.getValue());
         } else if(currentTool == starTool){
-            starTool.setStarSides(starToolSides);
+            starTool.setStarSides(starSideSpinner.getValue());
         }
         logger.sendMessage(currentTool.toString() + " was selected");
     }
@@ -193,6 +198,11 @@ public class DrawController {
      * @param recentlySaved the recently saved
      */
     protected void setCurrentTool(Boolean recentlySaved){
+        if(currentTool==polygonTool){
+            setPolyToolSides(polyToolSides);
+        } else if(currentTool==starTool){
+            setStarToolSides(starToolSides);
+        }
         currentTool.setAttributes(
                 colorPicker.getValue(),
                 brushWidthSpinner.getValue(),

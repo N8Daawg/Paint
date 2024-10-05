@@ -88,6 +88,14 @@ public class FileController {
         return recentlySaved;
     }
 
+    public String getCurrentFile() {
+        if (currentFile == null){
+            return "No file selected";
+        } else {
+            return currentFile.getName();
+        }
+    }
+
     /*---------------------------------------------------------------------------*/
     /*------------------------------Help window control--------------------------*/
     /*---------------------------------------------------------------------------*/
@@ -189,7 +197,7 @@ public class FileController {
 
     private void updateServer(){
         server.updateServerFile(currentFile);
-        System.out.println("Server file updated to be " + currentFile);
+
     }
 
     // Nifty method I created to format all FileChoosers the program creates

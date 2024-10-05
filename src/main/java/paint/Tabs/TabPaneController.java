@@ -68,7 +68,7 @@ public class TabPaneController {
         BorderPane borderPane = (BorderPane) tabPane.getParent();
         Label timerLabel = (Label) borderPane.getBottom();
         timer = new autoSaveTimer(timerLabel);
-        int delay = 1000;
+        int delay = 30000;
         ActionListener tick = e -> {
             Platform.runLater(timer);
             if (timer.ended()) {
@@ -106,6 +106,7 @@ public class TabPaneController {
         tabSelector.select(nt);
         tabs.add(new TabController(nt, server, timer, logger));
         tabs.get(tabSelector.getSelectedIndex()).getMenuBar().getMenus().get(0).getItems().get(1).setOnAction(event -> {importImage();});
+        logger.updateTabs(tabSelector, tabs);
     }
     /**
      * removes a given tab

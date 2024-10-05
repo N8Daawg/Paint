@@ -118,3 +118,138 @@ INFO: 10-04-2024 16:54:21 || threadedLogger.sendMessage() : A new tab was opened
 INFO: 10-04-2024 16:54:35 || threadedLogger.sendMessage() : Star of sides5 was selected
 INFO: 10-04-2024 16:55:27 || threadedLogger.sendMessage() : Server updated file: C:\Users\nbeal\AppData\Roaming\Microsoft\Windows\Network Shortcuts\star.png
 INFO: 10-04-2024 16:56:23 || threadedLogger.sendMessage() : Server updated file: C:\Users\nbeal\AppData\Roaming\Microsoft\Windows\Network Shortcuts\star.png
+INFO: 10-04-2024 20:58:24 || threadedLogger.sendMessage() : Starting Paint
+INFO: 10-04-2024 20:58:24 || threadedLogger.sendMessage() : Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 20:58:24 || threadedLogger.sendMessage() : A new tab was opened
+INFO: 10-04-2024 20:58:31 || threadedLogger.sendMessage() : Free Draw was selected
+INFO: 10-04-2024 20:58:45 || threadedLogger.sendMessage() : Circle was selected
+INFO: 10-04-2024 20:59:14 || threadedLogger.sendMessage() : Rectangle was selected
+INFO: 10-04-2024 20:59:46 || threadedLogger.sendMessage() : Server updated file: C:\Users\nbeal\Downloads\newImage.png
+INFO: 10-04-2024 21:00:26 || threadedLogger.sendMessage() : Server updated file: C:\Users\nbeal\Downloads\newImage.png
+INFO: 10-04-2024 21:01:27 || threadedLogger.sendMessage() : Server updated file: C:\Users\nbeal\Downloads\newImage.png
+INFO: 10-04-2024 21:02:27 || threadedLogger.sendMessage() : Server updated file: C:\Users\nbeal\Downloads\newImage.png
+INFO: 10-04-2024 21:03:28 || threadedLogger.sendMessage() : Server updated file: C:\Users\nbeal\Downloads\newImage.png
+INFO: 10-04-2024 21:04:28 || threadedLogger.sendMessage() : Server updated file: C:\Users\nbeal\Downloads\newImage.png
+INFO: 10-04-2024 21:05:29 || threadedLogger.sendMessage() : Server updated file: C:\Users\nbeal\Downloads\newImage.png
+INFO: 10-04-2024 21:06:39 || threadedLogger.null() : Starting Paint
+INFO: 10-04-2024 21:06:39 || threadedLogger.null() : Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 21:06:39 || threadedLogger.null() : A new tab was opened
+INFO: 10-04-2024 21:06:45 || threadedLogger.null() : Rectangle was selected
+INFO: 10-04-2024 21:06:48 || threadedLogger.null() : text was selected
+INFO: 10-04-2024 21:06:55 || threadedLogger.null() : Free Draw was selected
+INFO: 10-04-2024 21:07:18 || threadedLogger.null() : Line was selected
+INFO: 10-04-2024 21:44:16 || threadedLogger.No file selected() : Starting Paint
+INFO: 10-04-2024 21:44:17 || threadedLogger.No file selected() : Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 21:44:17 || threadedLogger.No file selected() : A new tab was opened
+INFO: 10-04-2024 21:45:01 || No file selected() : Starting Paint
+INFO: 10-04-2024 21:45:02 || No file selected() : Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 21:45:02 || No file selected() : A new tab was opened
+INFO: 10-04-2024 21:45:35 || No file selected: Starting Paint
+INFO: 10-04-2024 21:45:35 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 21:45:35 || No file selected: A new tab was opened
+INFO: 10-04-2024 21:49:24 || No file selected: Starting Paint
+INFO: 10-04-2024 21:49:24 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 21:49:24 || No file selected: A new tab was opened
+INFO: 10-04-2024 21:49:31 || No file selected: Free Draw was selected
+INFO: 10-04-2024 21:49:33 || No file selected: text was selected
+INFO: 10-04-2024 21:49:42 || No file selected: Eraser was selected
+INFO: 10-04-2024 21:49:48 || No file selected: Eraser was selected
+INFO: 10-04-2024 21:50:11 || No file selected: Free Draw was selected
+INFO: 10-04-2024 21:50:25 || No file selected: Square was selected
+INFO: 10-04-2024 21:50:32 || newImage.png: Server updated file: C:\Users\nbeal\Downloads\newImage.png
+INFO: 10-04-2024 21:50:41 || newImage.png: Rectangle was selected
+INFO: 10-04-2024 21:51:26 || newImage.png: Server updated file: C:\Users\nbeal\Downloads\newImage.png
+INFO: 10-04-2024 21:52:26 || newImage.png: Server updated file: C:\Users\nbeal\Downloads\newImage.png
+INFO: 10-04-2024 21:53:27 || newImage.png: Server updated file: C:\Users\nbeal\Downloads\newImage.png
+INFO: 10-04-2024 21:54:27 || newImage.png: Server updated file: C:\Users\nbeal\Downloads\newImage.png
+INFO: 10-04-2024 21:55:13 || No file selected: Starting Paint
+INFO: 10-04-2024 21:55:13 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 21:55:13 || No file selected: A new tab was opened
+INFO: 10-04-2024 21:55:18 || No file selected: Free Draw was selected
+INFO: 10-04-2024 21:55:22 || No file selected: Free Draw was selected
+INFO: 10-04-2024 21:55:44 || No file selected: Starting Paint
+INFO: 10-04-2024 21:55:45 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 21:55:45 || No file selected: A new tab was opened
+INFO: 10-04-2024 21:55:47 || No file selected: Free Draw was selected
+INFO: 10-04-2024 21:55:55 || No file selected: Right Triangle was selected
+INFO: 10-04-2024 21:56:17 || No file selected: Triangle was selected
+INFO: 10-04-2024 21:56:43 || No file selected: Square was selected
+INFO: 10-04-2024 21:56:49 || No file selected: Rectangle was selected
+INFO: 10-04-2024 21:56:53 || No file selected: Star of sides5 was selected
+INFO: 10-04-2024 21:59:36 || No file selected: Polygon of sides5 was selected
+INFO: 10-04-2024 21:59:44 || No file selected: Rectangle was selected
+INFO: 10-04-2024 22:21:48 || No file selected: Starting Paint
+INFO: 10-04-2024 22:21:48 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 22:21:48 || No file selected: A new tab was opened
+INFO: 10-04-2024 22:21:53 || No file selected: Star of sides5 was selected
+INFO: 10-04-2024 22:22:32 || No file selected: Starting Paint
+INFO: 10-04-2024 22:22:32 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 22:22:32 || No file selected: A new tab was opened
+INFO: 10-04-2024 22:22:35 || No file selected: Star of sides5 was selected
+INFO: 10-04-2024 22:23:34 || No file selected: Starting Paint
+INFO: 10-04-2024 22:23:34 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 22:23:35 || No file selected: A new tab was opened
+INFO: 10-04-2024 22:23:38 || No file selected: Star of sides5 was selected
+INFO: 10-04-2024 22:25:18 || No file selected: Starting Paint
+INFO: 10-04-2024 22:25:18 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 22:25:18 || No file selected: A new tab was opened
+INFO: 10-04-2024 22:25:21 || No file selected: Star of sides5 was selected
+INFO: 10-04-2024 22:26:19 || No file selected: Starting Paint
+INFO: 10-04-2024 22:26:19 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 22:26:19 || No file selected: A new tab was opened
+INFO: 10-04-2024 22:26:25 || No file selected: Star of sides5 was selected
+INFO: 10-04-2024 22:28:12 || No file selected: Starting Paint
+INFO: 10-04-2024 22:28:12 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 22:28:13 || No file selected: A new tab was opened
+INFO: 10-04-2024 22:28:20 || No file selected: Free Draw was selected
+INFO: 10-04-2024 22:30:48 || No file selected: Starting Paint
+INFO: 10-04-2024 22:30:48 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 22:30:48 || No file selected: A new tab was opened
+INFO: 10-04-2024 22:30:52 || No file selected: Star of sides5 was selected
+INFO: 10-04-2024 22:33:05 || No file selected: Starting Paint
+INFO: 10-04-2024 22:33:05 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 22:33:05 || No file selected: A new tab was opened
+INFO: 10-04-2024 22:33:09 || No file selected: Star of sides5 was selected
+INFO: 10-04-2024 22:37:42 || No file selected: Starting Paint
+INFO: 10-04-2024 22:37:42 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 22:37:42 || No file selected: A new tab was opened
+INFO: 10-04-2024 22:37:57 || No file selected: Starting Paint
+INFO: 10-04-2024 22:37:57 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 22:37:57 || No file selected: A new tab was opened
+INFO: 10-04-2024 22:38:00 || No file selected: Star of sides5 was selected
+INFO: 10-04-2024 22:38:24 || No file selected: Starting Paint
+INFO: 10-04-2024 22:38:24 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 22:38:24 || No file selected: A new tab was opened
+INFO: 10-04-2024 22:38:28 || No file selected: Star of sides5 was selected
+INFO: 10-04-2024 22:39:05 || No file selected: Starting Paint
+INFO: 10-04-2024 22:39:05 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 22:39:06 || No file selected: A new tab was opened
+INFO: 10-04-2024 22:39:08 || No file selected: Star of sides5 was selected
+INFO: 10-04-2024 22:39:49 || No file selected: Starting Paint
+INFO: 10-04-2024 22:39:49 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 22:39:49 || No file selected: A new tab was opened
+INFO: 10-04-2024 22:39:53 || No file selected: Star of sides5 was selected
+INFO: 10-04-2024 22:41:18 || No file selected: Starting Paint
+INFO: 10-04-2024 22:41:18 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 22:41:18 || No file selected: A new tab was opened
+INFO: 10-04-2024 22:41:20 || No file selected: Star of sides5 was selected
+INFO: 10-04-2024 22:41:45 || No file selected: Starting Paint
+INFO: 10-04-2024 22:41:45 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 22:41:45 || No file selected: A new tab was opened
+INFO: 10-04-2024 22:41:47 || No file selected: Star of sides5 was selected
+INFO: 10-04-2024 22:42:11 || No file selected: Starting Paint
+INFO: 10-04-2024 22:42:12 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 22:42:13 || No file selected: A new tab was opened
+INFO: 10-04-2024 22:42:15 || No file selected: Star of sides5 was selected
+INFO: 10-04-2024 22:43:39 || No file selected: Star of sides5 was selected
+INFO: 10-04-2024 22:43:40 || No file selected: Polygon of sides5 was selected
+INFO: 10-04-2024 22:45:17 || No file selected: Starting Paint
+INFO: 10-04-2024 22:45:17 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 22:45:17 || No file selected: A new tab was opened
+INFO: 10-04-2024 22:45:23 || No file selected: Polygon of sides5 was selected
+INFO: 10-04-2024 22:50:10 || No file selected: Starting Paint
+INFO: 10-04-2024 22:50:10 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 22:50:10 || No file selected: A new tab was opened
+INFO: 10-04-2024 22:50:21 || No file selected: Star of sides5 was selected
+INFO: 10-04-2024 22:50:50 || No file selected: Polygon of sides7 was selected
+INFO: 10-04-2024 22:50:56 || No file selected: Star of sides6 was selected

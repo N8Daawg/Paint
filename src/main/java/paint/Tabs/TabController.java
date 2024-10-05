@@ -88,29 +88,24 @@ public class TabController {
         menuBar.getMenus().get(1).getItems().get(0).setOnAction(event -> openResizeWindow());
         menuBar.getMenus().get(1).getItems().get(1).setOnAction(event -> setTimerVisibility());
 
+        Spinner<Integer> polySideSpinner = (Spinner<Integer>) ((HBox) ((CustomMenuItem) menuBar.getMenus().get(1).getItems().get(2)).getContent()).getChildren().get(1);
+        polySideSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, 5));
+
+        Spinner<Integer> starSideSpinner = (Spinner<Integer>) ((HBox) ((CustomMenuItem) menuBar.getMenus().get(1).getItems().get(3)).getContent()).getChildren().get(1);
+        starSideSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, 5));
+
         drawController = new DrawController(
                 canvas.getGraphicsContext2D(),
                 liveDrawCanvas.getGraphicsContext2D(),
+                polySideSpinner, starSideSpinner,
                 toolBar, fileController, logger
         );
-
-        Spinner<Integer> polySideSpinner = (Spinner<Integer>) ((HBox) ((CustomMenuItem) menuBar.getMenus().get(1).getItems().get(2)).getContent()).getChildren().get(1);
-        polySideSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, 5));
-        polySideSpinner.getValueFactory().valueProperty().addListener(event -> {drawController.setPolyToolSides(polySideSpinner.getValue());});
-
-        Spinner<Integer> starSideSpinner = (Spinner<Integer>) ((HBox) ((CustomMenuItem) menuBar.getMenus().get(1).getItems().get(2)).getContent()).getChildren().get(1);
-        starSideSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, 5));
-        starSideSpinner.getValueFactory().valueProperty().addListener(event -> {drawController.setPolyToolSides(polySideSpinner.getValue());});
-
-
 
         currentState = canvas.snapshot(null, null);
 
         recentlySaved = true;
         undoStack = new Stack<>();
         redoStack = new Stack<>();
-
-
 
         if(pane.getChildren().get(2).getScene() != null) {
             postInitializationSetup();
