@@ -1,18 +1,22 @@
-version 1.1.3 (9/29/2024)
+version 1.1.4 (10/4/2024)
 Features:
     * Redesigned User Interface
         * Categories
+        * Tooltips
         * Icons
     * Canvas tools:
         * Rotation
         * Mirror
     * New Shape: Star
     * Log record in the form of txt file
+    * Save Notifications
+    * More Hotkeys:
+        * Ctrl+S - Save file
+        * Ctrl+O - Open file
 
 Know Bugs:
     * Cannot find saved image anywhere in local file directory
     * selection tool has issues with being dragged in different directions
-    * Polygon algorithm works for n sides but userinput for n does not work
 
 Coming soon:
     * To be announced
