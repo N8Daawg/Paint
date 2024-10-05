@@ -85,7 +85,6 @@ public class TabController {
         logger = Logger;
 
         fileController = new FileController(menuBar, canvas, server, logger);
-        menuBar.getMenus().get(0).getItems().get(1).setOnAction(event -> {});
         menuBar.getMenus().get(1).getItems().get(0).setOnAction(event -> openResizeWindow());
         menuBar.getMenus().get(1).getItems().get(1).setOnAction(event -> setTimerVisibility());
 
@@ -94,6 +93,16 @@ public class TabController {
                 liveDrawCanvas.getGraphicsContext2D(),
                 toolBar, fileController, logger
         );
+
+        Spinner<Integer> polySideSpinner = (Spinner<Integer>) ((HBox) ((CustomMenuItem) menuBar.getMenus().get(1).getItems().get(2)).getContent()).getChildren().get(1);
+        polySideSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, 5));
+        polySideSpinner.getValueFactory().valueProperty().addListener(event -> {drawController.setPolyToolSides(polySideSpinner.getValue());});
+
+        Spinner<Integer> starSideSpinner = (Spinner<Integer>) ((HBox) ((CustomMenuItem) menuBar.getMenus().get(1).getItems().get(2)).getContent()).getChildren().get(1);
+        starSideSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, 5));
+        starSideSpinner.getValueFactory().valueProperty().addListener(event -> {drawController.setPolyToolSides(polySideSpinner.getValue());});
+
+
 
         currentState = canvas.snapshot(null, null);
 

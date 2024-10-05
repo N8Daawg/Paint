@@ -237,9 +237,9 @@ public class TabPaneController {
     private void fishForShortcuts(KeyEvent ke) throws IOException { //creates key combos and fish for them
         if(saveCombo.match(ke)){ //A wild saveCombo appeared!
             tabs.get(tabSelector.getSelectedIndex()).save();
-        } else if(openCombo.match(ke)) {
+        } else if(openCombo.match(ke)) { // A wild openCombo appeared!
             tabs.get(tabSelector.getSelectedIndex()).openfile();
-        } else if(JPun.match(ke)){
+        } else if(JPun.match(ke)){ // A wild JPun appeared!
             Group root = new Group();
             WebView webView = new WebView();
             root.getChildren().add(webView);
@@ -251,7 +251,7 @@ public class TabPaneController {
 
             webView.getEngine().load("https://blackbirdvalpo.com/");
             logger.sendMessage("They found my easter egg ^o^");
-        } else if(undoCombo.match(ke)){
+        } else if(undoCombo.match(ke)){ //
             tabs.get(tabSelector.getSelectedIndex()).undo();
         } else if(redoCombo.match(ke)){
             tabs.get(tabSelector.getSelectedIndex()).redo();

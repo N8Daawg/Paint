@@ -145,7 +145,7 @@ public class DrawController {
                 event -> selectTool(11)
         );
         ((Button) shapeGridPane.getChildren().get(8)).setOnAction( // Star tool Button
-                event -> {/*selectTool(12)*/}
+                event -> selectTool(12)
         );
 
 

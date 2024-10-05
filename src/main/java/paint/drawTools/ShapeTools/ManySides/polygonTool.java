@@ -31,25 +31,18 @@ public class polygonTool extends shapeTool {
     public void setPolygonSides(int Sides){
         sides = Sides;
     }
-    private double[][] generateShapeArrays(double initialX, double initialY, double finalX, double finalY){
-        int n = sides;
-        double deltaX = finalX-initialX;
-        double deltaY = finalY-initialY;
-
-        double originX = deltaX/2;
-        double originY = deltaX/2;
-
+    protected double[][] generatePolyArray(double R){
         double[] x = new double[sides];
         double[] y = new double[sides];
 
-        double outerTheta = ((double) (180*(n-2))/n)*(Math.PI/180);
+        double outerTheta = ((double) (180*(sides-2))/sides)*(Math.PI/180);
         double innerTheta = (90 - (outerTheta)/2)*(Math.PI/180);
-        double R = Math.abs(deltaX)/2;
+
 
         x[0] = R + (Math.pow(R,2)*Math.sin(innerTheta));
         y[0] = R + (Math.pow(R,2)*Math.cos(innerTheta));
 
-        for(int i=1; i<n; i++){
+        for(int i=1; i<sides; i++){
             x[i] = R + (Math.pow(R,2)*Math.sin(innerTheta+(i*(Math.PI-outerTheta))));
             y[i] = R + (Math.pow(R,2)*Math.cos(innerTheta+(i*(Math.PI-outerTheta))));
         }
@@ -104,14 +97,19 @@ public class polygonTool extends shapeTool {
 
     @Override
     public void getDragEvent(MouseEvent mouseEvent) {
-        double[][] xy = generateShapeArrays(anchorX,anchorY,mouseEvent.getX(),mouseEvent.getY());
+        double deltaX = mouseEvent.getX() - anchorX;
+        double R = Math.abs(deltaX)/2;
+        double[][] xy = generatePolyArray(R);
         liveDrawPolygon(xy[0],xy[1]);
     }
 
     @Override
     public void getReleaseEvent(MouseEvent mouseEvent) {
         clearCanvas(ldgc);
-        double[][] xy = generateShapeArrays(anchorX, anchorY, mouseEvent.getX(), mouseEvent.getY());
+
+        double deltaX = mouseEvent.getX() - anchorX;
+        double R = Math.abs(deltaX)/2;
+        double[][] xy = generatePolyArray(R);
         drawPolygon(gc, xy[0],xy[1]);
     }
 

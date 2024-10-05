@@ -4,3 +4,117 @@ INFO: 10-03-2024 22:32:32 || threadedLogger.sendMessage() : A new tab was opened
 INFO: 10-03-2024 22:32:34 || threadedLogger.sendMessage() : Free Draw was selected
 INFO: 10-03-2024 22:32:38 || threadedLogger.sendMessage() : Line was selected
 INFO: 10-03-2024 22:32:44 || threadedLogger.sendMessage() : Circle was selected
+INFO: 10-04-2024 09:11:42 || threadedLogger.sendMessage() : Starting Paint
+INFO: 10-04-2024 09:11:42 || threadedLogger.sendMessage() : Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 09:11:44 || threadedLogger.sendMessage() : A new tab was opened
+INFO: 10-04-2024 09:12:03 || threadedLogger.sendMessage() : Free Draw was selected
+INFO: 10-04-2024 09:12:07 || threadedLogger.sendMessage() : selector was selected
+INFO: 10-04-2024 09:12:25 || threadedLogger.sendMessage() : text was selected
+INFO: 10-04-2024 09:26:49 || threadedLogger.sendMessage() : Starting Paint
+INFO: 10-04-2024 09:26:49 || threadedLogger.sendMessage() : Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 09:26:50 || threadedLogger.sendMessage() : A new tab was opened
+INFO: 10-04-2024 13:11:06 || threadedLogger.sendMessage() : Starting Paint
+INFO: 10-04-2024 13:11:06 || threadedLogger.sendMessage() : Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 13:11:07 || threadedLogger.sendMessage() : A new tab was opened
+INFO: 10-04-2024 13:11:51 || threadedLogger.sendMessage() : Free Draw was selected
+INFO: 10-04-2024 13:13:11 || threadedLogger.sendMessage() : Starting Paint
+INFO: 10-04-2024 13:13:11 || threadedLogger.sendMessage() : Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 13:13:12 || threadedLogger.sendMessage() : A new tab was opened
+INFO: 10-04-2024 13:13:26 || threadedLogger.sendMessage() : Free Draw was selected
+INFO: 10-04-2024 13:13:28 || threadedLogger.sendMessage() : Free Draw was selected
+INFO: 10-04-2024 13:13:29 || threadedLogger.sendMessage() : Free Draw was selected
+INFO: 10-04-2024 13:13:32 || threadedLogger.sendMessage() : Polygon of sides5 was selected
+INFO: 10-04-2024 13:21:02 || threadedLogger.sendMessage() : Starting Paint
+INFO: 10-04-2024 13:21:03 || threadedLogger.sendMessage() : Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 13:21:04 || threadedLogger.sendMessage() : A new tab was opened
+INFO: 10-04-2024 13:21:40 || threadedLogger.sendMessage() : Starting Paint
+INFO: 10-04-2024 13:21:40 || threadedLogger.sendMessage() : Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 13:21:41 || threadedLogger.sendMessage() : A new tab was opened
+INFO: 10-04-2024 13:21:50 || threadedLogger.sendMessage() : Free Draw was selected
+INFO: 10-04-2024 13:22:13 || threadedLogger.sendMessage() : Server updated file: C:\Users\nbeal\Downloads\downloaded.png
+INFO: 10-04-2024 13:22:43 || threadedLogger.sendMessage() : Server updated file: C:\Users\nbeal\Downloads\downloaded.png
+INFO: 10-04-2024 13:23:43 || threadedLogger.sendMessage() : Server updated file: C:\Users\nbeal\Downloads\downloaded.png
+INFO: 10-04-2024 13:23:54 || threadedLogger.sendMessage() : Server updated file: C:\Users\nbeal\Downloads\downloaded.png
+INFO: 10-04-2024 15:48:28 || threadedLogger.sendMessage() : Starting Paint
+INFO: 10-04-2024 15:48:28 || threadedLogger.sendMessage() : Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 15:48:29 || threadedLogger.sendMessage() : A new tab was opened
+INFO: 10-04-2024 15:49:13 || threadedLogger.sendMessage() : Starting Paint
+INFO: 10-04-2024 15:49:14 || threadedLogger.sendMessage() : Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 15:49:14 || threadedLogger.sendMessage() : A new tab was opened
+INFO: 10-04-2024 15:49:20 || threadedLogger.sendMessage() : Star of sides5 was selected
+INFO: 10-04-2024 15:51:48 || threadedLogger.sendMessage() : Starting Paint
+INFO: 10-04-2024 15:51:48 || threadedLogger.sendMessage() : Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 15:51:49 || threadedLogger.sendMessage() : A new tab was opened
+INFO: 10-04-2024 15:51:54 || threadedLogger.sendMessage() : Star of sides5 was selected
+INFO: 10-04-2024 15:52:14 || threadedLogger.sendMessage() : Starting Paint
+INFO: 10-04-2024 15:52:14 || threadedLogger.sendMessage() : Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 15:52:15 || threadedLogger.sendMessage() : A new tab was opened
+INFO: 10-04-2024 15:52:24 || threadedLogger.sendMessage() : Polygon of sides5 was selected
+INFO: 10-04-2024 15:52:27 || threadedLogger.sendMessage() : Polygon of sides5 was selected
+INFO: 10-04-2024 15:52:30 || threadedLogger.sendMessage() : Triangle was selected
+INFO: 10-04-2024 15:52:32 || threadedLogger.sendMessage() : Polygon of sides5 was selected
+INFO: 10-04-2024 15:52:54 || threadedLogger.sendMessage() : Star of sides5 was selected
+INFO: 10-04-2024 15:55:34 || threadedLogger.sendMessage() : Starting Paint
+INFO: 10-04-2024 15:55:34 || threadedLogger.sendMessage() : Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 15:55:35 || threadedLogger.sendMessage() : A new tab was opened
+INFO: 10-04-2024 15:55:44 || threadedLogger.sendMessage() : Polygon of sides5 was selected
+INFO: 10-04-2024 15:58:17 || threadedLogger.sendMessage() : Starting Paint
+INFO: 10-04-2024 15:58:18 || threadedLogger.sendMessage() : Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 15:58:18 || threadedLogger.sendMessage() : A new tab was opened
+INFO: 10-04-2024 15:58:22 || threadedLogger.sendMessage() : Polygon of sides5 was selected
+INFO: 10-04-2024 16:14:07 || threadedLogger.sendMessage() : Starting Paint
+INFO: 10-04-2024 16:14:07 || threadedLogger.sendMessage() : Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 16:14:08 || threadedLogger.sendMessage() : A new tab was opened
+INFO: 10-04-2024 16:14:13 || threadedLogger.sendMessage() : Polygon of sides5 was selected
+INFO: 10-04-2024 16:14:18 || threadedLogger.sendMessage() : Star of sides5 was selected
+INFO: 10-04-2024 16:19:16 || threadedLogger.sendMessage() : Starting Paint
+INFO: 10-04-2024 16:19:16 || threadedLogger.sendMessage() : Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 16:19:17 || threadedLogger.sendMessage() : A new tab was opened
+INFO: 10-04-2024 16:19:27 || threadedLogger.sendMessage() : Star of sides5 was selected
+INFO: 10-04-2024 16:22:08 || threadedLogger.sendMessage() : Starting Paint
+INFO: 10-04-2024 16:22:08 || threadedLogger.sendMessage() : Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 16:22:09 || threadedLogger.sendMessage() : A new tab was opened
+INFO: 10-04-2024 16:27:15 || threadedLogger.sendMessage() : Polygon of sides5 was selected
+INFO: 10-04-2024 16:27:19 || threadedLogger.sendMessage() : Star of sides5 was selected
+INFO: 10-04-2024 16:28:20 || threadedLogger.sendMessage() : Starting Paint
+INFO: 10-04-2024 16:28:20 || threadedLogger.sendMessage() : Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 16:28:21 || threadedLogger.sendMessage() : A new tab was opened
+INFO: 10-04-2024 16:28:29 || threadedLogger.sendMessage() : Star of sides5 was selected
+INFO: 10-04-2024 16:29:07 || threadedLogger.sendMessage() : Starting Paint
+INFO: 10-04-2024 16:29:08 || threadedLogger.sendMessage() : Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 16:29:09 || threadedLogger.sendMessage() : A new tab was opened
+INFO: 10-04-2024 16:29:18 || threadedLogger.sendMessage() : Star of sides5 was selected
+INFO: 10-04-2024 16:41:40 || threadedLogger.sendMessage() : Starting Paint
+INFO: 10-04-2024 16:41:40 || threadedLogger.sendMessage() : Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 16:41:40 || threadedLogger.sendMessage() : A new tab was opened
+INFO: 10-04-2024 16:41:57 || threadedLogger.sendMessage() : Star of sides5 was selected
+INFO: 10-04-2024 16:42:25 || threadedLogger.sendMessage() : Starting Paint
+INFO: 10-04-2024 16:42:26 || threadedLogger.sendMessage() : Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 16:42:26 || threadedLogger.sendMessage() : A new tab was opened
+INFO: 10-04-2024 16:42:31 || threadedLogger.sendMessage() : Polygon of sides5 was selected
+INFO: 10-04-2024 16:43:04 || threadedLogger.sendMessage() : Starting Paint
+INFO: 10-04-2024 16:43:04 || threadedLogger.sendMessage() : Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 16:43:05 || threadedLogger.sendMessage() : A new tab was opened
+INFO: 10-04-2024 16:43:09 || threadedLogger.sendMessage() : Star of sides5 was selected
+INFO: 10-04-2024 16:44:12 || threadedLogger.sendMessage() : Starting Paint
+INFO: 10-04-2024 16:44:12 || threadedLogger.sendMessage() : Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 16:44:12 || threadedLogger.sendMessage() : A new tab was opened
+INFO: 10-04-2024 16:44:16 || threadedLogger.sendMessage() : Star of sides5 was selected
+INFO: 10-04-2024 16:49:27 || threadedLogger.sendMessage() : Starting Paint
+INFO: 10-04-2024 16:49:27 || threadedLogger.sendMessage() : Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 16:49:28 || threadedLogger.sendMessage() : A new tab was opened
+INFO: 10-04-2024 16:49:31 || threadedLogger.sendMessage() : Star of sides5 was selected
+INFO: 10-04-2024 16:52:28 || threadedLogger.sendMessage() : Starting Paint
+INFO: 10-04-2024 16:52:29 || threadedLogger.sendMessage() : Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 16:52:29 || threadedLogger.sendMessage() : A new tab was opened
+INFO: 10-04-2024 16:52:33 || threadedLogger.sendMessage() : Star of sides5 was selected
+INFO: 10-04-2024 16:53:09 || threadedLogger.sendMessage() : Starting Paint
+INFO: 10-04-2024 16:53:09 || threadedLogger.sendMessage() : Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 16:53:10 || threadedLogger.sendMessage() : A new tab was opened
+INFO: 10-04-2024 16:53:14 || threadedLogger.sendMessage() : Star of sides5 was selected
+INFO: 10-04-2024 16:54:21 || threadedLogger.sendMessage() : Starting Paint
+INFO: 10-04-2024 16:54:21 || threadedLogger.sendMessage() : Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-04-2024 16:54:21 || threadedLogger.sendMessage() : A new tab was opened
+INFO: 10-04-2024 16:54:35 || threadedLogger.sendMessage() : Star of sides5 was selected
+INFO: 10-04-2024 16:55:27 || threadedLogger.sendMessage() : Server updated file: C:\Users\nbeal\AppData\Roaming\Microsoft\Windows\Network Shortcuts\star.png
+INFO: 10-04-2024 16:56:23 || threadedLogger.sendMessage() : Server updated file: C:\Users\nbeal\AppData\Roaming\Microsoft\Windows\Network Shortcuts\star.png

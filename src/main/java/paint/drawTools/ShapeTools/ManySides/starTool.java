@@ -1,12 +1,10 @@
 package paint.drawTools.ShapeTools.ManySides;
 
-
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import paint.drawTools.ShapeTools.shapeTool;
 
-public class starTool extends shapeTool {
-    private int sides = 5;
+public class starTool extends polygonTool {
     /**
      * Instantiates a new Shape tool.
      *
@@ -16,40 +14,24 @@ public class starTool extends shapeTool {
     public starTool(GraphicsContext g, GraphicsContext LDGC) {
         super(g, LDGC);
     }
-    public void setStarSides(int Sides){
-        sides = Sides;
-    }
+    public void setStarSides(int Sides){ setPolygonSides(Sides);}
 
-    private double[][] generateShapeArrays(double initialX, double initialY, double finalX, double finalY){
-        int n = sides;
-        double deltaX = finalX-initialX;
-        double deltaY = finalY-initialY;
+    private double[][] generateStarArray(double R){
+        double[][] innercoors = generatePolyArray(R);
+        double[][] outercoors = generatePolyArray(R/2);
 
-        double originX = deltaX/2;
-        double originY = deltaX/2;
-
-        double[] x = new double[sides];
-        double[] y = new double[sides];
-
-        double outerTheta = ((double) (180*(n-2))/n)*(Math.PI/180);
-        double innerTheta = (90 - (outerTheta)/2)*(Math.PI/180);
-        double R = Math.abs(deltaX)/2;
-
-        x[0] = R + (Math.pow(R,2)*Math.sin(innerTheta));
-        y[0] = R + (Math.pow(R,2)*Math.cos(innerTheta));
-
-        for(int i=1; i<n; i++){
-            x[i] = R + (Math.pow(R,2)*Math.sin(innerTheta+(i*(Math.PI-outerTheta))));
-            y[i] = R + (Math.pow(R,2)*Math.cos(innerTheta+(i*(Math.PI-outerTheta))));
+        double innerx[] = innercoors[0];
+        double innery[] = innercoors[1];
+        double outerx[] = outercoors[0];
+        double outery[] = outercoors[1];
+        double[][] xy = new double[2][sides*2];
+        for (int i = 0; i < (sides*2)-2; i+=2) {
+            xy[0][i] = innerx[i/2];
+            xy[0][i+1] = outerx[(i/2)+1];
+            xy[1][i] = innery[i/2];
+            xy[1][i+1] = outery[(i/2)+1];
         }
-
-        for(int i=0; i<x.length;i++){
-            x[i] +=anchorX;
-        }
-        for(int i=0; i<y.length;i++){
-            y[i] +=anchorY;
-        }
-        return new double[][]{x,y};
+        return xy;
     }
 
     /**
@@ -60,18 +42,7 @@ public class starTool extends shapeTool {
      * @param ycoors    the ycoors
      */
     protected void drawStar(GraphicsContext currentgc, double[] xcoors, double[] ycoors){
-        recentlySaved=true;
-        if(isDashedLine){
-            double perimeter = (
-                    (Math.abs(xcoors[2]-xcoors[1])*2)+(Math.abs(ycoors[1]-ycoors[0])*2)
-            );
-            currentgc.setLineDashes(createLineDashes(perimeter));
-        }
-        currentgc.strokePolygon(
-                xcoors,
-                ycoors,
-                sides
-        );
+        drawPolygon(currentgc, xcoors, ycoors);
     }
 
     /**
@@ -81,26 +52,21 @@ public class starTool extends shapeTool {
      * @param ycoors the ycoors
      */
     protected void liveDrawStar(double[] xcoors, double[] ycoors){
-        clearCanvas(ldgc);
-        drawStar(ldgc, xcoors, ycoors);
-    }
-
-    @Override
-    public void getPressEvent(MouseEvent mouseEvent) {
-        anchorX = mouseEvent.getX();
-        anchorY = mouseEvent.getY();
+        liveDrawPolygon(xcoors, ycoors);
     }
 
     @Override
     public void getDragEvent(MouseEvent mouseEvent) {
-        double[][] xy = generateShapeArrays(anchorX,anchorY,mouseEvent.getX(),mouseEvent.getY());
+        double R = Math.abs((anchorX - mouseEvent.getX())/2);
+        double[][] xy = generateStarArray(R);
         liveDrawStar(xy[0],xy[1]);
     }
 
     @Override
     public void getReleaseEvent(MouseEvent mouseEvent) {
         clearCanvas(ldgc);
-        double[][] xy = generateShapeArrays(anchorX, anchorY, mouseEvent.getX(), mouseEvent.getY());
+        double R = Math.abs((anchorX - mouseEvent.getX())/2);
+        double[][] xy = generateStarArray(R);
         drawStar(gc, xy[0],xy[1]);
     }
 
