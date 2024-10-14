@@ -35,7 +35,6 @@ public class DrawController {
     private drawTool currentTool;
     private final drawTool[] toolsList;
     private final FileController fileController;
-    private boolean recentlySaved;
     private final selectorTool selectorTool;
     private final polygonTool polygonTool;
     private final Spinner<Integer> polySideSpinner;
@@ -159,8 +158,6 @@ public class DrawController {
         colorPicker = (ColorPicker) colorToolContainer.getChildren().get(0);
         colorPicker.setValue(Color.BLACK);
 
-
-        recentlySaved = false;
         setListeners(true);
     }
 
@@ -179,9 +176,7 @@ public class DrawController {
     /**
      * Clear screen.
      */
-    public void clearScreen(){
-        gc.clearRect(0,0,gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
-    }
+    public void clearScreen(){currentTool.clearCanvas(gc);}
 
     /**
      * Set listeners.
@@ -230,27 +225,7 @@ public class DrawController {
      *
      * @param mouseEvent the mouse event
      */
-    public void getReleaseEvent(MouseEvent mouseEvent){
-        currentTool.getReleaseEvent(mouseEvent);
-    }
-
-    /**
-     * Sets recently saved.
-     */
-    public void setRecentlySaved() {
-        recentlySaved = fileController.wasRecentlySaved();
-        currentTool.setRecentlySaved(recentlySaved);
-    }
-
-    /**
-     * Was recently saved boolean.
-     *
-     * @return whether the file was recently saved or not
-     */
-    public boolean wasRecentlySaved() {
-        recentlySaved = currentTool.wasRecentlySaved();
-        return recentlySaved;
-    }
+    public void getReleaseEvent(MouseEvent mouseEvent){currentTool.getReleaseEvent(mouseEvent);}
 
     /**
      * Get clip board image.

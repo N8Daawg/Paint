@@ -253,3 +253,26 @@ INFO: 10-04-2024 22:50:10 || No file selected: A new tab was opened
 INFO: 10-04-2024 22:50:21 || No file selected: Star of sides5 was selected
 INFO: 10-04-2024 22:50:50 || No file selected: Polygon of sides7 was selected
 INFO: 10-04-2024 22:50:56 || No file selected: Star of sides6 was selected
+INFO: 10-14-2024 06:14:06 || No file selected: Starting Paint
+INFO: 10-14-2024 06:14:06 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-14-2024 06:14:06 || No file selected: A new tab was opened
+INFO: 10-14-2024 06:14:11 || No file selected: A new tab was opened
+INFO: 10-14-2024 06:14:26 || Screenshot 2024-06-28 152917.png: Free Draw was selected
+INFO: 10-14-2024 06:23:07 || No file selected: Starting Paint
+INFO: 10-14-2024 06:23:07 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-14-2024 06:23:07 || No file selected: A new tab was opened
+INFO: 10-14-2024 06:23:59 || No file selected: Starting Paint
+INFO: 10-14-2024 06:23:59 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-14-2024 06:23:59 || No file selected: A new tab was opened
+INFO: 10-14-2024 06:27:55 || No file selected: Starting Paint
+INFO: 10-14-2024 06:27:55 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-14-2024 06:27:55 || No file selected: A new tab was opened
+INFO: 10-14-2024 06:53:29 || No file selected: Starting Paint
+INFO: 10-14-2024 06:53:29 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-14-2024 06:53:29 || No file selected: A new tab was opened
+INFO: 10-14-2024 06:53:43 || newim.png: Server updated file: C:\Users\nbeal\Downloads\newim.png
+INFO: 10-14-2024 06:54:39 || newim.png: Server updated file: C:\Users\nbeal\Downloads\newim.png
+INFO: 10-14-2024 06:54:52 || newim.png: A new tab was opened
+INFO: 10-14-2024 07:22:47 || No file selected: Starting Paint
+INFO: 10-14-2024 07:22:47 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-14-2024 07:22:47 || No file selected: A new tab was opened

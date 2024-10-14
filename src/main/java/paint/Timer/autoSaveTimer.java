@@ -3,20 +3,20 @@ package paint.Timer;
 import javafx.scene.control.Label;
 
 /**
- * The type Auto save timer.
+ * The type Auto savetab timer.
  */
 public class autoSaveTimer implements Runnable {
     /**
      * The starting time left on the countdown.
      */
-    final int minutesToMidnight = 1;
+    final int minutesToMidnight = 20;
     private final Label timerLabel;
     private countdownClock timer;
     private boolean showTimer;
     private boolean visibilityChanged;
 
     /**
-     * Instantiates a new Auto save timer.
+     * Instantiates a new Auto savetab timer.
      *
      * @param TimerLabel the timer label
      */

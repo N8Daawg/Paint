@@ -1,8 +1,6 @@
 package paint.Tabs;
 
-import paint.PaintController;
 import paint.fileAndServerManagment.FileController;
-import paint.Timer.autoSaveTimer;
 import paint.drawTools.DrawController;
 import javafx.application.Platform;
 import javafx.event.Event;
@@ -37,7 +35,6 @@ public class TabController {
     private WritableImage currentState;
     private Stack<WritableImage> undoStack;
     private Stack<WritableImage> redoStack;
-    private final autoSaveTimer timer;
     private final threadedLogger logger;
 
     /**
@@ -53,7 +50,7 @@ public class TabController {
         fileController = null;
         drawController = null;
         recentlySaved = true;
-        timer = null;
+
         logger = null;
     }
 
@@ -62,17 +59,23 @@ public class TabController {
      *
      * @param T      the tab
      * @param server the server
-     * @param Timer  the timer
      */
-    public TabController(Tab T, webServer server, autoSaveTimer Timer, threadedLogger Logger) {
+    public TabController(Tab T, webServer server, threadedLogger Logger) {
         tab = T;
         AnchorPane pane = (AnchorPane) tab.getContent();
         menuBar = (MenuBar) pane.getChildren().get(0);
         toolBar = (ToolBar) pane.getChildren().get(1);
+        canvas = (Canvas) ((StackPane) ((ScrollPane) pane.getChildren().get(2)).getContent()).getChildren().get(0);
+
+        logger = Logger;
+
+
+        fileController = new FileController(menuBar, canvas, server, logger);
+
+
         ((Button) ((GridPane) ((VBox) toolBar.getItems().get(2)).getChildren().get(0)).getChildren().get(3)).setOnAction( // clear screen button
                 event -> clearScreen()
         );
-        canvas = (Canvas) ((StackPane) ((ScrollPane) pane.getChildren().get(2)).getContent()).getChildren().get(0);
 
         Canvas liveDrawCanvas = new Canvas(canvas.getWidth(), canvas.getHeight());
         liveDrawCanvas.setLayoutX(canvas.getLayoutX());
@@ -80,13 +83,6 @@ public class TabController {
         ((StackPane) ((ScrollPane) pane.getChildren().get(2)).getContent()).getChildren().add(
                 liveDrawCanvas);
         liveDrawCanvas.toBack();
-
-        timer = Timer;
-        logger = Logger;
-
-        fileController = new FileController(menuBar, canvas, server, logger);
-        menuBar.getMenus().get(1).getItems().get(0).setOnAction(event -> openResizeWindow());
-        menuBar.getMenus().get(1).getItems().get(1).setOnAction(event -> setTimerVisibility());
 
         Spinner<Integer> polySideSpinner = (Spinner<Integer>) ((HBox) ((CustomMenuItem) menuBar.getMenus().get(1).getItems().get(2)).getContent()).getChildren().get(1);
         polySideSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, 5));
@@ -100,6 +96,7 @@ public class TabController {
                 polySideSpinner, starSideSpinner,
                 toolBar, fileController, logger
         );
+
 
         currentState = canvas.snapshot(null, null);
 
@@ -120,7 +117,18 @@ public class TabController {
         getTab().setOnCloseRequest(e -> {
             try {deleteTab(e);} catch (IOException ex) {throw new RuntimeException(ex);}
         });
-        fileController.postInitSetup();
+
+        //file menu
+        menuBar.getMenus().get(0).getItems().get(0).setOnAction(event -> fileController.openFile());
+        menuBar.getMenus().get(0).getItems().get(2).setOnAction(event -> saveTab());
+        menuBar.getMenus().get(0).getItems().get(3).setOnAction(event -> saveAsTab());
+
+        //edit menu
+        menuBar.getMenus().get(1).getItems().get(0).setOnAction(event -> openResizeWindow());
+
+        //help menu
+        menuBar.getMenus().get(2).getItems().get(0).setOnAction(event -> fileController.showHelp());
+
     }
 
     /**
@@ -153,6 +161,7 @@ public class TabController {
      */
     protected Canvas getCanvas() { return canvas; }
 
+
     /**
      * Gets file controller.
      *
@@ -163,6 +172,26 @@ public class TabController {
     }
 
     /**
+     * openFile.
+     */
+    protected void openFile(){
+        fileController.openFile();
+    }
+
+    /**
+     * Save.
+     */
+    protected void saveTab(){
+        recentlySaved = fileController.saveFile();
+        tab.setText(fileController.getCurrentFile());
+    }
+
+    private void saveAsTab(){
+        recentlySaved = fileController.saveAsFile();
+        tab.setText(fileController.getCurrentFile());
+    }
+
+    /**
      * Was recently saved boolean.
      *
      * @return the boolean
@@ -170,6 +199,7 @@ public class TabController {
     public Boolean wasRecentlySaved() {
         return recentlySaved;
     }
+
 
     private void setListeners(){
         drawController.setListeners(recentlySaved);
@@ -213,17 +243,6 @@ public class TabController {
         }
     }
 
-    /**
-     * Sets recently saved.
-     */
-    public void setRecentlySaved() {
-        if (this.drawController==null){
-            recentlySaved = true;
-        } else{
-            recentlySaved = drawController.wasRecentlySaved();
-            drawController.setRecentlySaved();
-        }
-    }
 
     /**
      * Delete tab.
@@ -233,7 +252,6 @@ public class TabController {
      */
     protected void deleteTab(Event e) throws IOException {
         e.consume();
-        setRecentlySaved();
         if(!recentlySaved){
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Clear Screen?");
@@ -261,33 +279,6 @@ public class TabController {
             }
         } else {
             TabPaneController.removeTab(this, getTab());
-        }
-    }
-
-    private void setTimerVisibility(){
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Timer Visible");
-        alert.setHeaderText(null);
-        alert.setContentText("Choose whether you would like to see the autoSave timer");
-
-        ButtonType buttonTypeVisible = new ButtonType("Visible");
-        ButtonType buttonTypeInvisible = new ButtonType("Invisible");
-        ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-
-        alert.getButtonTypes().setAll(buttonTypeVisible, buttonTypeInvisible, buttonTypeCancel);
-
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == buttonTypeVisible){
-            // ... user chose "One"
-            timer.setVisibility(true);
-            alert.close();
-        } else if (result.get() == buttonTypeInvisible) {
-            // ... user chose "Two"
-            timer.setVisibility(false);
-            alert.close();
-        } else {
-            // ... user chose CANCEL or closed the dialog
-            alert.close();
         }
     }
 
@@ -384,20 +375,6 @@ public class TabController {
             undoStack.push(currentState);
             currentState = canvas.snapshot(null, null);
         }
-    }
-
-    /**
-     * Save.
-     */
-    protected void save(){
-        fileController.saveFile();
-    }
-
-    /**
-     * Openfile.
-     */
-    protected void openfile(){
-        fileController.openFile();
     }
 
     /**

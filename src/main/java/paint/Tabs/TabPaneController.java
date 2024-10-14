@@ -68,7 +68,7 @@ public class TabPaneController {
         BorderPane borderPane = (BorderPane) tabPane.getParent();
         Label timerLabel = (Label) borderPane.getBottom();
         timer = new autoSaveTimer(timerLabel);
-        int delay = 30000;
+        int delay = 1000;
         ActionListener tick = e -> {
             Platform.runLater(timer);
             if (timer.ended()) {
@@ -104,8 +104,11 @@ public class TabPaneController {
         logger.sendMessage("A new tab was opened");
         tabPane.getTabs().add(nt);
         tabSelector.select(nt);
-        tabs.add(new TabController(nt, server, timer, logger));
-        tabs.get(tabSelector.getSelectedIndex()).getMenuBar().getMenus().get(0).getItems().get(1).setOnAction(event -> {importImage();});
+        tabs.add(new TabController(nt, server, logger));
+
+        tabs.get(tabSelector.getSelectedIndex()).getMenuBar().getMenus().get(0).getItems().get(1).setOnAction(event -> importImage());
+        tabs.get(tabSelector.getSelectedIndex()).getMenuBar().getMenus().get(1).getItems().get(1).setOnAction(event -> setTimerVisibility());
+
         logger.updateTabs(tabSelector, tabs);
     }
     /**
@@ -121,7 +124,7 @@ public class TabPaneController {
     }
 
     /**
-     * opens a dialog to get the user to save all of their projects before closing
+     * opens a dialog to get the user to savetab all of their projects before closing
      *
      * @param windowEvent the closing window event
      */
@@ -174,7 +177,6 @@ public class TabPaneController {
             if(!tabController.wasRecentlySaved()){
                 modifiedTabs.add(tabController);
             }
-            tabController.setRecentlySaved();
         }
         return modifiedTabs;
     }
@@ -190,9 +192,36 @@ public class TabPaneController {
         currenTab.resize(width, height);
     }
 
-    protected void importImage(){
+    private void importImage(){
         addTab();
-        tabs.get(tabSelector.getSelectedIndex()).openfile();
+        tabs.get(tabSelector.getSelectedIndex()).openFile();
+    }
+
+    private void setTimerVisibility() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Timer Visible");
+        alert.setHeaderText(null);
+        alert.setContentText("Choose whether you would like to see the autoSave timer");
+
+        ButtonType buttonTypeVisible = new ButtonType("Visible");
+        ButtonType buttonTypeInvisible = new ButtonType("Invisible");
+        ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(buttonTypeVisible, buttonTypeInvisible, buttonTypeCancel);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == buttonTypeVisible) {
+            // ... user chose "One"
+            timer.setVisibility(true);
+            alert.close();
+        } else if (result.get() == buttonTypeInvisible) {
+            // ... user chose "Two"
+            timer.setVisibility(false);
+            alert.close();
+        } else {
+            // ... user chose CANCEL or closed the dialog
+            alert.close();
+        }
     }
 
     private final KeyCombination openCombo = new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN);
@@ -237,9 +266,9 @@ public class TabPaneController {
      */
     private void fishForShortcuts(KeyEvent ke) throws IOException { //creates key combos and fish for them
         if(saveCombo.match(ke)){ //A wild saveCombo appeared!
-            tabs.get(tabSelector.getSelectedIndex()).save();
+            tabs.get(tabSelector.getSelectedIndex()).saveTab();
         } else if(openCombo.match(ke)) { // A wild openCombo appeared!
-            tabs.get(tabSelector.getSelectedIndex()).openfile();
+            tabs.get(tabSelector.getSelectedIndex()).openFile();
         } else if(JPun.match(ke)){ // A wild JPun appeared!
             Group root = new Group();
             WebView webView = new WebView();
@@ -256,8 +285,6 @@ public class TabPaneController {
             tabs.get(tabSelector.getSelectedIndex()).undo();
         } else if(redoCombo.match(ke)){
             tabs.get(tabSelector.getSelectedIndex()).redo();
-        } else if(pasteCombo.match(ke)){
-            //tabs.get(tabSelector.getSelectedIndex()).paste(me);
         }
     }
 }
