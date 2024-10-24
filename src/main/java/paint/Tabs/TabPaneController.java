@@ -105,6 +105,7 @@ public class TabPaneController {
 
         tabs.get(tabSelector.getSelectedIndex()).getMenuBar().getMenus().get(0).getItems().get(1).setOnAction(event -> importImage());
         tabs.get(tabSelector.getSelectedIndex()).getMenuBar().getMenus().get(1).getItems().get(1).setOnAction(event -> setTimerVisibility());
+        tabs.get(tabSelector.getSelectedIndex()).getMenuBar().getMenus().get(1).getItems().get(2).setOnAction(event -> setSaveNotifications());
 
         logger.updateTabs(tabSelector, tabs);
     }
@@ -192,6 +193,44 @@ public class TabPaneController {
         tabs.get(tabSelector.getSelectedIndex()).openFile();
     }
 
+    private void setSaveNotifications() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Save Notifications");
+        alert.setHeaderText(null);
+        alert.setContentText("Choose whether you would like to see Notifications when saving");
+
+        ButtonType buttonTypeON = new ButtonType("ON");
+        ButtonType buttonTypeOFF = new ButtonType("OFF");
+        ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(buttonTypeON, buttonTypeOFF, buttonTypeCancel);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == buttonTypeON) {
+            // ... user chose "On"
+            turnNotificationsOn();
+            alert.close();
+        } else if (result.get() == buttonTypeOFF) {
+            // ... user chose "Off"
+            turnNotificationsOff();
+            alert.close();
+        } else {
+            // ... user chose CANCEL or closed the dialog
+            alert.close();
+        }
+    }
+
+    private void turnNotificationsOn(){
+        for(TabController tab:tabs){
+            tab.setNotifications(true);
+        }
+    }
+    private void turnNotificationsOff(){
+        for(TabController tab:tabs){
+            tab.setNotifications(false);
+        }
+    }
+
     private void setTimerVisibility() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Timer Visible");
@@ -207,17 +246,20 @@ public class TabPaneController {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == buttonTypeVisible) {
             // ... user chose "One"
-            timer.setVisibility(true);
+            makeTimerVisible();
             alert.close();
         } else if (result.get() == buttonTypeInvisible) {
             // ... user chose "Two"
-            timer.setVisibility(false);
+            makeTimerInvisible();
             alert.close();
         } else {
             // ... user chose CANCEL or closed the dialog
             alert.close();
         }
     }
+
+    private void makeTimerVisible(){timer.setVisibility(true);}
+    private void makeTimerInvisible(){timer.setVisibility(false);}
 
     private final KeyCombination openCombo = new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN);
     /**

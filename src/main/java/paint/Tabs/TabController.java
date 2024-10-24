@@ -9,7 +9,6 @@ import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.image.WritableImage;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import paint.fileAndServerManagment.webServer;
@@ -18,7 +17,6 @@ import paint.threadedLogger;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.Stack;
-
 
 public class TabController {
     private final Tab tab;
@@ -68,11 +66,11 @@ public class TabController {
         menuBar.getMenus().get(1).getItems().get(0).setOnAction(event -> openResizeWindow());
 
         // Polygon Side Spinner in Edit menu
-        Spinner<Integer> polySideSpinner = (Spinner<Integer>) ((HBox) ((CustomMenuItem) menuBar.getMenus().get(1).getItems().get(2)).getContent()).getChildren().get(1);
+        Spinner<Integer> polySideSpinner = (Spinner<Integer>) ((HBox) ((CustomMenuItem) menuBar.getMenus().get(1).getItems().get(3)).getContent()).getChildren().get(1);
         polySideSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, 5));
 
         // Star Side Spinner in Edit Menu
-        Spinner<Integer> starSideSpinner = (Spinner<Integer>) ((HBox) ((CustomMenuItem) menuBar.getMenus().get(1).getItems().get(3)).getContent()).getChildren().get(1);
+        Spinner<Integer> starSideSpinner = (Spinner<Integer>) ((HBox) ((CustomMenuItem) menuBar.getMenus().get(1).getItems().get(4)).getContent()).getChildren().get(1);
         starSideSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, 5));
 
         // Help menu
@@ -125,8 +123,10 @@ public class TabController {
 
     protected MenuBar getMenuBar() {return menuBar;}
 
-
     public FileController getFileController() {return fileController;}
+
+
+    public void setNotifications(boolean on){fileController.setNotifications(on);}
 
     protected void openFile(){
         fileController.openFile((Stage) menuBar.getScene().getWindow());
@@ -176,12 +176,16 @@ public class TabController {
             if (result.get() == buttonTypeSAC){
                 // ... user chose "Save and clear"
                 fileController.saveFile((Stage) menuBar.getScene().getWindow());
-                drawController.clearScreen();
+                alert.close();
+                clearScreen();
             } else if (result.get() == buttonTypeClear) {
-                // ... user chose "Two"
-                drawController.clearScreen();
+                recentlySaved = true;
+                alert.close();
+                clearScreen();
+            } else{
+                // ... user chose anything else
+                alert.close();
             }
-            alert.close();
         } else{
             drawController.clearScreen();
         }

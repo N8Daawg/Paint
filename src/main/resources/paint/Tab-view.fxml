@@ -30,7 +30,7 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <MenuBar prefHeight="20.0" prefWidth="132.0" AnchorPane.bottomAnchor="731.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1148.0" AnchorPane.topAnchor="0.0">
          <menus>
@@ -47,6 +47,7 @@
                <items>
                   <MenuItem mnemonicParsing="false" text="Resize Canvas" />
                   <MenuItem mnemonicParsing="false" text="Show Timer" />
+                  <MenuItem mnemonicParsing="false" text="Turn on/off save notifications" />
                   <CustomMenuItem hideOnClick="false" mnemonicParsing="false">
                      <content>
                         <HBox spacing="10.0">

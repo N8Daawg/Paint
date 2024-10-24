@@ -86,15 +86,25 @@ public class FileController {
         showHelpWindow();
     }
 
-    /**
-     * Turn notifications on.
-     */
-    public void turnNotificationsOn(){notificationsOn = true;}
+    /*---------------------------------------------------------------------------*/
+    /*----------------------------Notification Visibility------------------------*/
+    /*---------------------------------------------------------------------------*/
+
+    public void setNotifications(boolean on){
+        if (on){ turnNotificationsOn();
+        } else { turnNotificationsOff();
+        }
+    }
 
     /**
-     * Turn notifications off.
+     * Turns notifications on.
      */
-    public void turnNotificationsOff(){notificationsOn = false;}
+    private void turnNotificationsOn(){notificationsOn = true;}
+
+    /**
+     * Turns notifications off.
+     */
+    private void turnNotificationsOff(){notificationsOn = false;}
 
     /*---------------------------------------------------------------------------*/
     /*------------------------------File Method Control--------------------------*/
@@ -120,8 +130,7 @@ public class FileController {
         }
     }
 
-
-    private Boolean save(Stage stage) {
+    private boolean save(Stage stage) {
         if(currentFile != null) { // if we are already working on an existing file
             String extension = getExtension(currentFile.toPath()); //get a file extension
 

@@ -61,7 +61,6 @@ public class DrawController {
         gc = g;
         logger = Logger;
         polySideSpinner = PolySideSpinner;
-
         starSideSpinner = StarSideSpinner;
 
         selectorTool = new selectorTool(gc, LDGC);
@@ -100,9 +99,6 @@ public class DrawController {
         );
         ((Button) ((GridPane) canvasToolsContainer.getChildren().get(0)).getChildren().get(2)).setOnAction( // resize screen button
                 event -> resizeCanvas()
-        );
-        ((Button) ((GridPane) canvasToolsContainer.getChildren().get(0)).getChildren().get(3)).setOnAction( // clear screen button
-                event -> clearScreen()
         );
 
         // Tools tool
