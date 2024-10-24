@@ -11,14 +11,14 @@ public class lineTool extends shapeTool {
     /**
      * Instantiates a new Line tool.
      *
-     * @param g    the g
-     * @param LDGC the ldgc
+     * @param g    the Graphics Context
+     * @param LDGC the Live Draw Graphics Context
      */
     public lineTool(GraphicsContext g, GraphicsContext LDGC) {
         super(g, LDGC);
     }
+
     private void drawLine(GraphicsContext currentgc, double initialX, double initialY, double finalX, double finalY){
-        recentlySaved = false;
         if(isDashedLine){
             double perimeter = Math.sqrt(Math.pow(finalX - initialX, 2) + Math.pow((finalY-initialY), 2));
             currentgc.setLineDashes(createLineDashes(perimeter));
@@ -52,7 +52,6 @@ public class lineTool extends shapeTool {
 
     @Override
     public void getReleaseEvent(MouseEvent mouseEvent) {
-        recentlySaved = false;
         clearCanvas(ldgc);
         drawLine(gc, anchorX, anchorY, mouseEvent.getX(), mouseEvent.getY());
     }

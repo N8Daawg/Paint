@@ -2,9 +2,6 @@ package paint.drawTools.ShapeTools.ManySides;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
-import paint.drawTools.ShapeTools.shapeTool;
-
-import java.util.Arrays;
 
 public class starTool extends polygonTool {
     /**
@@ -21,8 +18,6 @@ public class starTool extends polygonTool {
     private double[][] generateStarArray(double R){
         double[][] innercoors = generatePolyArray(R/4);
         double[][] outercoors = generatePolyArray(R/8);
-        //drawPolygon(ldgc, innercoors[0], innercoors[1]);
-        //drawPolygon(ldgc, outercoors[0], outercoors[1]);
 
         double[][] xy = new double[2][sides*2];
 
@@ -33,16 +28,6 @@ public class starTool extends polygonTool {
             xy[1][i+1] = outercoors[1][(i/2)];
         }
 
-        /*
-        for (int i = 0; i < sides; i++) {
-            xy[0][i] = innercoors[0][i];
-            xy[1][i] = innercoors[1][i];
-        }
-        for (int i = sides; i < sides*2; i++) {
-            xy[0][i] = outercoors[0][i-sides];
-            xy[1][i] = outercoors[1][i-sides];
-        }
-         */
         return xy;
     }
 

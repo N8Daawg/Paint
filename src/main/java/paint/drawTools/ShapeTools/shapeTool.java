@@ -23,13 +23,8 @@ public class shapeTool extends drawTool {
     public shapeTool(GraphicsContext g, GraphicsContext LDGC) {
         super(g, LDGC);
     }
-    @Override
-    public void setAttributes(Color color, double size, Boolean dashedLine, Boolean recentlySaved) {
-        setup(color, size, dashedLine, recentlySaved);
-    }
 
     protected void setColor(Color color){
-        currentColor = color;
         gc.setStroke(color);
         ldgc.setStroke(color);
     }
@@ -60,19 +55,13 @@ public class shapeTool extends drawTool {
     }
 
     @Override
-    public void getPressEvent(MouseEvent mouseEvent) {
-
-    }
+    public void getPressEvent(MouseEvent mouseEvent) {}
 
     @Override
-    public void getDragEvent(MouseEvent mouseEvent) {
-
-    }
+    public void getDragEvent(MouseEvent mouseEvent) {}
 
     @Override
-    public void getReleaseEvent(MouseEvent mouseEvent) {
-
-    }
+    public void getReleaseEvent(MouseEvent mouseEvent) {}
 
     @Override
     public String toString() {

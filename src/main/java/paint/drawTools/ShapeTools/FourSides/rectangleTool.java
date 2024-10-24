@@ -26,7 +26,6 @@ public class rectangleTool extends shapeTool {
      * @param ycoors    the ycoors
      */
     protected void drawRectangle(GraphicsContext currentgc, double[] xcoors, double[] ycoors){
-        recentlySaved=true;
         if(isDashedLine){
             double perimeter = (
                     (Math.abs(xcoors[2]-xcoors[1])*2)+(Math.abs(ycoors[1]-ycoors[0])*2)

@@ -253,6 +253,22 @@ INFO: 10-04-2024 22:50:10 || No file selected: A new tab was opened
 INFO: 10-04-2024 22:50:21 || No file selected: Star of sides5 was selected
 INFO: 10-04-2024 22:50:50 || No file selected: Polygon of sides7 was selected
 INFO: 10-04-2024 22:50:56 || No file selected: Star of sides6 was selected
+INFO: 10-08-2024 11:19:15 || No file selected: Starting Paint
+INFO: 10-08-2024 11:19:16 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-08-2024 11:19:17 || No file selected: A new tab was opened
+INFO: 10-08-2024 11:19:27 || No file selected: Starting Paint
+INFO: 10-08-2024 11:19:27 || No file selected: Error starting the web server: Address already in use: bind
+INFO: 10-08-2024 11:19:28 || No file selected: A new tab was opened
+INFO: 10-08-2024 11:19:33 || No file selected: Polygon of sides 5 was selected
+INFO: 10-08-2024 11:19:37 || No file selected: Star of sides 5 was selected
+INFO: 10-08-2024 11:20:12 || No file selected: Right Triangle was selected
+INFO: 10-08-2024 11:20:14 || No file selected: Star of sides 8 was selected
+INFO: 10-08-2024 11:20:49 || No file selected: Right Triangle was selected
+INFO: 10-08-2024 11:20:56 || No file selected: Star of sides 4 was selected
+INFO: 10-08-2024 11:56:49 || No file selected: Starting Paint
+INFO: 10-08-2024 11:56:49 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-08-2024 11:56:50 || No file selected: A new tab was opened
+INFO: 10-08-2024 11:58:29 || NewImage.png: Server updated file: C:\Users\nbeal\Downloads\NewImage.png
 INFO: 10-14-2024 06:14:06 || No file selected: Starting Paint
 INFO: 10-14-2024 06:14:06 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
 INFO: 10-14-2024 06:14:06 || No file selected: A new tab was opened
@@ -276,3 +292,68 @@ INFO: 10-14-2024 06:54:52 || newim.png: A new tab was opened
 INFO: 10-14-2024 07:22:47 || No file selected: Starting Paint
 INFO: 10-14-2024 07:22:47 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
 INFO: 10-14-2024 07:22:47 || No file selected: A new tab was opened
+INFO: 10-23-2024 12:57:26 || No file selected: Starting Paint
+INFO: 10-23-2024 12:57:26 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-23-2024 12:57:28 || No file selected: A new tab was opened
+INFO: 10-23-2024 12:58:42 || star.png: new image: star.png was opened.
+INFO: 10-23-2024 13:10:33 || No file selected: Starting Paint
+INFO: 10-23-2024 13:10:34 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-23-2024 13:10:34 || No file selected: A new tab was opened
+INFO: 10-23-2024 13:10:46 || star.png: new image: star.png was opened.
+INFO: 10-23-2024 13:10:55 || star.png: C:\Users\nbeal\AppData\Roaming\Microsoft\Windows\Network Shortcuts\star.png was saved.
+INFO: 10-23-2024 13:10:55 || star.png: Server updated file: C:\Users\nbeal\AppData\Roaming\Microsoft\Windows\Network Shortcuts\star.png
+INFO: 10-23-2024 13:11:08 || star.png: C:\Users\nbeal\AppData\Roaming\Microsoft\Windows\Network Shortcuts\star.png was saved.
+INFO: 10-23-2024 13:11:08 || star.png: Server updated file: C:\Users\nbeal\AppData\Roaming\Microsoft\Windows\Network Shortcuts\star.png
+INFO: 10-23-2024 13:11:17 || anotherStar.png: C:\Users\nbeal\AppData\Roaming\Microsoft\Windows\Network Shortcuts\anotherStar.png was saved.
+INFO: 10-23-2024 13:11:17 || anotherStar.png: Server updated file: C:\Users\nbeal\AppData\Roaming\Microsoft\Windows\Network Shortcuts\anotherStar.png
+INFO: 10-23-2024 13:11:23 || anotherStar.png: A new tab was opened
+INFO: 10-23-2024 13:21:12 || No file selected: Starting Paint
+INFO: 10-23-2024 13:21:12 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-23-2024 13:21:13 || No file selected: A new tab was opened
+INFO: 10-23-2024 13:21:40 || No file selected: Free Draw was selected
+INFO: 10-23-2024 13:21:44 || No file selected: A new tab was opened
+INFO: 10-23-2024 13:21:47 || star.png: new image: star.png was opened.
+INFO: 10-24-2024 13:14:27 || No file selected: Starting Paint
+INFO: 10-24-2024 13:14:28 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-24-2024 13:14:29 || No file selected: A new tab was opened
+INFO: 10-24-2024 13:14:35 || No file selected: A new tab was opened
+INFO: 10-24-2024 13:14:38 || No file selected: Eraser was selected
+INFO: 10-24-2024 13:14:43 || No file selected: Line was selected
+INFO: 10-24-2024 13:14:45 || No file selected: Eraser was selected
+INFO: 10-24-2024 14:37:46 || No file selected: Starting Paint
+INFO: 10-24-2024 14:37:47 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-24-2024 14:37:48 || No file selected: A new tab was opened
+INFO: 10-24-2024 14:37:54 || No file selected: Free Draw was selected
+INFO: 10-24-2024 14:38:08 || No file selected: Free Draw was selected
+INFO: 10-24-2024 14:38:09 || No file selected: Eraser was selected
+INFO: 10-24-2024 14:38:15 || No file selected: Rectangle was selected
+INFO: 10-24-2024 14:38:25 || No file selected: Ellipse was selected
+INFO: 10-24-2024 14:38:30 || No file selected: Eraser was selected
+INFO: 10-24-2024 14:38:33 || No file selected: text was selected
+INFO: 10-24-2024 14:39:04 || No file selected: Polygon of sides 0 was selected
+INFO: 10-24-2024 14:39:22 || No file selected: Star of sides 0 was selected
+INFO: 10-24-2024 14:39:57 || No file selected: Polygon of sides 7 was selected
+INFO: 10-24-2024 14:40:10 || No file selected: A new tab was opened
+INFO: 10-24-2024 14:40:37 || savedIm.png: C:\Users\nbeal\Downloads\savedIm.png was saved.
+INFO: 10-24-2024 14:40:37 || savedIm.png: Server updated file: C:\Users\nbeal\Downloads\savedIm.png
+INFO: 10-24-2024 14:40:37 || savedIm.png: A tab was closed
+INFO: 10-24-2024 14:40:57 || No file selected: A new tab was opened
+INFO: 10-24-2024 14:40:58 || No file selected: Free Draw was selected
+INFO: 10-24-2024 14:41:08 || No file selected: A tab was closed
+INFO: 10-24-2024 14:44:53 || No file selected: Starting Paint
+INFO: 10-24-2024 14:44:53 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-24-2024 14:44:54 || No file selected: A new tab was opened
+INFO: 10-24-2024 14:45:10 || No file selected: Rectangle was selected
+INFO: 10-24-2024 14:45:21 || No file selected: Square was selected
+INFO: 10-24-2024 14:47:24 || No file selected: Starting Paint
+INFO: 10-24-2024 14:47:24 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-24-2024 14:47:26 || No file selected: A new tab was opened
+INFO: 10-24-2024 14:47:36 || No file selected: Rectangle was selected
+INFO: 10-24-2024 14:47:39 || No file selected: Line was selected
+INFO: 10-24-2024 14:47:44 || No file selected: Polygon of sides 0 was selected
+INFO: 10-24-2024 14:47:52 || No file selected: Free Draw was selected
+INFO: 10-24-2024 14:51:32 || No file selected: Starting Paint
+INFO: 10-24-2024 14:51:32 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-24-2024 14:51:33 || No file selected: A new tab was opened
+INFO: 10-24-2024 14:51:35 || No file selected: Free Draw was selected
+INFO: 10-24-2024 14:51:40 || No file selected: Exiting Paint

@@ -39,11 +39,6 @@ public class textTool extends drawTool {
     }
 
     @Override
-    public void setAttributes(Color color, double size, Boolean dashedLine, Boolean recentlySaved) {
-        setup(color,1, false, wasRecentlySaved());
-    }
-
-    @Override
     public void getPressEvent(MouseEvent mouseEvent) {
         anchorX = mouseEvent.getX(); anchorY = mouseEvent.getY();
 

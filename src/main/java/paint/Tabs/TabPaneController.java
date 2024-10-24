@@ -4,7 +4,6 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
-
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
@@ -23,7 +22,6 @@ import paint.PaintApplication;
 import paint.Timer.autoSaveTimer;
 import paint.fileAndServerManagment.webServer;
 import paint.threadedLogger;
-
 import javax.swing.*;
 
 /**
@@ -56,7 +54,6 @@ public class TabPaneController {
 
         tabs = new ArrayList<>();
         tabs.add(new TabController(ta));
-        addTab();
 
         tabAdderButton = (Button) tabs.get(0).getTab().getGraphic();
     }
@@ -75,7 +72,7 @@ public class TabPaneController {
                 Platform.runLater(() -> {
                     for (TabController tab : tabs) {
                         if (tab.getFileController() != null) {
-                            tab.getFileController().saveFile();
+                            tab.saveTab();
                         }
                     }
                 });
@@ -86,7 +83,7 @@ public class TabPaneController {
 
         tabAdderButton.setOnAction(e -> addTab());
         shortCutSetup();
-        tabs.get(1).postInitializationSetup();
+        addTab();
     }
 
     /**
@@ -149,18 +146,16 @@ public class TabPaneController {
             if (result.get() == buttonTypeSAE){
                 // ... user chose "One"
                 for(TabController tab:modifiedTabs){
-                    tab.getFileController().saveFile();
+                    tab.saveTab();
                 }
-                alert.close();
                 closingWindow.close();
             } else if (result.get() == buttonTypeExit) {
                 // ... user chose "Two"
-                alert.close();
                 closingWindow.close();
-            } else {
-                // ... user chose CANCEL or closed the dialog
-                alert.close();
+                logger.sendMessage("Exiting Paint");
+                System.exit(0);
             }
+            alert.close();
         } else {
             logger.sendMessage("Exiting Paint");
             System.exit(0);
@@ -241,10 +236,6 @@ public class TabPaneController {
      * The Redo combo key combination.
      */
     private final KeyCombination redoCombo = new KeyCodeCombination(KeyCode.Y, KeyCombination.CONTROL_DOWN);
-    /**
-     * The Paste combo key combination.
-     */
-    private final KeyCombination pasteCombo = new KeyCodeCombination(KeyCode.P, KeyCombination.CONTROL_DOWN);
 
 
     /**

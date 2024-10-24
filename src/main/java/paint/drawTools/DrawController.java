@@ -3,7 +3,6 @@ package paint.drawTools;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import paint.drawTools.ShapeTools.ManySides.starTool;
-import paint.fileAndServerManagment.FileController;
 import paint.drawTools.MiscTools.selectorTool;
 import paint.drawTools.MiscTools.textTool;
 import paint.drawTools.ShapeTools.FourSides.rectangleTool;
@@ -29,54 +28,59 @@ import paint.threadedLogger;
  */
 public class DrawController {
     private final GraphicsContext gc;
+
     private final ColorPicker colorPicker;
     private final Spinner<Integer> brushWidthSpinner;
     private final ToggleButton dashToggle;
+
     private drawTool currentTool;
     private final drawTool[] toolsList;
-    private final FileController fileController;
     private final selectorTool selectorTool;
     private final polygonTool polygonTool;
-    private final Spinner<Integer> polySideSpinner;
-    private int polyToolSides = 5;
     private final starTool starTool;
+
+    private final Spinner<Integer> polySideSpinner;
     private final Spinner<Integer> starSideSpinner;
-    private int starToolSides = 5;
+
     private final threadedLogger logger;
+
+    private int canvasRotation = 0;
 
     /**
      * Instantiates a new Draw controller.
      *
-     * @param g     the graphics context
-     * @param LDGC  the live draw graphics context
-     * @param tb    the tool bar
-     * @param filec the file controller
+     * @param g               the Graphics Context
+     * @param LDGC            the Live Draw Graphics Context
+     * @param PolySideSpinner the poly side spinner
+     * @param StarSideSpinner the star side spinner
+     * @param tb              the Tool Bar
+     * @param Logger          the logger
      */
     public DrawController(GraphicsContext g, GraphicsContext LDGC, Spinner<Integer> PolySideSpinner, Spinner<Integer> StarSideSpinner, ToolBar tb,
-                          FileController filec, threadedLogger Logger){
+                          threadedLogger Logger){
         gc = g;
-        fileController = filec;
         logger = Logger;
         polySideSpinner = PolySideSpinner;
+
         starSideSpinner = StarSideSpinner;
 
         selectorTool = new selectorTool(gc, LDGC);
         polygonTool = new polygonTool(gc, LDGC);
         starTool = new starTool(gc, LDGC);
         toolsList = new drawTool[]{
-                selectorTool,                    //  0 Selector
-                new freeDrawTool(gc, LDGC),      //  1 Pencil
-                new eraserTool(gc, LDGC),        //  2 Eraser
-                new textTool(gc, LDGC),          //  3 Text
-                new lineTool(gc, LDGC),          //  4 Line
-                new circleTool(gc, LDGC),        //  5 Circle
-                new ellipseTool(gc, LDGC),       //  6 Ellipse
-                new squareTool(gc, LDGC),        //  7 Square
-                new rectangleTool(gc, LDGC),     //  8 Rectangle
-                polygonTool,                     //  9 Polygon
-                new triangleTool(gc, LDGC),      // 10 Triangle
-                new rightTriangleTool(gc, LDGC), // 11 Right Triangle
-                starTool                         // 12 Star
+                selectorTool,                    //  0: Selector
+                new freeDrawTool(gc, LDGC),      //  1: Pencil
+                new eraserTool(gc, LDGC),        //  2: Eraser
+                new textTool(gc, LDGC),          //  3: Text
+                new lineTool(gc, LDGC),          //  4: Line
+                new circleTool(gc, LDGC),        //  5: Circle
+                new ellipseTool(gc, LDGC),       //  6: Ellipse
+                new squareTool(gc, LDGC),        //  7: Square
+                new rectangleTool(gc, LDGC),     //  8: Rectangle
+                polygonTool,                     //  9: Polygon
+                new triangleTool(gc, LDGC),      // 10: Triangle
+                new rightTriangleTool(gc, LDGC), // 11: Right Triangle
+                starTool                         // 12: Star
         };
         currentTool = toolsList[1];
 
@@ -119,7 +123,8 @@ public class DrawController {
         VBox brushToolsContainer = (VBox) tb.getItems().get(6);
         brushWidthSpinner = (Spinner<Integer>) brushToolsContainer.getChildren().get(0);
         brushWidthSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0,50));
-        brushWidthSpinner.valueProperty().addListener(event -> {});
+        //brushWidthSpinner.valueProperty().addListener(event -> currentTool.setSize(brushWidthSpinner.getValue()));
+        brushWidthSpinner.getValueFactory().setValue(6);
 
         // Shape tools
         VBox shapeToolsContainer = (VBox) tb.getItems().get(8);
@@ -157,111 +162,74 @@ public class DrawController {
         VBox colorToolContainer = (VBox) tb.getItems().get(10);
         colorPicker = (ColorPicker) colorToolContainer.getChildren().get(0);
         colorPicker.setValue(Color.BLACK);
-
-        setListeners(true);
     }
-
-    private void selectTool(int toolIndex){
-        currentTool = toolsList[toolIndex];
-        if(currentTool == polygonTool){ //prompt user for number of polygon sides
-            polygonTool.setPolygonSides(polySideSpinner.getValue());
-        } else if(currentTool == starTool){
-            starTool.setStarSides(starSideSpinner.getValue());
-        }
-        logger.sendMessage(currentTool.toString() + " was selected");
-    }
-    public void setPolyToolSides(int polySides){this.polyToolSides = polySides;}
-    public void setStarToolSides(int starSides){this.starToolSides = starSides;}
 
     /**
-     * Clear screen.
+     * Prepares the current selected tool to be used.
      */
-    public void clearScreen(){currentTool.clearCanvas(gc);}
+    public void updateTool(){updateCurrentTool();}
 
     /**
-     * Set listeners.
-     *
-     * @param recentlySaved the recently saved
-     */
-    public void setListeners(Boolean recentlySaved){
-        setCurrentTool(recentlySaved);
-    }
-
-    /**
-     * Set current tool.
-     *
-     * @param recentlySaved the recently saved
-     */
-    protected void setCurrentTool(Boolean recentlySaved){
-        if(currentTool==polygonTool){
-            setPolyToolSides(polyToolSides);
-        } else if(currentTool==starTool){
-            setStarToolSides(starToolSides);
-        }
-        currentTool.setAttributes(
-                colorPicker.getValue(),
-                brushWidthSpinner.getValue(),
-                dashToggle.isSelected(),
-                recentlySaved
-        );
-    }
-
-    /**
-     * gets the selected tool's Press event
+     * Used to get the Draw Event from the current tool.
      *
      * @param mouseEvent the mouse event
      */
     public void getPressEvent(MouseEvent mouseEvent){currentTool.getPressEvent(mouseEvent);}
 
     /**
-     * gets the selected tool's Drag event.
+     * Used to get the Draw Event from the current tool.
      *
      * @param mouseEvent the mouse event
      */
     public void getDragEvent(MouseEvent mouseEvent){currentTool.getDragEvent(mouseEvent);}
 
     /**
-     *gets the selected tool's Release event
+     * Used to get the Draw Event from the current tool.
      *
      * @param mouseEvent the mouse event
      */
     public void getReleaseEvent(MouseEvent mouseEvent){currentTool.getReleaseEvent(mouseEvent);}
 
     /**
-     * Get clip board image.
-     *
-     * @return the image on the clipboard
+     * Clears the screen.
      */
-    public Image getClipBoard(){
-        return selectorTool.getClipBoard();
+    public void clearScreen(){currentTool.clearCanvas(gc);}
+
+
+    private void selectTool(int toolIndex){
+        currentTool = toolsList[toolIndex];
+        logger.sendMessage(currentTool.toString() + " was selected");
     }
 
-    /**
-     * Paste.
-     *
-     * @param mouseEvent the mouse event
-     */
-    public void paste(MouseEvent mouseEvent) {
-        selectorTool.paste(mouseEvent);
+    private void updateCurrentTool(){
+        if(currentTool==polygonTool){
+            polygonTool.setPolygonSides(polySideSpinner.getValue());
+        } else if(currentTool==starTool){
+            starTool.setStarSides(starSideSpinner.getValue());
+        }
+        currentTool.setAttributes(
+                colorPicker.getValue(),
+                brushWidthSpinner.getValue(),
+                dashToggle.isSelected()
+        );
     }
 
-    private void resizeCanvas(){
-
-    }
-
-    private int rotation = 0;
     private void rotateCanvas(){
-        rotation+=90;
-        gc.getCanvas().rotateProperty().setValue(rotation);
+        canvasRotation +=90;
+        gc.getCanvas().rotateProperty().setValue(canvasRotation);
     }
 
     private void mirrorCanvas(){
-        Image currentstate = gc.getCanvas().snapshot(null, null);
+        Image currentState = gc.getCanvas().snapshot(null, null);
         clearScreen();
         gc.save();
         gc.translate(gc.getCanvas().getWidth(), 0);
         gc.scale(-1,1);
-        gc.drawImage(currentstate, 0, 0);
+        gc.drawImage(currentState, 0, 0);
         gc.restore();
+    }
+
+    private void resizeCanvas(){
+
     }
 }

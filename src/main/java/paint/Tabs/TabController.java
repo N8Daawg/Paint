@@ -20,9 +20,6 @@ import java.util.Optional;
 import java.util.Stack;
 
 
-/**
- * The type Tab controller.
- */
 public class TabController {
     private final Tab tab;
     private final MenuBar menuBar;
@@ -37,11 +34,6 @@ public class TabController {
     private Stack<WritableImage> redoStack;
     private final threadedLogger logger;
 
-    /**
-     * Instantiates a new Tab controller.
-     *
-     * @param T the t
-     */
     public TabController(Tab T){
         tab = T;
         menuBar = null;
@@ -54,12 +46,6 @@ public class TabController {
         logger = null;
     }
 
-    /**
-     * Instantiates a new Tab controller.
-     *
-     * @param T      the tab
-     * @param server the server
-     */
     public TabController(Tab T, webServer server, threadedLogger Logger) {
         tab = T;
         AnchorPane pane = (AnchorPane) tab.getContent();
@@ -70,13 +56,38 @@ public class TabController {
         logger = Logger;
 
 
-        fileController = new FileController(menuBar, canvas, server, logger);
+        fileController = new FileController(canvas, server, logger);
+
+        /*---------------------------------- MENU BAR STUFF ---------------------------------------*/
+        // File menu
+        menuBar.getMenus().get(0).getItems().get(0).setOnAction(event -> openFile());
+        menuBar.getMenus().get(0).getItems().get(2).setOnAction(event -> saveTab());
+        menuBar.getMenus().get(0).getItems().get(3).setOnAction(event -> saveAsTab());
+
+        // Edit menu
+        menuBar.getMenus().get(1).getItems().get(0).setOnAction(event -> openResizeWindow());
+
+        // Polygon Side Spinner in Edit menu
+        Spinner<Integer> polySideSpinner = (Spinner<Integer>) ((HBox) ((CustomMenuItem) menuBar.getMenus().get(1).getItems().get(2)).getContent()).getChildren().get(1);
+        polySideSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, 5));
+
+        // Star Side Spinner in Edit Menu
+        Spinner<Integer> starSideSpinner = (Spinner<Integer>) ((HBox) ((CustomMenuItem) menuBar.getMenus().get(1).getItems().get(3)).getContent()).getChildren().get(1);
+        starSideSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, 5));
+
+        // Help menu
+        menuBar.getMenus().get(2).getItems().get(0).setOnAction(event -> help());
 
 
-        ((Button) ((GridPane) ((VBox) toolBar.getItems().get(2)).getChildren().get(0)).getChildren().get(3)).setOnAction( // clear screen button
+
+        /*---------------------------------- TOOL BAR STUFF ---------------------------------------*/
+        // clear screen button
+        ((Button) ((GridPane) ((VBox) toolBar.getItems().get(2)).getChildren().get(0)).getChildren().get(3)).setOnAction(
                 event -> clearScreen()
         );
 
+        /*----------------------------------- CANVAS STUFF ----------------------------------------*/
+        // Live Draw Canvas
         Canvas liveDrawCanvas = new Canvas(canvas.getWidth(), canvas.getHeight());
         liveDrawCanvas.setLayoutX(canvas.getLayoutX());
         liveDrawCanvas.setLayoutY(canvas.getLayoutY());
@@ -84,125 +95,60 @@ public class TabController {
                 liveDrawCanvas);
         liveDrawCanvas.toBack();
 
-        Spinner<Integer> polySideSpinner = (Spinner<Integer>) ((HBox) ((CustomMenuItem) menuBar.getMenus().get(1).getItems().get(2)).getContent()).getChildren().get(1);
-        polySideSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, 5));
+        // GET READY TO DRAW
+        canvas.setOnMouseEntered(event -> setListeners());
 
-        Spinner<Integer> starSideSpinner = (Spinner<Integer>) ((HBox) ((CustomMenuItem) menuBar.getMenus().get(1).getItems().get(3)).getContent()).getChildren().get(1);
-        starSideSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, 5));
+        // recently Saved bool for smart closing
+        recentlySaved = true;
 
+        // Undo and redo Stacks for Canvas State
+        currentState = canvas.snapshot(null, null);
+        undoStack = new Stack<>();
+        redoStack = new Stack<>();
+
+        /*----------------------------------- DRAWING STUFF ---------------------------------------*/
         drawController = new DrawController(
                 canvas.getGraphicsContext2D(),
                 liveDrawCanvas.getGraphicsContext2D(),
                 polySideSpinner, starSideSpinner,
-                toolBar, fileController, logger
+                toolBar, logger
         );
 
 
-        currentState = canvas.snapshot(null, null);
-
-        recentlySaved = true;
-        undoStack = new Stack<>();
-        redoStack = new Stack<>();
-
-        if(pane.getChildren().get(2).getScene() != null) {
-            postInitializationSetup();
-        }
-    }
-
-    /**
-     * Post initialization setup.
-     */
-    public void postInitializationSetup(){
-        canvas.setOnMouseEntered(event -> setListeners());
-        getTab().setOnCloseRequest(e -> {
+        /*----------------------------------- CLOSING TABS ---------------------------------------*/
+        tab.setOnCloseRequest(e -> {
             try {deleteTab(e);} catch (IOException ex) {throw new RuntimeException(ex);}
         });
-
-        //file menu
-        menuBar.getMenus().get(0).getItems().get(0).setOnAction(event -> fileController.openFile());
-        menuBar.getMenus().get(0).getItems().get(2).setOnAction(event -> saveTab());
-        menuBar.getMenus().get(0).getItems().get(3).setOnAction(event -> saveAsTab());
-
-        //edit menu
-        menuBar.getMenus().get(1).getItems().get(0).setOnAction(event -> openResizeWindow());
-
-        //help menu
-        menuBar.getMenus().get(2).getItems().get(0).setOnAction(event -> fileController.showHelp());
-
     }
 
-    /**
-     * Get tab tab.
-     *
-     * @return the tab
-     */
-    protected Tab getTab(){
-        return tab;
-    }
+    protected Tab getTab(){return tab;}
 
-    /**
-     * Gets menu bar.
-     *
-     * @return the menu bar
-     */
-    protected MenuBar getMenuBar() { return menuBar; }
-
-    /**
-     * Gets tool bar.
-     *
-     * @return the tool bar
-     */
-    protected ToolBar getToolBar() { return toolBar; }
-
-    /**
-     * Gets canvas.
-     *
-     * @return the canvas
-     */
-    protected Canvas getCanvas() { return canvas; }
+    protected MenuBar getMenuBar() {return menuBar;}
 
 
-    /**
-     * Gets file controller.
-     *
-     * @return the file controller
-     */
-    public FileController getFileController() {
-        return fileController;
-    }
+    public FileController getFileController() {return fileController;}
 
-    /**
-     * openFile.
-     */
     protected void openFile(){
-        fileController.openFile();
+        fileController.openFile((Stage) menuBar.getScene().getWindow());
+        tab.setText(fileController.getCurrentFile());
     }
 
-    /**
-     * Save.
-     */
     protected void saveTab(){
-        recentlySaved = fileController.saveFile();
+        recentlySaved = fileController.saveFile((Stage) menuBar.getScene().getWindow());
         tab.setText(fileController.getCurrentFile());
     }
 
     private void saveAsTab(){
-        recentlySaved = fileController.saveAsFile();
+        recentlySaved = fileController.saveAsFile((Stage) menuBar.getScene().getWindow());
         tab.setText(fileController.getCurrentFile());
     }
 
-    /**
-     * Was recently saved boolean.
-     *
-     * @return the boolean
-     */
-    public Boolean wasRecentlySaved() {
-        return recentlySaved;
-    }
+    private void help(){fileController.showHelp();}
 
+    public Boolean wasRecentlySaved() {return recentlySaved;}
 
     private void setListeners(){
-        drawController.setListeners(recentlySaved);
+        drawController.updateTool();
         canvas.setOnMousePressed(drawController::getPressEvent);
         canvas.setOnMouseDragged(drawController::getDragEvent);
         canvas.setOnMouseReleased(e -> {
@@ -212,6 +158,7 @@ public class TabController {
                 currentState = canvas.snapshot(null, null);
         });
     }
+
     private void clearScreen() {
         if(!recentlySaved){
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -219,72 +166,74 @@ public class TabController {
             alert.setHeaderText("This tab is not saved.");
             alert.setContentText("Are you sure you would like to clear the screen?");
 
-            ButtonType buttonTypeSAE = new ButtonType("Save and clear");
+            ButtonType buttonTypeSAC = new ButtonType("Save and clear");
             ButtonType buttonTypeClear = new ButtonType("Clear anyway");
             ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-            alert.getButtonTypes().setAll(buttonTypeSAE, buttonTypeClear, buttonTypeCancel);
+            alert.getButtonTypes().setAll(buttonTypeSAC, buttonTypeClear, buttonTypeCancel);
 
             Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == buttonTypeSAE){
-                // ... user chose "One"
-                fileController.saveFile();
+            if (result.get() == buttonTypeSAC){
+                // ... user chose "Save and clear"
+                fileController.saveFile((Stage) menuBar.getScene().getWindow());
                 drawController.clearScreen();
             } else if (result.get() == buttonTypeClear) {
                 // ... user chose "Two"
-                alert.close();
                 drawController.clearScreen();
-            } else {
-                // ... user chose CANCEL or closed the dialog
-                alert.close();
             }
+            alert.close();
         } else{
             drawController.clearScreen();
         }
     }
 
-
-    /**
-     * Delete tab.
-     *
-     * @param e the e
-     * @throws IOException the io exception
-     */
-    protected void deleteTab(Event e) throws IOException {
-        e.consume();
+    private void deleteTab(Event event) throws IOException {
+        event.consume();
         if(!recentlySaved){
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Clear Screen?");
             alert.setHeaderText("This tab is not saved.");
             alert.setContentText("Are you sure you would like to close the project?");
 
-            ButtonType buttonTypeSAE = new ButtonType("Save and clear");
+            ButtonType buttonTypeSAC = new ButtonType("Save and Close");
             ButtonType buttonTypeClear = new ButtonType("Close anyway");
             ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-            alert.getButtonTypes().setAll(buttonTypeSAE, buttonTypeClear, buttonTypeCancel);
+            alert.getButtonTypes().setAll(buttonTypeSAC, buttonTypeClear, buttonTypeCancel);
 
             Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == buttonTypeSAE){
-                // ... user chose "One"
-                fileController.saveFile();
-                TabPaneController.removeTab(this, getTab());
+            if (result.get() == buttonTypeSAC){
+                // ... user chose "Save and Close"
+                fileController.saveFile((Stage) menuBar.getScene().getWindow());
+                TabPaneController.removeTab(this, tab);
             } else if (result.get() == buttonTypeClear) {
-                // ... user chose "Two"
-                alert.close();
-                TabPaneController.removeTab(this, getTab());
-            } else {
-                // ... user chose CANCEL or closed the dialog
-                alert.close();
+                // ... user chose "Close anyway"
+                TabPaneController.removeTab(this, tab);
             }
+            alert.close();
         } else {
-            TabPaneController.removeTab(this, getTab());
+            TabPaneController.removeTab(this, tab);
         }
     }
 
-    /**
-     * Open resize window.
-     */
+    protected void undo(){
+        if(!undoStack.isEmpty()){
+            canvas.getGraphicsContext2D().drawImage(undoStack.pop(),0,0);
+            redoStack.push(currentState);
+            currentState = canvas.snapshot(null, null);
+        }
+    }
+
+    protected void redo(){
+        if(!redoStack.isEmpty()){
+            canvas.getGraphicsContext2D().drawImage(redoStack.pop(),0,0);
+            undoStack.push(currentState);
+            currentState = canvas.snapshot(null, null);
+        }
+    }
+
+    /*----------------------------------- NEEDS FIXING ---------------------------------------*/
+
     public void openResizeWindow(){
         Dialog<double[]> dialog = new Dialog<>();
         dialog.setTitle("Resize window");
@@ -333,17 +282,11 @@ public class TabController {
         resize(result.get()[0],result.get()[1]);
     }
 
-    /**
-     * Resize.
-     *
-     * @param x the x
-     * @param y the y
-     */
     public void resize(double x, double y){
-        Stage window = (Stage) getTab().getTabPane().getScene().getWindow();
+        Stage window = (Stage) tab.getTabPane().getScene().getWindow();
         window.setWidth(x);window.setHeight(y);
 
-        getTab().getTabPane().setPrefWidth(window.getWidth());
+        tab.getTabPane().setPrefWidth(window.getWidth());
         toolBar.setPrefWidth(window.getWidth());
 
         canvas.setWidth(window.getWidth()*0.97);
@@ -353,38 +296,5 @@ public class TabController {
 
         canvas.setHeight(window.getHeight()-canvasInitialY);
 
-    }
-
-    /**
-     * Undo.
-     */
-    protected void undo(){
-        if(!undoStack.isEmpty()){
-            canvas.getGraphicsContext2D().drawImage(undoStack.pop(),0,0);
-            redoStack.push(currentState);
-            currentState = canvas.snapshot(null, null);
-        }
-    }
-
-    /**
-     * Redo.
-     */
-    protected void redo(){
-        if(!redoStack.isEmpty()){
-            canvas.getGraphicsContext2D().drawImage(redoStack.pop(),0,0);
-            undoStack.push(currentState);
-            currentState = canvas.snapshot(null, null);
-        }
-    }
-
-    /**
-     * Paste.
-     *
-     * @param me the me
-     */
-    protected void paste(MouseEvent me) {
-        if(drawController.getClipBoard() != null){
-            drawController.paste(me);
-        }
     }
 }

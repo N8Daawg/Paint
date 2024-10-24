@@ -36,7 +36,6 @@ public class freeDrawTool extends shapeTool {
         gc.lineTo(mouseEvent.getX(), mouseEvent.getY());
         gc.stroke();
         gc.closePath();
-        recentlySaved=false;
     }
 
     @Override

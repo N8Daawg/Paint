@@ -6,13 +6,10 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.WindowEvent;
 
-
 /**
  * The type Paint controller.
  */
 public class PaintController {
-    private static final int initialWindowSizeX = 1280;
-    private static final int initialWindowSizeY = 800;
 
     @FXML
     private BorderPane borderPane;
@@ -42,12 +39,5 @@ public class PaintController {
      */
     public static void smartCloseWindow(WindowEvent windowEvent){
         tpc.tryCloseAll(windowEvent);
-    }
-
-    /**
-     * Resize the window
-     */
-    public static void resize(){
-        TabPaneController.resize(initialWindowSizeX, initialWindowSizeY);
     }
 }

@@ -26,13 +26,7 @@ public class eraserTool extends drawTool {
         brushSize = size;
     }
     @Override
-    protected void setDashedLine(Boolean dashedLine) {
-        isDashedLine = dashedLine;
-    }
-    @Override
-    public void setAttributes(Color color, double size, Boolean dottedLine, Boolean recentlySaved) {
-        setup(color, size, dottedLine, recentlySaved);
-    }
+    protected void setDashedLine(Boolean dashedLine) {}
 
     /*---------------------------------------------------------------------------*/
     /*-------------------------------Free Draw Events----------------------------*/
@@ -50,9 +44,7 @@ public class eraserTool extends drawTool {
 
     }
     @Override
-    public void getReleaseEvent(MouseEvent mouseEvent) {
-        recentlySaved = false;
-    }
+    public void getReleaseEvent(MouseEvent mouseEvent) {}
 
     @Override
     public String toString() {

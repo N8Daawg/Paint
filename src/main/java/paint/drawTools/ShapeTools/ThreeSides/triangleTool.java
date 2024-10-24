@@ -26,7 +26,6 @@ public class triangleTool extends shapeTool {
      * @param ycoors    the ycoors
      */
     protected void drawTriangle(GraphicsContext currentgc, double[] xcoors, double[] ycoors){
-        recentlySaved = false;
         if(isDashedLine){
             double perimeter = (
                     Math.sqrt(Math.pow((xcoors[1]-xcoors[0]) ,2)+Math.pow(ycoors[1]-ycoors[0],2)) +
@@ -69,7 +68,6 @@ public class triangleTool extends shapeTool {
 
     @Override
     public void getReleaseEvent(MouseEvent mouseEvent) {
-        recentlySaved=true;
         clearCanvas(ldgc);
         drawTriangle(gc,
                 new double[]{anchorX, anchorX+((mouseEvent.getX()-anchorX)/2), mouseEvent.getX()},

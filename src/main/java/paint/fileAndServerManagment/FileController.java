@@ -2,13 +2,13 @@ package paint.fileAndServerManagment;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.controlsfx.control.Notifications;
 import paint.threadedLogger;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -21,11 +21,8 @@ import java.util.Optional;
  * The type File controller.
  */
 public class FileController {
-    private Stage stage;
-
     private final Canvas canvas;
     private File currentFile;
-    private Boolean recentlySaved;
     private final webServer server; //the connected webserver to display saved images
     private final threadedLogger logger;
     private boolean notificationsOn;
@@ -33,31 +30,21 @@ public class FileController {
     /**
      * Instantiates a new File controller.
      *
-     * @param newMenuBar the menu bar
-     * @param newCanvas  the canvas to be saved
-     * @param Server     the server storing the images
+     * @param newCanvas the new canvas
+     * @param Server    the server
+     * @param Logger    the logger
      */
-    public FileController(MenuBar newMenuBar, Canvas newCanvas, webServer Server, threadedLogger Logger) {
-
+    public FileController(Canvas newCanvas, webServer Server, threadedLogger Logger) {
         canvas = newCanvas;
-        recentlySaved = true;
         server = Server;
         logger = Logger;
         turnNotificationsOn();
     }
 
     /**
-     * Was recently saved boolean.
+     * Gets current file.
      *
-     * @return returns whether the file was recently saved or not
-     */
-    public Boolean wasRecentlySaved(){
-        return recentlySaved;
-    }
-
-    /**
-     *
-     * @return the name of the current file
+     * @return the current file
      */
     public String getCurrentFile() {
         if (currentFile == null){
@@ -68,46 +55,44 @@ public class FileController {
     }
 
     /**
-     * opens a new file
-     */
-    public void openFile(){
-        open();
-    }
-
-    /**
-     * saves the current file.
+     * Open file.
      *
-     * @return if the file was saved successfully
+     * @param stage the stage
      */
-    public boolean saveFile(){
-        recentlySaved = save();
-        return recentlySaved;
+    public void openFile(Stage stage){
+        open(stage);
     }
 
     /**
-     * saves the current file as a new name
+     * Save file boolean.
      *
-     * @return if the file was saved successfully
+     * @param stage the stage
+     * @return the boolean
      */
-    public boolean saveAsFile(){
-        recentlySaved = saveAsFile();
-        return recentlySaved;
-    }
+    public boolean saveFile(Stage stage){return save(stage);}
 
     /**
-     * opens the help window
+     * Save as file boolean.
+     *
+     * @param stage the stage
+     * @return the boolean
+     */
+    public boolean saveAsFile(Stage stage){return saveAs(stage);}
+
+    /**
+     * Show help.
      */
     public void showHelp(){
         showHelpWindow();
     }
 
     /**
-     * turns notifications on
+     * Turn notifications on.
      */
     public void turnNotificationsOn(){notificationsOn = true;}
 
     /**
-     * turns notifications off
+     * Turn notifications off.
      */
     public void turnNotificationsOff(){notificationsOn = false;}
 
@@ -115,14 +100,15 @@ public class FileController {
     /*------------------------------File Method Control--------------------------*/
     /*---------------------------------------------------------------------------*/
 
-    private void open() {
+    private void open(Stage stage) {
         FileChooser fileChooser = new FileChooser(); //create a fileChooser to show the open dialog
         fileChooserSetup(fileChooser, currentFile, "File Selection"); // format the FileChooser
         currentFile = fileChooser.showOpenDialog(stage); //grab a file
 
         if(currentFile != null){
             try {
-                Image currentImage = new Image(String.valueOf(currentFile.toURI().toURL()));//create Image from file that was grabbed
+                Image currentImage = new Image(String.valueOf(currentFile.toURI().toURL()));//create an Image from file
+                // that was grabbed
                 canvas.getGraphicsContext2D().drawImage(currentImage,
                         (canvas.getWidth()-currentImage.getWidth())/2,
                         (canvas.getHeight()-currentImage.getHeight())/2
@@ -135,9 +121,9 @@ public class FileController {
     }
 
 
-    private Boolean save() {
+    private Boolean save(Stage stage) {
         if(currentFile != null) { // if we are already working on an existing file
-            String extension = getExtension(currentFile.toPath()); //get file extension
+            String extension = getExtension(currentFile.toPath()); //get a file extension
 
             try {
                 Image currentImage = canvas.snapshot(null,null);
@@ -156,13 +142,13 @@ public class FileController {
             updateServer();
 
         } else { //there is no file being worked on
-            System.out.println("some error message saying you dont have a file to savetab yet");
-            return saveAsFile();
+            System.out.println("some error message saying you dont have a file to save yet");
+            return saveAsFile(stage);
         }
         return true;
     }
 
-    private boolean saveAs() {
+    private boolean saveAs(Stage stage) {
         File previousFile=null;
         if(currentFile !=null){
             previousFile = currentFile;
@@ -171,7 +157,7 @@ public class FileController {
         fileChooserSetup(fileChooser, currentFile, "Save"); // format the FileChooser
         currentFile = fileChooser.showSaveDialog(stage); //Create the file name that is being saved
         if(currentFile != null){
-            String extension = getExtension(currentFile.toPath()); //get file extension
+            String extension = getExtension(currentFile.toPath()); //get a file extension
 
             if(previousFile != null && !getExtension(previousFile.toPath()).equals(extension)){
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -181,17 +167,17 @@ public class FileController {
 
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK){
-                    return saveFile();
+                    return saveFile(stage);
                 } else {
                     // ... user chose CANCEL or closed the dialog
                     currentFile = previousFile;
                     return false;
                 }
             } else{
-                return saveFile();
+                return saveFile(stage);
             }
         }
-        return saveAsFile();
+        return saveAsFile(stage);
     }
 
     /*---------------------------------------------------------------------------*/
@@ -228,14 +214,15 @@ public class FileController {
         }
     }
 
-    /**
-     * Gets an extension of a file.
-     *
-     * @param path the path of a file
-     * @return the extension of a file
-     */
+
     // method to read file extensions found from GFG website:
     // https://www.geeksforgeeks.org/how-to-get-the-file-extension-in-java/
+    /**
+     * Gets extension.
+     *
+     * @param path the path
+     * @return the extension
+     */
     protected static String getExtension(Path path) {
         String fileName = path.getFileName().toString();
         int dotIndex = fileName.lastIndexOf(".");

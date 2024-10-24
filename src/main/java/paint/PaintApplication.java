@@ -16,7 +16,7 @@ public class PaintApplication extends Application {
 
         stage.show();
         PaintController.postInitializationSetup();
-        stage.setOnCloseRequest(PaintController::smartCloseWindow); //setup for smart savetab
+        stage.setOnCloseRequest(PaintController::smartCloseWindow); //setup for smart save
     }
 
 

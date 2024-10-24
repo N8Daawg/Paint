@@ -31,6 +31,7 @@ public class polygonTool extends shapeTool {
     public void setPolygonSides(int Sides){
         sides = Sides;
     }
+
     protected double[][] generatePolyArray(double R){
         double[] x = new double[sides];
         double[] y = new double[sides];
@@ -64,7 +65,6 @@ public class polygonTool extends shapeTool {
      * @param ycoors    the ycoors
      */
     protected void drawPolygon(GraphicsContext currentgc, double[] xcoors, double[] ycoors){
-        recentlySaved=true;
         if(isDashedLine){
             double perimeter = (
                     (Math.abs(xcoors[2]-xcoors[1])*2)+(Math.abs(ycoors[1]-ycoors[0])*2)
