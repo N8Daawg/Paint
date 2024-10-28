@@ -32,16 +32,19 @@ public class ellipseTool extends shapeTool {
             double perimeter = Math.PI*Math.sqrt(2*(Math.pow((finalY-anchorY)/2,2)+Math.pow((finalX-anchorX)/2,2)));
             currentgc.setLineDashes(createLineDashes(perimeter));
         }
+        double deltaX = finalX-anchorX;
+        double deltaY = finalY-anchorY;
 
 
-        if(finalX >= anchorX && finalY >= anchorY){
-            currentgc.strokeOval(anchorX, anchorY, finalX-anchorX, finalY-anchorY);
-        } else if (finalX >= anchorX && finalY <= anchorY) {
-            currentgc.strokeOval(anchorX, anchorY, finalX-anchorX, finalY+anchorY);
-        } else if (finalX <= anchorX && finalY >= anchorY) {
-            currentgc.strokeOval(anchorX, anchorY, finalX+anchorX, finalY-anchorY);
+
+        if ((deltaX<=0)&&(deltaY<=0)) {
+            currentgc.strokeOval(anchorX+deltaX, anchorY+deltaY, -deltaX, -deltaY);
+        } else if ((deltaX<=0)&&(deltaY>=0)){
+            currentgc.strokeOval(anchorX+deltaX, anchorY, -deltaX, deltaY);
+        } else if ((deltaX>=0)&&(deltaY<=0)){
+            currentgc.strokeOval(anchorX, anchorY+deltaY, deltaX, -deltaY);
         } else {
-            currentgc.strokeOval(anchorX, anchorY, finalX-anchorX, finalY-anchorY);
+            currentgc.strokeOval(anchorX, anchorY, deltaX, deltaY);
         }
     }
 

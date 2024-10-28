@@ -13,10 +13,10 @@ import javafx.scene.input.*;
 public class selectorTool extends rectangleTool {
     private Image clipboard;
     private Boolean selecting;
+    private double cornerX;
+    private double cornerY;
     private double grabbingx;
     private double grabbingy;
-    private double finalx;
-    private double finaly;
 
     /**
      * Instantiates a new Selector tool.
@@ -45,13 +45,10 @@ public class selectorTool extends rectangleTool {
         if(selecting) {
             super.getDragEvent(mouseEvent);
         } else{
-            double translatex = mouseEvent.getX()-grabbingx;
-            double translatey = mouseEvent.getY()-grabbingy;
-            liveDrawRectangle(
-                    new double[]{anchorX+translatex, anchorX+translatex, finalx+translatex, finalx+translatex},
-                    new double[]{anchorY+translatey, finaly+translatey, finaly+translatey, anchorY+translatey}
-            );
-            ldgc.drawImage(clipboard, anchorX+translatex, anchorY+translatey);
+            double translateX = mouseEvent.getX()-grabbingx;
+            double translateY = mouseEvent.getY()-grabbingy;
+            clearCanvas(ldgc);
+            ldgc.drawImage(clipboard, cornerX+translateX, cornerY+translateY);
         }
     }
 
@@ -59,38 +56,39 @@ public class selectorTool extends rectangleTool {
     public void getReleaseEvent(MouseEvent mouseEvent) {
         clearCanvas(ldgc);
         if(selecting){
-            finalx = mouseEvent.getX(); finaly=mouseEvent.getY();
+            double deltaX = mouseEvent.getX()-anchorX; double deltaY = mouseEvent.getY()-anchorY;
+            double width; double height;
+
+            if ((deltaX<=0)&&(deltaY<=0)) {
+                cornerX = anchorX+deltaX; cornerY = anchorY+deltaY;
+                width = -deltaX; height = -deltaY;
+            } else if ((deltaX<=0)&&(deltaY>=0)){
+                cornerX = anchorX+deltaX; cornerY = anchorY;
+                width = -deltaX; height = deltaY;
+            } else if ((deltaX>=0)&&(deltaY<=0)){
+                cornerX = anchorX; cornerY = anchorY+deltaY;
+                width = deltaX; height = -deltaY;
+            } else {
+                cornerX = anchorX; cornerY = anchorY;
+                width = deltaX; height = deltaY;
+            }
 
             SnapshotParameters sp = new SnapshotParameters();
-            sp.setViewport(new Rectangle2D(anchorX+gc.getCanvas().getLayoutX(), anchorY+gc.getCanvas().getLayoutY(), finalx-anchorX, finaly-anchorY));
-            clipboard = gc.getCanvas().snapshot(sp,null);
+            sp.setViewport(new Rectangle2D(
+                    cornerX+gc.getCanvas().getLayoutX(),
+                    cornerY+gc.getCanvas().getLayoutY(),
+                    width, height));
 
-            //gc.clearRect(anchorX,anchorY,e.getX(),e.getY());
-            ldgc.drawImage(clipboard, anchorX, anchorY);
+            clipboard = gc.getCanvas().snapshot(sp,null);
+            ldgc.drawImage(clipboard, cornerX, cornerY);
             selecting = false;
         } else {
+            double translateX = mouseEvent.getX()-grabbingx;
+            double translateY = mouseEvent.getY()-grabbingy;
 
-            gc.drawImage(clipboard, anchorX+(mouseEvent.getX()-grabbingx),anchorY+(mouseEvent.getY()-grabbingy));
+            gc.drawImage(clipboard, cornerX+translateX,cornerY+translateY);
             selecting = true;
         }
-    }
-
-    /**
-     * Get clip board image.
-     *
-     * @return the image
-     */
-    public Image getClipBoard(){
-        return clipboard;
-    }
-
-    /**
-     * Paste.
-     *
-     * @param me the mouse event
-     */
-    public void paste(MouseEvent me) {
-        gc.drawImage(clipboard, me.getX(), me.getY());
     }
 
     @Override

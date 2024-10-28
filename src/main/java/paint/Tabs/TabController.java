@@ -49,7 +49,7 @@ public class TabController {
         AnchorPane pane = (AnchorPane) tab.getContent();
         menuBar = (MenuBar) pane.getChildren().get(0);
         toolBar = (ToolBar) pane.getChildren().get(1);
-        canvas = (Canvas) ((StackPane) ((ScrollPane) pane.getChildren().get(2)).getContent()).getChildren().get(0);
+        canvas = (Canvas) ((Pane) ((StackPane) ((ScrollPane) pane.getChildren().get(2)).getContent()).getChildren().get(0)).getChildren().get(0);
 
         logger = Logger;
 
@@ -77,7 +77,6 @@ public class TabController {
         menuBar.getMenus().get(2).getItems().get(0).setOnAction(event -> help());
 
 
-
         /*---------------------------------- TOOL BAR STUFF ---------------------------------------*/
         // clear screen button
         ((Button) ((GridPane) ((VBox) toolBar.getItems().get(2)).getChildren().get(0)).getChildren().get(3)).setOnAction(
@@ -89,7 +88,7 @@ public class TabController {
         Canvas liveDrawCanvas = new Canvas(canvas.getWidth(), canvas.getHeight());
         liveDrawCanvas.setLayoutX(canvas.getLayoutX());
         liveDrawCanvas.setLayoutY(canvas.getLayoutY());
-        ((StackPane) ((ScrollPane) pane.getChildren().get(2)).getContent()).getChildren().add(
+        ((Pane) ((StackPane) ((ScrollPane) pane.getChildren().get(2)).getContent()).getChildren().get(0)).getChildren().add(
                 liveDrawCanvas);
         liveDrawCanvas.toBack();
 

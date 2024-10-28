@@ -400,3 +400,216 @@ INFO: 10-24-2024 18:07:03 || newim2.png: Server updated file: C:\Users\nbeal\Dow
 INFO: 10-24-2024 18:07:14 || newim2.png: C:\Users\nbeal\Downloads\newim2.png was saved.
 INFO: 10-24-2024 18:07:14 || newim2.png: Server updated file: C:\Users\nbeal\Downloads\newim2.png
 INFO: 10-24-2024 18:07:17 || newim2.png: Exiting Paint
+INFO: 10-24-2024 18:22:12 || No file selected: Starting Paint
+INFO: 10-24-2024 18:22:12 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-24-2024 18:22:13 || No file selected: A new tab was opened
+INFO: 10-24-2024 18:22:16 || No file selected: Free Draw was selected
+INFO: 10-24-2024 18:22:24 || No file selected: Free Draw was selected
+INFO: 10-24-2024 18:22:29 || No file selected: Eraser was selected
+INFO: 10-24-2024 18:22:37 || No file selected: text was selected
+INFO: 10-25-2024 13:08:38 || No file selected: Starting Paint
+INFO: 10-25-2024 13:08:38 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-25-2024 13:08:40 || No file selected: A new tab was opened
+INFO: 10-25-2024 13:08:59 || No file selected: selector was selected
+INFO: 10-25-2024 13:11:18 || No file selected: Line was selected
+INFO: 10-25-2024 13:11:24 || No file selected: Circle was selected
+INFO: 10-25-2024 13:13:23 || No file selected: Ellipse was selected
+INFO: 10-25-2024 13:14:50 || No file selected: Square was selected
+INFO: 10-25-2024 13:15:56 || No file selected: Rectangle was selected
+INFO: 10-25-2024 13:16:09 || No file selected: Polygon of sides 0 was selected
+INFO: 10-25-2024 13:18:30 || No file selected: Triangle was selected
+INFO: 10-25-2024 13:18:40 || No file selected: Right Triangle was selected
+INFO: 10-25-2024 13:31:17 || No file selected: Starting Paint
+INFO: 10-25-2024 13:31:17 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-25-2024 13:31:18 || No file selected: A new tab was opened
+INFO: 10-25-2024 13:31:24 || No file selected: Ellipse was selected
+INFO: 10-25-2024 13:35:03 || No file selected: Starting Paint
+INFO: 10-25-2024 13:35:03 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-25-2024 13:35:04 || No file selected: A new tab was opened
+INFO: 10-25-2024 13:35:11 || No file selected: Ellipse was selected
+INFO: 10-25-2024 13:36:39 || No file selected: Starting Paint
+INFO: 10-25-2024 13:36:40 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-25-2024 13:36:41 || No file selected: A new tab was opened
+INFO: 10-25-2024 13:36:48 || No file selected: Circle was selected
+INFO: 10-25-2024 13:36:50 || No file selected: Ellipse was selected
+INFO: 10-25-2024 13:37:53 || No file selected: Starting Paint
+INFO: 10-25-2024 13:37:53 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-25-2024 13:37:54 || No file selected: A new tab was opened
+INFO: 10-25-2024 13:37:56 || No file selected: Ellipse was selected
+INFO: 10-25-2024 13:38:35 || No file selected: Starting Paint
+INFO: 10-25-2024 13:38:35 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-25-2024 13:38:36 || No file selected: A new tab was opened
+INFO: 10-25-2024 13:38:39 || No file selected: Ellipse was selected
+INFO: 10-25-2024 13:41:32 || No file selected: Starting Paint
+INFO: 10-25-2024 13:41:32 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-25-2024 13:41:34 || No file selected: A new tab was opened
+INFO: 10-25-2024 13:41:36 || No file selected: Ellipse was selected
+INFO: 10-25-2024 13:45:38 || No file selected: Starting Paint
+INFO: 10-25-2024 13:45:38 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-25-2024 13:45:39 || No file selected: A new tab was opened
+INFO: 10-25-2024 13:45:58 || No file selected: Ellipse was selected
+INFO: 10-25-2024 13:46:03 || No file selected: Circle was selected
+INFO: 10-28-2024 08:51:55 || No file selected: Starting Paint
+INFO: 10-28-2024 08:51:55 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 08:51:56 || No file selected: A new tab was opened
+INFO: 10-28-2024 08:52:29 || No file selected: Free Draw was selected
+INFO: 10-28-2024 08:52:31 || No file selected: selector was selected
+INFO: 10-28-2024 09:08:19 || No file selected: Starting Paint
+INFO: 10-28-2024 09:08:20 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 09:08:21 || No file selected: A new tab was opened
+INFO: 10-28-2024 09:08:27 || No file selected: Free Draw was selected
+INFO: 10-28-2024 09:08:29 || No file selected: selector was selected
+INFO: 10-28-2024 09:10:35 || No file selected: Starting Paint
+INFO: 10-28-2024 09:10:35 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 09:10:36 || No file selected: A new tab was opened
+INFO: 10-28-2024 09:10:41 || No file selected: Free Draw was selected
+INFO: 10-28-2024 09:10:43 || No file selected: selector was selected
+INFO: 10-28-2024 09:16:46 || No file selected: Starting Paint
+INFO: 10-28-2024 09:16:47 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 09:16:48 || No file selected: A new tab was opened
+INFO: 10-28-2024 09:16:50 || No file selected: Free Draw was selected
+INFO: 10-28-2024 09:16:52 || No file selected: selector was selected
+INFO: 10-28-2024 09:17:02 || No file selected: Exiting Paint
+INFO: 10-28-2024 09:18:53 || No file selected: Starting Paint
+INFO: 10-28-2024 09:18:53 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 09:18:55 || No file selected: A new tab was opened
+INFO: 10-28-2024 09:19:15 || No file selected: Starting Paint
+INFO: 10-28-2024 09:19:15 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 09:19:17 || No file selected: A new tab was opened
+INFO: 10-28-2024 09:19:20 || No file selected: Free Draw was selected
+INFO: 10-28-2024 09:19:22 || No file selected: selector was selected
+INFO: 10-28-2024 09:19:31 || No file selected: Exiting Paint
+INFO: 10-28-2024 09:36:42 || No file selected: Starting Paint
+INFO: 10-28-2024 09:36:43 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 09:36:44 || No file selected: A new tab was opened
+INFO: 10-28-2024 09:36:53 || No file selected: Free Draw was selected
+INFO: 10-28-2024 09:36:58 || No file selected: selector was selected
+INFO: 10-28-2024 09:44:47 || No file selected: Starting Paint
+INFO: 10-28-2024 09:44:47 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 09:44:49 || No file selected: A new tab was opened
+INFO: 10-28-2024 09:45:13 || No file selected: Free Draw was selected
+INFO: 10-28-2024 09:45:16 || No file selected: selector was selected
+INFO: 10-28-2024 09:45:26 || No file selected: Exiting Paint
+INFO: 10-28-2024 09:45:52 || No file selected: Starting Paint
+INFO: 10-28-2024 09:45:52 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 09:45:53 || No file selected: A new tab was opened
+INFO: 10-28-2024 09:45:56 || No file selected: Free Draw was selected
+INFO: 10-28-2024 09:45:59 || No file selected: selector was selected
+INFO: 10-28-2024 09:51:44 || No file selected: Starting Paint
+INFO: 10-28-2024 09:51:45 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 09:51:46 || No file selected: A new tab was opened
+INFO: 10-28-2024 09:51:52 || No file selected: text was selected
+INFO: 10-28-2024 09:52:05 || No file selected: text was selected
+INFO: 10-28-2024 09:52:16 || No file selected: Exiting Paint
+INFO: 10-28-2024 10:15:24 || No file selected: Starting Paint
+INFO: 10-28-2024 10:15:24 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 10:15:26 || No file selected: A new tab was opened
+INFO: 10-28-2024 10:15:29 || No file selected: text was selected
+INFO: 10-28-2024 10:21:51 || No file selected: Starting Paint
+INFO: 10-28-2024 10:21:51 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 10:21:53 || No file selected: A new tab was opened
+INFO: 10-28-2024 10:21:56 || No file selected: text was selected
+INFO: 10-28-2024 10:22:02 || No file selected: Exiting Paint
+INFO: 10-28-2024 10:22:35 || No file selected: Starting Paint
+INFO: 10-28-2024 10:22:36 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 10:22:37 || No file selected: A new tab was opened
+INFO: 10-28-2024 10:22:40 || No file selected: text was selected
+INFO: 10-28-2024 10:22:45 || No file selected: Exiting Paint
+INFO: 10-28-2024 10:26:46 || No file selected: Starting Paint
+INFO: 10-28-2024 10:26:46 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 10:26:48 || No file selected: A new tab was opened
+INFO: 10-28-2024 10:26:58 || No file selected: text was selected
+INFO: 10-28-2024 10:29:15 || No file selected: Starting Paint
+INFO: 10-28-2024 10:29:16 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 10:29:17 || No file selected: A new tab was opened
+INFO: 10-28-2024 10:29:30 || No file selected: text was selected
+INFO: 10-28-2024 10:32:28 || No file selected: Starting Paint
+INFO: 10-28-2024 10:32:28 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 10:32:29 || No file selected: A new tab was opened
+INFO: 10-28-2024 10:32:37 || No file selected: text was selected
+INFO: 10-28-2024 10:38:43 || No file selected: Starting Paint
+INFO: 10-28-2024 10:38:44 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 10:38:45 || No file selected: A new tab was opened
+INFO: 10-28-2024 10:40:21 || No file selected: Starting Paint
+INFO: 10-28-2024 10:40:21 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 10:40:23 || No file selected: A new tab was opened
+INFO: 10-28-2024 10:40:27 || No file selected: text was selected
+INFO: 10-28-2024 10:41:11 || No file selected: Starting Paint
+INFO: 10-28-2024 10:41:12 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 10:41:13 || No file selected: A new tab was opened
+INFO: 10-28-2024 10:42:37 || No file selected: Starting Paint
+INFO: 10-28-2024 10:42:37 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 10:42:38 || No file selected: A new tab was opened
+INFO: 10-28-2024 10:43:22 || No file selected: Starting Paint
+INFO: 10-28-2024 10:43:23 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 10:43:35 || No file selected: Exiting Paint
+INFO: 10-28-2024 10:43:56 || No file selected: Starting Paint
+INFO: 10-28-2024 10:43:57 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 10:47:01 || No file selected: Starting Paint
+INFO: 10-28-2024 10:47:02 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 10:47:03 || No file selected: A new tab was opened
+INFO: 10-28-2024 10:47:06 || No file selected: text was selected
+INFO: 10-28-2024 10:50:32 || No file selected: Starting Paint
+INFO: 10-28-2024 10:50:32 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 10:50:33 || No file selected: A new tab was opened
+INFO: 10-28-2024 10:51:14 || No file selected: text was selected
+INFO: 10-28-2024 10:51:39 || No file selected: Exiting Paint
+INFO: 10-28-2024 10:55:00 || No file selected: Starting Paint
+INFO: 10-28-2024 10:55:00 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 10:55:01 || No file selected: A new tab was opened
+INFO: 10-28-2024 10:55:05 || No file selected: text was selected
+INFO: 10-28-2024 10:56:10 || No file selected: Starting Paint
+INFO: 10-28-2024 10:56:10 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 10:56:11 || No file selected: A new tab was opened
+INFO: 10-28-2024 10:56:21 || No file selected: text was selected
+INFO: 10-28-2024 11:00:40 || No file selected: Starting Paint
+INFO: 10-28-2024 11:00:40 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 11:00:41 || No file selected: A new tab was opened
+INFO: 10-28-2024 11:00:49 || No file selected: text was selected
+INFO: 10-28-2024 11:03:14 || No file selected: Starting Paint
+INFO: 10-28-2024 11:03:14 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 11:03:15 || No file selected: A new tab was opened
+INFO: 10-28-2024 11:03:19 || No file selected: text was selected
+INFO: 10-28-2024 11:04:41 || No file selected: Starting Paint
+INFO: 10-28-2024 11:04:41 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 11:04:42 || No file selected: A new tab was opened
+INFO: 10-28-2024 11:05:03 || No file selected: text was selected
+INFO: 10-28-2024 11:05:54 || No file selected: Starting Paint
+INFO: 10-28-2024 11:05:54 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 11:05:55 || No file selected: A new tab was opened
+INFO: 10-28-2024 11:05:58 || No file selected: text was selected
+INFO: 10-28-2024 11:07:30 || No file selected: Starting Paint
+INFO: 10-28-2024 11:07:30 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 11:07:31 || No file selected: A new tab was opened
+INFO: 10-28-2024 11:07:40 || No file selected: text was selected
+INFO: 10-28-2024 11:07:44 || No file selected: Exiting Paint
+INFO: 10-28-2024 11:08:31 || No file selected: Starting Paint
+INFO: 10-28-2024 11:08:31 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 11:08:33 || No file selected: A new tab was opened
+INFO: 10-28-2024 11:08:35 || No file selected: text was selected
+INFO: 10-28-2024 11:11:59 || No file selected: Starting Paint
+INFO: 10-28-2024 11:11:59 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 11:12:00 || No file selected: A new tab was opened
+INFO: 10-28-2024 11:12:27 || No file selected: text was selected
+INFO: 10-28-2024 11:14:26 || No file selected: Starting Paint
+INFO: 10-28-2024 11:14:26 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 11:14:28 || No file selected: A new tab was opened
+INFO: 10-28-2024 11:14:30 || No file selected: text was selected
+INFO: 10-28-2024 11:23:20 || No file selected: Starting Paint
+INFO: 10-28-2024 11:23:20 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 11:23:22 || No file selected: A new tab was opened
+INFO: 10-28-2024 11:23:30 || No file selected: Starting Paint
+INFO: 10-28-2024 11:23:30 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 11:23:31 || No file selected: A new tab was opened
+INFO: 10-28-2024 11:24:56 || No file selected: Starting Paint
+INFO: 10-28-2024 11:24:57 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 11:24:58 || No file selected: A new tab was opened
+INFO: 10-28-2024 11:25:06 || No file selected: text was selected
+INFO: 10-28-2024 11:25:28 || No file selected: Starting Paint
+INFO: 10-28-2024 11:25:28 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 11:25:29 || No file selected: A new tab was opened
+INFO: 10-28-2024 11:25:34 || No file selected: text was selected
+INFO: 10-28-2024 11:26:13 || No file selected: Starting Paint
+INFO: 10-28-2024 11:26:13 || No file selected: Server is running on port 8000.../net localhost:8000/Tab_Image
+INFO: 10-28-2024 11:26:14 || No file selected: A new tab was opened
+INFO: 10-28-2024 11:26:17 || No file selected: text was selected

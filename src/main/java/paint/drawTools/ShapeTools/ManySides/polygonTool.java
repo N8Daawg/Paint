@@ -58,6 +58,12 @@ public class polygonTool extends shapeTool {
     }
 
     /**
+     * <p>
+     *     NEEDS TO BE UPDATED TO USE LINEAR GROWTH AND NOT EXPONENTIAL
+     * </p>
+     * <p>
+     *     NEEDS TO HAVE BOUNDS UPDATED
+     * </p>
      * Draw polygon.
      *
      * @param currentgc the currentgc

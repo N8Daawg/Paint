@@ -1,6 +1,6 @@
 package paint.drawTools.MiscTools;
 
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.Pane;
 import paint.drawTools.drawTool;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.TextField;
@@ -11,7 +11,8 @@ import javafx.scene.paint.Color;
  * The type Text tool.
  */
 public class textTool extends drawTool {
-    private String text;
+    private final TextField userInput;
+    private static final String promptTxt = "Your text here";
     /**
      * Instantiates a new Text tool.
      *
@@ -20,7 +21,20 @@ public class textTool extends drawTool {
      */
     public textTool(GraphicsContext g, GraphicsContext LDGC) {
         super(g, LDGC);
-        gc.setLineWidth(1);
+        userInput = new TextField();
+        userInput.setPromptText(promptTxt);
+        userInput.setVisible(false);
+        userInput.setDisable(true);
+        Pane parent = (Pane) gc.getCanvas().getParent();
+        parent.getChildren().add(userInput);
+
+    }
+
+    private void printTxt(String txt) {
+        gc.strokeText(txt, anchorX, anchorY);
+        userInput.setText("");
+        userInput.setVisible(false);
+        userInput.setDisable(true);
     }
 
     @Override
@@ -29,14 +43,10 @@ public class textTool extends drawTool {
     }
 
     @Override
-    protected void setSize(double size) {
-        gc.setLineWidth(size);
-    }
+    protected void setSize(double size) {gc.setLineWidth(1);}
 
     @Override
-    protected void setDashedLine(Boolean dashedLine) {
-
-    }
+    protected void setDashedLine(Boolean dashedLine) {}
 
     @Override
     public void getPressEvent(MouseEvent mouseEvent) {
@@ -45,23 +55,22 @@ public class textTool extends drawTool {
     }
 
     @Override
-    public void getDragEvent(MouseEvent mouseEvent) {
-
-    }
+    public void getDragEvent(MouseEvent mouseEvent) {}
 
     @Override
     public void getReleaseEvent(MouseEvent mouseEvent) {
-        TextField userinput = new TextField("Your text here");
-        userinput.setLayoutX(mouseEvent.getSceneX());userinput.setLayoutY(mouseEvent.getSceneY());
+        userInput.setDisable(false);
+        userInput.setText(promptTxt);
+        //userInput.setLayoutX(anchorX - userInput.getLayoutBounds().getMinX());
+        userInput.relocate(anchorX, anchorY-userInput.getHeight());
+        userInput.setVisible(true);
+        userInput.requestFocus();
+        userInput.selectAll();
 
-        StackPane parent = (StackPane) gc.getCanvas().getParent();
-        parent.getChildren().add(userinput);
-        parent.getScene().addEventFilter(KeyEvent.KEY_PRESSED, keyEvent -> { //add event filter to fish for shortcuts
-            if(keyEvent.getCode()==KeyCode.ENTER){
-                text = userinput.getText();
-                parent.getChildren().remove(userinput);
-                gc.strokeText(text, anchorX, anchorY);
-                text = "";
+        gc.getCanvas().getScene().addEventFilter(KeyEvent.KEY_PRESSED, keyEvent -> {//add event filter to fish for shortcuts
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                printTxt(userInput.getText());
+                gc.getCanvas().getScene().addEventFilter(KeyEvent.KEY_PRESSED, otherKeyEvent -> {});
             }
         });
     }

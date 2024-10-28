@@ -6,9 +6,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.WindowEvent;
 
-/**
- * The type Paint controller.
- */
 public class PaintController {
 
     @FXML

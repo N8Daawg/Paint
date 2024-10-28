@@ -314,9 +314,9 @@ public class TabPaneController {
 
             webView.getEngine().load("https://blackbirdvalpo.com/");
             logger.sendMessage("They found my easter egg ^o^");
-        } else if(undoCombo.match(ke)){ //
+        } else if(undoCombo.match(ke)){ // a wild undoCombo appeared!
             tabs.get(tabSelector.getSelectedIndex()).undo();
-        } else if(redoCombo.match(ke)){
+        } else if(redoCombo.match(ke)){ // a wile redoCombo appeared!
             tabs.get(tabSelector.getSelectedIndex()).redo();
         }
     }
