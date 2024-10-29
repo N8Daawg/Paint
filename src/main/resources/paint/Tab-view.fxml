@@ -31,9 +31,9 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <MenuBar prefHeight="20.0" prefWidth="132.0" AnchorPane.bottomAnchor="731.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1148.0" AnchorPane.topAnchor="0.0">
+      <MenuBar prefHeight="69.0" prefWidth="1280.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <menus>
             <Menu mnemonicParsing="false" text="File">
                <items>
@@ -79,7 +79,7 @@
             </Menu>
          </menus>
       </MenuBar>
-      <ToolBar layoutY="26.0" prefWidth="1280.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="26.0">
+      <ToolBar layoutY="26.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="99.0" prefWidth="1280.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="26.0">
          <items>
             <VBox alignment="CENTER" spacing="10.0">
                <children>
@@ -328,7 +328,7 @@
                </children>
             </VBox>
             <Separator orientation="VERTICAL" />
-            <VBox alignment="CENTER" spacing="10.0">
+            <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0">
                <children>
                   <ColorPicker />
                   <Label text="Color" />
@@ -336,13 +336,13 @@
             </VBox>
          </items>
       </ToolBar>
-      <ScrollPane accessibleRole="PARENT" layoutY="124.8" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="625.0" prefWidth="1280.0" snapToPixel="false" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="125.0">
+      <ScrollPane accessibleRole="PARENT" fitToHeight="true" fitToWidth="true" layoutY="124.8" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="676.0" prefWidth="1280.0" snapToPixel="false" style="-fx-background-color: black;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="124.8">
          <content>
-            <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="635.0" prefWidth="1266.0">
+            <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="674.0" prefWidth="1278.0" style="-fx-background-color: black;">
                <children>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
+                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" style="-fx-background-color: white;">
                      <children>
-                        <Canvas height="600.0" width="1200.0" />
+                        <Canvas height="400.0" width="600.0" />
                      </children>
                   </Pane>
                </children>

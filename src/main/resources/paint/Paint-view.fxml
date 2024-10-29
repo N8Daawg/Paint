@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="borderPane" prefHeight="480.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paint.PaintController">
+<BorderPane fx:id="borderPane" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paint.PaintController">
    <center>
       <TabPane BorderPane.alignment="CENTER">
          <tabs>
@@ -19,6 +19,6 @@
       </TabPane>
    </center>
    <bottom>
-      <Label text="Time until AutoSave: 1:00" BorderPane.alignment="BOTTOM_LEFT" />
+      <Label text="Time until AutoSave: 1:00" textFill="WHITE" BorderPane.alignment="BOTTOM_LEFT" />
    </bottom>
 </BorderPane>

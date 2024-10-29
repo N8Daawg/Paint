@@ -84,6 +84,11 @@ public class TabPaneController {
         tabAdderButton.setOnAction(e -> addTab());
         shortCutSetup();
         addTab();
+
+        Stage stage = (Stage) tabPane.getScene().getWindow();
+        stage.widthProperty().addListener((observable, oldValue, newValue) -> resizeWindow(stage, (Double) oldValue, (Double) newValue, stage.getHeight(), stage.getHeight()));
+        stage.heightProperty().addListener(((observable, oldValue, newValue) -> resizeWindow(stage, stage.getWidth(), stage.getWidth(), (Double) oldValue, (Double) newValue)));
+        //resizeWindow(stage, stage.getWidth(), stage.getWidth(), stage.getHeight(), stage.getHeight());
     }
 
     /**
@@ -180,12 +185,21 @@ public class TabPaneController {
     /**
      * Resized the canvas
      *
-     * @param width the new width of the canvas
-     * @param height the height of the canvas
+
      */
-    public static void resize(double width, double height){
-        TabController currenTab = tabs.get(tabSelector.getSelectedIndex());
-        currenTab.resize(width, height);
+    public static void resizeWindow(Stage stage, double oldWidth, double newWidth, double oldHeight, double newHeight){
+        double heightChange = newHeight - oldHeight;
+        double widthChange = newWidth - oldWidth;
+
+        stage.setWidth(newWidth);
+        stage.setHeight(newHeight);
+        ((BorderPane) tabPane.getParent()).setPrefHeight(newHeight);
+        ((BorderPane) tabPane.getParent()).setPrefWidth(newWidth);
+        tabPane.getParent().resize(newWidth, newHeight);
+
+        tabPane.setPrefWidth(tabPane.getPrefWidth()+widthChange);
+        tabPane.setPrefHeight(tabPane.getPrefHeight()+heightChange);
+        tabs.get(tabSelector.getSelectedIndex()).resizeWindow(widthChange, heightChange);
     }
 
     private void importImage(){

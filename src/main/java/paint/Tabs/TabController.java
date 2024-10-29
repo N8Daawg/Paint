@@ -31,6 +31,7 @@ public class TabController {
     private Stack<WritableImage> undoStack;
     private Stack<WritableImage> redoStack;
     private final threadedLogger logger;
+    private static final int timerLabelHeight = 134;
 
     public TabController(Tab T){
         tab = T;
@@ -81,6 +82,10 @@ public class TabController {
         // clear screen button
         ((Button) ((GridPane) ((VBox) toolBar.getItems().get(2)).getChildren().get(0)).getChildren().get(3)).setOnAction(
                 event -> clearScreen()
+        );
+        // resizeCanvas canvas button
+        ((Button) ((GridPane) ((VBox) toolBar.getItems().get(2)).getChildren().get(0)).getChildren().get(2)).setOnAction(
+                event -> openResizeWindow()
         );
 
         /*----------------------------------- CANVAS STUFF ----------------------------------------*/
@@ -282,22 +287,49 @@ public class TabController {
         });
 
         Optional<double[]> result = dialog.showAndWait();
-        resize(result.get()[0],result.get()[1]);
+        resizeCanvas(result.get()[0],result.get()[1]);
     }
 
-    public void resize(double x, double y){
-        Stage window = (Stage) tab.getTabPane().getScene().getWindow();
-        window.setWidth(x);window.setHeight(y);
+    public void resizeWindow(double widthChange, double heightChange){
+        AnchorPane ap = (AnchorPane) menuBar.getParent();
+        double apWidth = ap.getPrefWidth()+widthChange;
+        double apHeight = ap.getPrefHeight()+heightChange;
+        ap.setPrefWidth(apWidth);
+        ap.setPrefHeight(apHeight);
+        ap.resize(apWidth,apHeight);
 
-        tab.getTabPane().setPrefWidth(window.getWidth());
-        toolBar.setPrefWidth(window.getWidth());
 
-        canvas.setWidth(window.getWidth()*0.97);
-        canvas.setLayoutX((window.getWidth()-canvas.getWidth())/2);
+        double mbWidth = menuBar.getPrefWidth()+widthChange;
+        menuBar.setPrefWidth(mbWidth);
+        menuBar.resize(mbWidth, menuBar.getHeight());
 
-        canvas.setLayoutY(canvasInitialY+(window.getWidth()-canvas.getWidth())/2);
+        double tbWidth = toolBar.getPrefWidth()+widthChange;
+        toolBar.setPrefWidth(tbWidth);
+        toolBar.resize(tbWidth, toolBar.getHeight());
 
-        canvas.setHeight(window.getHeight()-canvasInitialY);
+        double spWidth = ((ScrollPane) ap.getChildren().get(2)).getWidth()+widthChange;
+        double spHeight = ((ScrollPane) ap.getChildren().get(2)).getHeight()+heightChange;
+        ((ScrollPane) ap.getChildren().get(2)).setPrefWidth(spWidth);
+        ((ScrollPane) ap.getChildren().get(2)).setPrefHeight(spHeight);
+        ap.getChildren().get(2).resize(spWidth, spHeight);
 
+        ((ScrollPane) ap.getChildren().get(2)).getContent().resize(spWidth*0.90, spHeight*0.90);
+
+    }
+
+    public void resizeCanvas(double x, double y){
+        ScrollPane scp = (ScrollPane) ((AnchorPane) tab.getContent()).getChildren().get(2);
+        StackPane sp = (StackPane) scp.getContent();
+        Pane pane = (Pane) sp.getChildren().get(0);
+
+        sp.setPrefWidth(x);sp.setPrefHeight(y);
+        sp.resize(x, y);
+        pane.setPrefWidth(x);pane.setPrefHeight(y);
+        pane.resize(x, y);
+        canvas.setWidth(x);canvas.setHeight(y);
+        pane.getChildren().get(0).resize(x, y);
+        Canvas ldCanvas = (Canvas) pane.getChildren().get(1);
+        ldCanvas.setWidth(x);ldCanvas.setHeight(y);
+        ldCanvas.resize(x, y);
     }
 }
