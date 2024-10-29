@@ -7,8 +7,8 @@ public class starTool extends polygonTool {
     /**
      * Instantiates a new Shape tool.
      *
-     * @param g    the g
-     * @param LDGC the ldgc
+     * @param g    the Graphics Context
+     * @param LDGC the Live Draw Graphics Context
      */
     public starTool(GraphicsContext g, GraphicsContext LDGC) {
         super(g, LDGC);

@@ -12,8 +12,8 @@ public class squareTool extends rectangleTool {
     /**
      * Instantiates a new Square tool.
      *
-     * @param g    the g
-     * @param LDGC the ldgc
+     * @param g    the Graphics Context
+     * @param LDGC the Live Draw Graphics Context
      */
     public squareTool(GraphicsContext g, GraphicsContext LDGC) {
         super(g, LDGC);

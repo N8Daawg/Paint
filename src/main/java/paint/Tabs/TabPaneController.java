@@ -183,9 +183,7 @@ public class TabPaneController {
     }
 
     /**
-     * Resized the canvas
-     *
-
+     * Resizes the display window
      */
     public static void resizeWindow(Stage stage, double oldWidth, double newWidth, double oldHeight, double newHeight){
         double heightChange = newHeight - oldHeight;

@@ -12,8 +12,8 @@ public class eraserTool extends drawTool {
     /**
      * Instantiates a new Eraser tool.
      *
-     * @param g    the g
-     * @param LDGC the ldgc
+     * @param g    the Graphics Context
+     * @param LDGC the Live Draw Graphics Context
      */
     public eraserTool(GraphicsContext g, GraphicsContext LDGC) {
         super(g, LDGC);

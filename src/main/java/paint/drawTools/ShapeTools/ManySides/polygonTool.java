@@ -16,8 +16,8 @@ public class polygonTool extends shapeTool {
     /**
      * Instantiates a new Polygon tool.
      *
-     * @param g    the g
-     * @param LDGC the ldgc
+     * @param g    the Graphics Context
+     * @param LDGC the Live Draw Graphics Context
      */
     public polygonTool(GraphicsContext g, GraphicsContext LDGC) {
         super(g, LDGC);

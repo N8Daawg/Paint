@@ -18,6 +18,9 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.Stack;
 
+/**
+ * The type Tab controller.
+ */
 public class TabController {
     private final Tab tab;
     private final MenuBar menuBar;
@@ -26,13 +29,16 @@ public class TabController {
     private final FileController fileController;
     private final DrawController drawController;
     private Boolean recentlySaved;
-    private static final double canvasInitialY=69;
     private WritableImage currentState;
     private Stack<WritableImage> undoStack;
     private Stack<WritableImage> redoStack;
     private final threadedLogger logger;
-    private static final int timerLabelHeight = 134;
 
+    /**
+     * Instantiates a new Tab controller.
+     *
+     * @param T the tab
+     */
     public TabController(Tab T){
         tab = T;
         menuBar = null;
@@ -45,6 +51,13 @@ public class TabController {
         logger = null;
     }
 
+    /**
+     * Instantiates a new Tab controller.
+     *
+     * @param T      the tab to control
+     * @param server the web server
+     * @param Logger the logger
+     */
     public TabController(Tab T, webServer server, threadedLogger Logger) {
         tab = T;
         AnchorPane pane = (AnchorPane) tab.getContent();
@@ -123,20 +136,46 @@ public class TabController {
         });
     }
 
+    /**
+     * Get the tab.
+     *
+     * @return the tab
+     */
     protected Tab getTab(){return tab;}
 
+    /**
+     * Gets menu bar.
+     *
+     * @return the menu bar
+     */
     protected MenuBar getMenuBar() {return menuBar;}
 
+    /**
+     * Gets file controller.
+     *
+     * @return the file controller
+     */
     public FileController getFileController() {return fileController;}
 
 
+    /**
+     * Sets notifications for saving.
+     *
+     * @param on a bool representing true if notifications are on and false if not
+     */
     public void setNotifications(boolean on){fileController.setNotifications(on);}
 
+    /**
+     * open Open file dialogue.
+     */
     protected void openFile(){
         fileController.openFile((Stage) menuBar.getScene().getWindow());
         tab.setText(fileController.getCurrentFile());
     }
 
+    /**
+     * open save tab dialogue.
+     */
     protected void saveTab(){
         recentlySaved = fileController.saveFile((Stage) menuBar.getScene().getWindow());
         tab.setText(fileController.getCurrentFile());
@@ -149,6 +188,9 @@ public class TabController {
 
     private void help(){fileController.showHelp();}
 
+    /**
+     * returns true if the tab was recently saved
+     */
     public Boolean wasRecentlySaved() {return recentlySaved;}
 
     private void setListeners(){
@@ -224,6 +266,9 @@ public class TabController {
         }
     }
 
+    /**
+     * Undo the previous action
+     */
     protected void undo(){
         if(!undoStack.isEmpty()){
             canvas.getGraphicsContext2D().drawImage(undoStack.pop(),0,0);
@@ -232,6 +277,9 @@ public class TabController {
         }
     }
 
+    /**
+     * redo the previous undo action
+     */
     protected void redo(){
         if(!redoStack.isEmpty()){
             canvas.getGraphicsContext2D().drawImage(redoStack.pop(),0,0);
@@ -240,8 +288,41 @@ public class TabController {
         }
     }
 
-    /*----------------------------------- NEEDS FIXING ---------------------------------------*/
+    /**
+     * Resizes tab nodes to fit a resized window
+     *
+     * @param widthChange  the change in window width
+     * @param heightChange the change in window height
+     */
+    public void resizeWindow(double widthChange, double heightChange){
+        AnchorPane ap = (AnchorPane) menuBar.getParent();
+        double apWidth = ap.getPrefWidth()+widthChange;
+        double apHeight = ap.getPrefHeight()+heightChange;
+        ap.setPrefWidth(apWidth);
+        ap.setPrefHeight(apHeight);
+        ap.resize(apWidth,apHeight);
 
+
+        double mbWidth = menuBar.getPrefWidth()+widthChange;
+        menuBar.setPrefWidth(mbWidth);
+        menuBar.resize(mbWidth, menuBar.getHeight());
+
+        double tbWidth = toolBar.getPrefWidth()+widthChange;
+        toolBar.setPrefWidth(tbWidth);
+        toolBar.resize(tbWidth, toolBar.getHeight());
+
+        double spWidth = ((ScrollPane) ap.getChildren().get(2)).getWidth()+widthChange;
+        double spHeight = ((ScrollPane) ap.getChildren().get(2)).getHeight()+heightChange;
+        ((ScrollPane) ap.getChildren().get(2)).setPrefWidth(spWidth);
+        ((ScrollPane) ap.getChildren().get(2)).setPrefHeight(spHeight);
+        ap.getChildren().get(2).resize(spWidth, spHeight);
+
+        ((ScrollPane) ap.getChildren().get(2)).getContent().resize(spWidth*0.90, spHeight*0.90);
+    }
+
+    /**
+     * Open resize window dialog to resize the canvas.
+     */
     public void openResizeWindow(){
         Dialog<double[]> dialog = new Dialog<>();
         dialog.setTitle("Resize window");
@@ -290,46 +371,25 @@ public class TabController {
         resizeCanvas(result.get()[0],result.get()[1]);
     }
 
-    public void resizeWindow(double widthChange, double heightChange){
-        AnchorPane ap = (AnchorPane) menuBar.getParent();
-        double apWidth = ap.getPrefWidth()+widthChange;
-        double apHeight = ap.getPrefHeight()+heightChange;
-        ap.setPrefWidth(apWidth);
-        ap.setPrefHeight(apHeight);
-        ap.resize(apWidth,apHeight);
-
-
-        double mbWidth = menuBar.getPrefWidth()+widthChange;
-        menuBar.setPrefWidth(mbWidth);
-        menuBar.resize(mbWidth, menuBar.getHeight());
-
-        double tbWidth = toolBar.getPrefWidth()+widthChange;
-        toolBar.setPrefWidth(tbWidth);
-        toolBar.resize(tbWidth, toolBar.getHeight());
-
-        double spWidth = ((ScrollPane) ap.getChildren().get(2)).getWidth()+widthChange;
-        double spHeight = ((ScrollPane) ap.getChildren().get(2)).getHeight()+heightChange;
-        ((ScrollPane) ap.getChildren().get(2)).setPrefWidth(spWidth);
-        ((ScrollPane) ap.getChildren().get(2)).setPrefHeight(spHeight);
-        ap.getChildren().get(2).resize(spWidth, spHeight);
-
-        ((ScrollPane) ap.getChildren().get(2)).getContent().resize(spWidth*0.90, spHeight*0.90);
-
-    }
-
-    public void resizeCanvas(double x, double y){
+    /**
+     * Resizes the canvas.
+     *
+     * @param newWidth the new width of the canvas
+     * @param newHeight the new Height of the canvas
+     */
+    public void resizeCanvas(double newWidth, double newHeight){
         ScrollPane scp = (ScrollPane) ((AnchorPane) tab.getContent()).getChildren().get(2);
         StackPane sp = (StackPane) scp.getContent();
         Pane pane = (Pane) sp.getChildren().get(0);
 
-        sp.setPrefWidth(x);sp.setPrefHeight(y);
-        sp.resize(x, y);
-        pane.setPrefWidth(x);pane.setPrefHeight(y);
-        pane.resize(x, y);
-        canvas.setWidth(x);canvas.setHeight(y);
-        pane.getChildren().get(0).resize(x, y);
+        sp.setPrefWidth(newWidth);sp.setPrefHeight(newHeight);
+        sp.resize(newWidth, newHeight);
+        pane.setPrefWidth(newWidth);pane.setPrefHeight(newHeight);
+        pane.resize(newWidth, newHeight);
+        canvas.setWidth(newWidth);canvas.setHeight(newHeight);
+        pane.getChildren().get(0).resize(newWidth, newHeight);
         Canvas ldCanvas = (Canvas) pane.getChildren().get(1);
-        ldCanvas.setWidth(x);ldCanvas.setHeight(y);
-        ldCanvas.resize(x, y);
+        ldCanvas.setWidth(newWidth);ldCanvas.setHeight(newHeight);
+        ldCanvas.resize(newWidth, newHeight);
     }
 }

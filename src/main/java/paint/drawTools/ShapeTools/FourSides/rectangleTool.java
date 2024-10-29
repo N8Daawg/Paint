@@ -11,8 +11,8 @@ public class rectangleTool extends shapeTool {
     /**
      * Instantiates a new Rectangle tool.
      *
-     * @param g    the g
-     * @param LDGC the ldgc
+     * @param g    the Graphics Context
+     * @param LDGC the Live Draw Graphics Context
      */
     public rectangleTool(GraphicsContext g, GraphicsContext LDGC) {
         super(g, LDGC);
@@ -21,9 +21,9 @@ public class rectangleTool extends shapeTool {
     /**
      * Draw rectangle.
      *
-     * @param currentgc the currentgc
-     * @param xcoors    the xcoors
-     * @param ycoors    the ycoors
+     * @param currentgc the current Graphics context
+     * @param xcoors    the array of xcoors
+     * @param ycoors    the array of ycoors
      */
     protected void drawRectangle(GraphicsContext currentgc, double[] xcoors, double[] ycoors){
         if(isDashedLine){
@@ -42,8 +42,8 @@ public class rectangleTool extends shapeTool {
     /**
      * Live draw rectangle.
      *
-     * @param xcoors the xcoors
-     * @param ycoors the ycoors
+     * @param xcoors    the array of xcoors
+     * @param ycoors    the array of ycoors
      */
     protected void liveDrawRectangle(double[] xcoors, double[] ycoors){
         clearCanvas(ldgc);

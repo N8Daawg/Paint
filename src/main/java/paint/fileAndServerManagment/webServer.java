@@ -10,7 +10,7 @@ import java.net.InetSocketAddress;
 /**
  * The type Web server.
  */
-public class webServer{
+public class webServer {
     private File file;
     private webHandler handler;
     private final threadedLogger logger;
@@ -18,7 +18,7 @@ public class webServer{
     /**
      * Instantiates a new Web server.
      */
-    public webServer(threadedLogger logger){
+    public webServer(threadedLogger logger) {
         file = null;
         this.logger = logger;
     }
@@ -26,15 +26,15 @@ public class webServer{
     /**
      * void to start the webserver.
      */
-    public void run(){
-        try{
+    public void run() {
+        try {
             HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
             handler = new webHandler();
             server.createContext("/Tab_Image", handler);
             server.setExecutor(null);
             server.start();
             logger.sendMessage("Server is running on port 8000.../net localhost:8000/Tab_Image");
-        } catch (IOException e){
+        } catch (IOException e) {
             logger.sendMessage("Error starting the web server: " + e.getMessage());
         }
     }
@@ -44,7 +44,7 @@ public class webServer{
      *
      * @param file the file
      */
-    public void updateServerFile(File file){
+    public void updateServerFile(File file) {
         this.file = file;
         handler.setTransferredfile(file);
         logger.sendMessage("Server updated file: " + file.toString());

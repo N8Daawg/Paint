@@ -12,8 +12,8 @@ public class freeDrawTool extends shapeTool {
     /**
      * Instantiates a new Free draw tool.
      *
-     * @param g    the g
-     * @param LDGC the ldgc
+     * @param g    the Graphics Context
+     * @param LDGC the Live Draw Graphics Context
      */
     public freeDrawTool(GraphicsContext g, GraphicsContext LDGC) {
         super(g, LDGC);

@@ -11,8 +11,8 @@ public class triangleTool extends shapeTool {
     /**
      * Instantiates a new Triangle tool.
      *
-     * @param g    the g
-     * @param LDGC the ldgc
+     * @param g    the Graphics Context
+     * @param LDGC the Live Draw Graphics Context
      */
     public triangleTool(GraphicsContext g, GraphicsContext LDGC) {
         super(g, LDGC);

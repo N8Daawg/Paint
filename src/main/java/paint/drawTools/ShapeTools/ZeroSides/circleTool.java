@@ -10,8 +10,8 @@ public class circleTool extends ellipseTool {
     /**
      * Instantiates a new Circle tool.
      *
-     * @param g    the g
-     * @param LDGC the ldgc
+     * @param g    the Graphics Context
+     * @param LDGC the Live Draw Graphics Context
      */
     public circleTool(GraphicsContext g, GraphicsContext LDGC) {
         super(g, LDGC);

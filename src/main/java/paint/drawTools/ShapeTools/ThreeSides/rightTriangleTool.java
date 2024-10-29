@@ -11,8 +11,8 @@ public class rightTriangleTool extends triangleTool{
     /**
      * Instantiates a new Right triangle tool.
      *
-     * @param g    the g
-     * @param LDGC the ldgc
+     * @param g    the Graphics Context
+     * @param LDGC the Live Draw Graphics Context
      */
     public rightTriangleTool(GraphicsContext g, GraphicsContext LDGC) {
         super(g, LDGC);

@@ -21,8 +21,8 @@ public class selectorTool extends rectangleTool {
     /**
      * Instantiates a new Selector tool.
      *
-     * @param g    the g
-     * @param LDGC the ldgc
+     * @param g    the Graphics Context
+     * @param LDGC the Live Draw Graphics Context
      */
     public selectorTool(GraphicsContext g, GraphicsContext LDGC) {
         super(g, LDGC);

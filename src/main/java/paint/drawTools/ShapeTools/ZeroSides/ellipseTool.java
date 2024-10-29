@@ -11,8 +11,8 @@ public class ellipseTool extends shapeTool {
     /**
      * Instantiates a new Ellipse tool.
      *
-     * @param g    the g
-     * @param LDGC the ldgc
+     * @param g    the Graphics Context
+     * @param LDGC the Live Draw Graphics Context
      */
     public ellipseTool(GraphicsContext g, GraphicsContext LDGC) {
         super(g, LDGC);

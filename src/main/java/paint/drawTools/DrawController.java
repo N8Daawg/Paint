@@ -97,12 +97,6 @@ public class DrawController {
         ((Button) ((GridPane) canvasToolsContainer.getChildren().get(0)).getChildren().get(1)).setOnAction( // mirror screen button
                 event -> mirrorCanvas()
         );
-        /*
-        ((Button) ((GridPane) canvasToolsContainer.getChildren().get(0)).getChildren().get(2)).setOnAction( // resizeCanvas screen button
-                event -> resizeCanvas()
-        );
-
-         */
 
         // Tools tool
         VBox toolsToolsContainer = (VBox) tb.getItems().get(4);
